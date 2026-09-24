@@ -1,3 +1,5 @@
+import 'package:kazumi/utils/zh.dart';
+
 /// Bangumi 收藏类型枚举
 /// via: https://bangumi.github.io/api/#/model-CollectionType
 enum BangumiCollectionType {
@@ -13,10 +15,12 @@ enum BangumiCollectionType {
 
   abandoned(5, '抛弃');
 
-  const BangumiCollectionType(this.value, this.label);
+  const BangumiCollectionType(this.value, this._label);
 
   final int value;
-  final String label;
+  final String _label;
+
+  String get label => zh(_label);
 
   static BangumiCollectionType fromValue(int value) {
     return BangumiCollectionType.values.firstWhere(

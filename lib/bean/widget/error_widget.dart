@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kazumi/bean/widget/state_presentation.dart';
+import 'package:kazumi/utils/zh.dart';
 
 /// Shrink-wraps in slivers and scrolls within bounded page or media surfaces.
 class GeneralErrorWidget extends StatelessWidget {
@@ -61,7 +62,7 @@ class GeneralErrorWidget extends StatelessWidget {
                     Semantics(
                       header: true,
                       child: Text(
-                        title,
+                        zh(title),
                         textAlign: TextAlign.center,
                         style: (compact
                                 ? theme.textTheme.titleMedium
@@ -74,7 +75,7 @@ class GeneralErrorWidget extends StatelessWidget {
                     if (errMsg.isNotEmpty) ...[
                       const SizedBox(height: 8),
                       Text(
-                        errMsg,
+                        zh(errMsg),
                         textAlign: TextAlign.center,
                         style: theme.textTheme.bodyMedium
                             ?.copyWith(color: colors.onSurfaceVariant),

@@ -3,6 +3,7 @@ import 'package:kazumi/bean/settings/settings_detail_scaffold.dart';
 import 'package:kazumi/services/storage/storage.dart';
 import 'package:kazumi/utils/constants.dart';
 import 'package:kazumi/bean/settings/settings_list.dart';
+import 'package:kazumi/utils/zh.dart';
 
 class RendererSettings extends StatefulWidget {
   const RendererSettings({super.key});
@@ -18,11 +19,11 @@ class _RendererSettingsState extends State<RendererSettings> {
   @override
   Widget build(BuildContext context) {
     return SettingsDetailScaffold(
-      title: const Text('视频渲染器'),
+      title: Text(zh('视频渲染器')),
       body: SettingsList(
         sections: [
           SettingsRadioSection<String>(
-            title: Text('选择合适的渲染器以获得最佳播放体验'),
+            title: Text(zh('选择合适的渲染器以获得最佳播放体验')),
             groupValue: _renderer,
             onChanged: (String? value) {
               if (value != null) {
@@ -36,7 +37,7 @@ class _RendererSettingsState extends State<RendererSettings> {
             tiles: androidVideoRenderersList.entries
                 .map((e) => SettingsTile<String>.radioTile(
                       title: Text(e.key),
-                      description: Text(e.value),
+                      description: Text(zh(e.value)),
                       radioValue: e.key,
                     ))
                 .toList(),

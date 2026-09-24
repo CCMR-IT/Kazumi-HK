@@ -9,6 +9,7 @@ import 'package:kazumi/plugins/plugins.dart';
 import 'package:kazumi/plugins/plugins_controller.dart';
 import 'package:kazumi/services/plugin/plugin_import_parser.dart';
 import 'package:kazumi/utils/encoding.dart';
+import 'package:kazumi/utils/zh.dart';
 
 enum RuleAddSource { catalog, clipboard, file, create }
 
@@ -24,7 +25,7 @@ Future<RuleAddSource?> showRuleAddDialog(BuildContext context) =>
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const Text('选择一种方式，添加新的番剧来源。'),
+              Text(zh('选择一种方式，添加新的番剧来源。')),
               const SizedBox(height: 20),
               for (final option in [
                 (
@@ -77,7 +78,7 @@ Future<RuleAddSource?> showRuleAddDialog(BuildContext context) =>
           actions: [
             TextButton(
                 onPressed: () => Navigator.of(context).pop(),
-                child: const Text('取消')),
+                child: Text(zh('取消'))),
           ],
         );
       },
@@ -97,20 +98,20 @@ Future<bool> confirmRuleDeletion(
             Text(names.take(5).join('、') + (names.length > 5 ? ' 等' : ''),
                 style: Theme.of(context).textTheme.titleMedium),
             const SizedBox(height: 12),
-            const Text('删除后将不再使用这些来源搜索番剧。你可以稍后重新导入规则。'),
+            Text(zh('删除后将不再使用这些来源搜索番剧。你可以稍后重新导入规则。')),
           ],
         ),
         actions: [
           TextButton(
               onPressed: () => Navigator.of(context).pop(false),
-              child: const Text('保留')),
+              child: Text(zh('保留'))),
           FilledButton(
             style: FilledButton.styleFrom(
                 backgroundColor: Theme.of(context).colorScheme.error,
                 foregroundColor: Theme.of(context).colorScheme.onError,
                 minimumSize: const Size(88, 48)),
             onPressed: () => Navigator.of(context).pop(true),
-            child: const Text('删除'),
+            child: Text(zh('删除')),
           ),
         ],
       ),
@@ -130,7 +131,7 @@ Future<void> showRuleShareDialog(BuildContext context, Plugin plugin) async {
         children: [
           Text(plugin.name, style: Theme.of(context).textTheme.titleLarge),
           const SizedBox(height: 8),
-          const Text('复制规则链接，对方可在「添加规则」中从剪贴板导入。'),
+          Text(zh('复制规则链接，对方可在「添加规则」中从剪贴板导入。')),
           const SizedBox(height: 20),
           Container(
             padding: const EdgeInsets.all(16),
@@ -151,10 +152,10 @@ Future<void> showRuleShareDialog(BuildContext context, Plugin plugin) async {
       actions: [
         TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('关闭')),
+            child: Text(zh('关闭'))),
         FilledButton.icon(
           icon: const Icon(Icons.copy_rounded, size: 18),
-          label: const Text('复制链接'),
+          label: Text(zh('复制链接')),
           onPressed: () async {
             try {
               await Clipboard.setData(ClipboardData(text: link));
@@ -246,7 +247,7 @@ class _RuleImportDialogState extends State<_RuleImportDialog> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const Text('支持多条 kazumi:// 链接、单条 JSON 或 JSON 数组。同名规则会被替换。'),
+              Text(zh('支持多条 kazumi:// 链接、单条 JSON 或 JSON 数组。同名规则会被替换。')),
               const SizedBox(height: 20),
               TextField(
                 controller: _text,
@@ -266,7 +267,7 @@ class _RuleImportDialogState extends State<_RuleImportDialog> {
           actions: [
             TextButton(
               onPressed: _saving ? null : () => Navigator.of(context).pop(),
-              child: const Text('取消'),
+              child: Text(zh('取消')),
             ),
             FilledButton.icon(
               onPressed: _saving || _text.text.trim().isEmpty ? null : _import,

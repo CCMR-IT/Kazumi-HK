@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:material_new_shapes/material_new_shapes.dart';
+import 'package:kazumi/utils/zh.dart';
 
 /// Keeps the rule catalog lazy within the responsive onboarding scroll surface.
 class OnboardingStepLayout extends StatelessWidget {
@@ -33,7 +34,7 @@ class OnboardingStepLayout extends StatelessWidget {
     final titleWidget = Semantics(
       header: true,
       child: Text(
-        title,
+        zh(title),
         style: (wide
                 ? theme.textTheme.displaySmall
                 : compact
@@ -44,7 +45,7 @@ class OnboardingStepLayout extends StatelessWidget {
     );
     final description = subtitle == null
         ? null
-        : Text(subtitle!,
+      : Text(zh(subtitle),
             style: theme.textTheme.bodyLarge?.copyWith(
               color: theme.colorScheme.onSurfaceVariant,
               height: 1.5,

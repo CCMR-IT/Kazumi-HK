@@ -13,6 +13,7 @@ import 'package:kazumi/services/logging/logger.dart';
 import 'package:kazumi/services/storage/storage.dart';
 import 'package:kazumi/bean/appbar/drag_to_move_bar.dart' as dtb;
 import 'package:kazumi/utils/device.dart';
+import 'package:kazumi/utils/zh.dart';
 
 class PopularPage extends StatefulWidget {
   const PopularPage({
@@ -234,14 +235,14 @@ class _PopularPageState extends State<PopularPage> {
     final actions = <Widget>[
       if (MediaQuery.of(context).orientation == Orientation.portrait)
         IconButton(
-          tooltip: '搜索',
+          tooltip: zh('搜索'),
           onPressed: () => context.pushNamed('/search/'),
           icon: const Icon(Icons.search),
         ),
     ];
     actions.add(
       IconButton(
-        tooltip: '历史记录',
+        tooltip: zh('历史记录'),
         onPressed: () => context.pushNamed('/settings/history/'),
         icon: const Icon(Icons.history),
       ),
@@ -250,7 +251,7 @@ class _PopularPageState extends State<PopularPage> {
       if (!showWindowButton()) {
         actions.add(
           IconButton(
-            tooltip: '退出',
+            tooltip: zh('退出'),
             onPressed: () => windowManager.close(),
             icon: const Icon(Icons.close),
           ),

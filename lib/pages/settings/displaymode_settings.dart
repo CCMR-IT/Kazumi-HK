@@ -7,6 +7,7 @@ import 'package:kazumi/bean/settings/settings_list.dart';
 import 'package:kazumi/bean/settings/settings_detail_scaffold.dart';
 import 'package:kazumi/bean/widget/loading_indicator.dart';
 import 'package:kazumi/services/storage/storage.dart';
+import 'package:kazumi/utils/zh.dart';
 
 class SetDisplayMode extends StatefulWidget {
   const SetDisplayMode({super.key});
@@ -58,13 +59,13 @@ class _SetDisplayModeState extends State<SetDisplayMode> {
   @override
   Widget build(BuildContext context) {
     return SettingsDetailScaffold(
-      title: const Text('屏幕帧率设置'),
+      title: Text(zh('屏幕帧率设置')),
       body: (modes.isEmpty)
           ? const LoadingIndicator()
           : SettingsList(
               sections: [
                 SettingsRadioSection<DisplayMode>(
-                  title: Text('没有生效? 重启app试试'),
+                  title: Text(zh('没有生效? 重启app试试')),
                   groupValue: preferred,
                   onChanged: (DisplayMode? newMode) async {
                     await FlutterDisplayMode.setPreferredMode(newMode!);
@@ -77,8 +78,8 @@ class _SetDisplayModeState extends State<SetDisplayMode> {
                       .map((e) => SettingsTile<DisplayMode>.radioTile(
                             radioValue: e,
                             title: e == DisplayMode.auto
-                                ? Text('自动')
-                                : Text('$e${e == active ? "  [系统]" : ""}'),
+                              ? Text(zh('自动'))
+                              : Text('$e${e == active ? "  [${zh('系统')}]" : ""}'),
                           ))
                       .toList(),
                 ),

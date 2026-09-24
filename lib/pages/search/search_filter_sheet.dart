@@ -186,10 +186,10 @@ class _SearchFilterSheetState extends State<_SearchFilterSheet> {
     final keyboardInset = MediaQuery.viewInsetsOf(context).bottom;
     final colors = Theme.of(context).colorScheme;
     final dateSummary = _draft.season.isNotEmpty
-        ? _draft.season
-        : _draft.dateRange == null
-            ? '不限日期'
-            : '${_draft.dateRange!.start} 至 ${_draft.dateRange!.end}';
+      ? _draft.season
+      : _draft.dateRange == null
+        ? zh('不限日期')
+        : '${_draft.dateRange!.start} ${zh('至')} ${_draft.dateRange!.end}';
     return Padding(
       padding: EdgeInsets.only(bottom: keyboardInset),
       child: LayoutBuilder(builder: (context, constraints) {
@@ -207,12 +207,12 @@ class _SearchFilterSheetState extends State<_SearchFilterSheet> {
               if (_draft.isIdSearch)
                 ListTile(
                   contentPadding: EdgeInsets.zero,
-                  title: const Text('当前按编号定位番剧'),
-                  subtitle: const Text('清除编号后，可以组合其他条件查找。'),
+                  title: Text(zh('当前按编号定位番剧')),
+                  subtitle: Text(zh('清除编号后，可以组合其他条件查找。')),
                   trailing: TextButton(
                       onPressed: () =>
                           setState(() => _draft = _draft.copyWith(id: '')),
-                      child: const Text('清除编号')),
+                      child: Text(zh('清除编号'))),
                 ),
               DropdownButtonFormField<String>(
                 key: ValueKey('sort-${_draft.sort}'),
@@ -222,7 +222,7 @@ class _SearchFilterSheetState extends State<_SearchFilterSheet> {
                 items: [
                   for (final sort in _searchSortLabels.entries)
                     DropdownMenuItem(
-                        value: sort.key, child: Text('按${sort.value}排序')),
+                        value: sort.key, child: Text('${zh('按')}${zh(sort.value)}${zh('排序')}')),
                 ],
                 onChanged: (value) => setState(
                     () => _draft = _draft.copyWith(sort: value ?? 'heat')),
@@ -230,7 +230,7 @@ class _SearchFilterSheetState extends State<_SearchFilterSheet> {
               const SizedBox(height: 16),
               _SearchFilterGroup(
                 title: '题材标签',
-                summary: _draft.tags.isEmpty ? '不限题材' : _draft.tags.join('、'),
+                summary: _draft.tags.isEmpty ? zh('不限题材') : _draft.tags.join('、'),
                 initiallyExpanded: _draft.tags.isNotEmpty,
                 children: [
                   Align(
@@ -258,7 +258,7 @@ class _SearchFilterSheetState extends State<_SearchFilterSheet> {
                     textInputAction: TextInputAction.done,
                     decoration: _fieldDecoration('自定义标签').copyWith(
                         suffixIcon: IconButton(
-                            tooltip: '添加标签',
+                        tooltip: zh('添加标签'),
                             onPressed: () => _addTag(_tagController.text),
                             icon: const Icon(Icons.add_rounded))),
                     onSubmitted: _addTag,
@@ -269,7 +269,7 @@ class _SearchFilterSheetState extends State<_SearchFilterSheet> {
               _SearchFilterGroup(
                 title: '放送时间',
                 summary:
-                    '$dateSummary${_draft.weekdays.isNotEmpty ? ' · 已选 ${_draft.weekdays.length} 天' : ''}',
+                  '${zh(dateSummary)}${_draft.weekdays.isNotEmpty ? ' · ${zh('已选')} ${_draft.weekdays.length} ${zh('天')}' : ''}',
                 initiallyExpanded: _draft.season.isNotEmpty ||
                     _draft.dateRange != null ||
                     _draft.weekdays.isNotEmpty,
@@ -280,7 +280,7 @@ class _SearchFilterSheetState extends State<_SearchFilterSheet> {
                     isExpanded: true,
                     decoration: _fieldDecoration('放送季度'),
                     items: [
-                      const DropdownMenuItem(value: '', child: Text('不限季度')),
+                      DropdownMenuItem(value: '', child: Text(zh('不限季度'))),
                       for (final season in _seasonOptions.entries)
                         DropdownMenuItem(
                             value: season.key, child: Text(season.value)),
@@ -295,13 +295,13 @@ class _SearchFilterSheetState extends State<_SearchFilterSheet> {
                         TextButton.icon(
                             onPressed: _pickCustomDateRange,
                             icon: const Icon(Icons.date_range_outlined),
-                            label: const Text('自定义日期')),
+                            label: Text(zh('自定义日期'))),
                         if (_draft.dateRange != null ||
                             _draft.season.isNotEmpty)
                           TextButton(
                               onPressed: () => setState(() => _draft =
                                   _draft.copyWith(season: '', dateRange: null)),
-                              child: const Text('清除日期')),
+                                child: Text(zh('清除日期'))),
                       ])),
                   const SizedBox(height: 8),
                   Align(
@@ -309,7 +309,7 @@ class _SearchFilterSheetState extends State<_SearchFilterSheet> {
                       child: Wrap(spacing: 8, runSpacing: 4, children: [
                         for (var day = 1; day <= 7; day++)
                           FilterChip(
-                            label: Text('周${'一二三四五六日'[day - 1]}'),
+                            label: Text('${zh('周')}${zh('一二三四五六日'[day - 1])}'),
                             selected: _draft.weekdays.contains(day),
                             showCheckmark: false,
                             onSelected: (selected) {
@@ -327,18 +327,18 @@ class _SearchFilterSheetState extends State<_SearchFilterSheet> {
                 title: '评分与排名',
                 summary: [
                   if (_draft.scoreRange?.isValid == true)
-                    '评分 ${_draft.scoreRange!.toToken()}',
+                    '${zh('评分')} ${_draft.scoreRange!.toToken()}',
                   if (_draft.rankRange?.isValid == true)
-                    '排名 ${_draft.rankRange!.toToken()}',
+                    '${zh('排名')} ${_draft.rankRange!.toToken()}',
                   if (_draft.scoreRange == null && _draft.rankRange == null)
-                    '不限',
+                    zh('不限'),
                 ].join(' · '),
                 initiallyExpanded:
                     _draft.scoreRange != null || _draft.rankRange != null,
                 children: [
                   SwitchListTile(
                     contentPadding: EdgeInsets.zero,
-                    title: const Text('限定评分'),
+                    title: Text(zh('限定评分')),
                     value: _draft.scoreRange?.isValid == true,
                     onChanged: (value) => setState(() => _draft =
                         _draft.copyWith(
@@ -348,11 +348,11 @@ class _SearchFilterSheetState extends State<_SearchFilterSheet> {
                   ),
                   if (_draft.scoreRange?.isValid == true) ...[
                     _buildScoreRangeSlider(_draft.scoreRange!),
-                    Text('评分 ${_draft.scoreRange!.toToken()}'),
+                    Text('${zh('评分')} ${_draft.scoreRange!.toToken()}'),
                   ],
                   SwitchListTile(
                     contentPadding: EdgeInsets.zero,
-                    title: const Text('限定排名'),
+                    title: Text(zh('限定排名')),
                     value: _draft.rankRange?.isValid == true,
                     onChanged: (value) => setState(() => _draft =
                         _draft.copyWith(
@@ -362,7 +362,7 @@ class _SearchFilterSheetState extends State<_SearchFilterSheet> {
                   ),
                   if (_draft.rankRange?.isValid == true) ...[
                     _buildRankRangeSlider(_draft.rankRange!),
-                    Text('排名 ${_draft.rankRange!.toToken()}'),
+                    Text('${zh('排名')} ${_draft.rankRange!.toToken()}'),
                   ],
                 ],
               ),
@@ -370,21 +370,21 @@ class _SearchFilterSheetState extends State<_SearchFilterSheet> {
               _SearchFilterGroup(
                 title: '收藏状态',
                 summary: [
-                  if (_notShowWatched) '隐藏已看',
-                  if (_notShowAbandoned) '隐藏已弃',
-                  if (!_notShowWatched && !_notShowAbandoned) '显示全部'
+                  if (_notShowWatched) zh('隐藏已看'),
+                  if (_notShowAbandoned) zh('隐藏已弃'),
+                  if (!_notShowWatched && !_notShowAbandoned) zh('显示全部')
                 ].join(' · '),
                 initiallyExpanded: _notShowWatched || _notShowAbandoned,
                 children: [
                   SwitchListTile(
                       contentPadding: EdgeInsets.zero,
-                      title: const Text('隐藏看过的番剧'),
+                      title: Text(zh('隐藏看过的番剧')),
                       value: _notShowWatched,
                       onChanged: (value) =>
                           setState(() => _notShowWatched = value)),
                   SwitchListTile(
                       contentPadding: EdgeInsets.zero,
-                      title: const Text('隐藏抛弃的番剧'),
+                      title: Text(zh('隐藏抛弃的番剧')),
                       value: _notShowAbandoned,
                       onChanged: (value) =>
                           setState(() => _notShowAbandoned = value)),
@@ -396,14 +396,14 @@ class _SearchFilterSheetState extends State<_SearchFilterSheet> {
             Padding(
                 padding: const EdgeInsets.fromLTRB(24, 12, 24, 24),
                 child: Row(children: [
-                  TextButton(onPressed: _reset, child: const Text('重置')),
+                  TextButton(onPressed: _reset, child: Text(zh('重置'))),
                   const SizedBox(width: 16),
                   Expanded(
                       child: FilledButton(
                           onPressed: _apply,
                           style: FilledButton.styleFrom(
                               minimumSize: const Size(48, 56)),
-                          child: const Text('查看结果'))),
+                            child: Text(zh('查看结果')))),
                 ])),
         ]);
       }),

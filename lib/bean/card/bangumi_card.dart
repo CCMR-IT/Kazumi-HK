@@ -3,6 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:kazumi/bean/card/network_img_layer.dart';
 import 'package:kazumi/bean/dialog/dialog_helper.dart';
 import 'package:kazumi/modules/bangumi/bangumi_item.dart';
+import 'package:kazumi/utils/zh.dart';
 
 // 视频卡片 - 垂直布局
 class BangumiCardV extends StatelessWidget {
@@ -88,8 +89,9 @@ class BangumiContent extends StatelessWidget {
                 letterSpacing: 0.3,
               );
           final textScaler = ts.clamp(maxScaleFactor: 1.1);
+          final title = zh(bangumiItem.nameCn);
           final painter = TextPainter(
-            text: TextSpan(text: bangumiItem.nameCn, style: style),
+            text: TextSpan(text: title, style: style),
             textDirection: Directionality.of(context),
             textScaler: textScaler,
           );
@@ -98,7 +100,7 @@ class BangumiContent extends StatelessWidget {
               .clamp(1, 3);
           painter.dispose();
           return Text(
-            bangumiItem.nameCn,
+            title,
             textAlign: TextAlign.start,
             style: style,
             textScaler: textScaler,

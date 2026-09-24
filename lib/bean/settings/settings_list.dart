@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:kazumi/bean/widget/content_section.dart';
 import 'package:kazumi/bean/widget/split_list_row.dart';
+import 'package:kazumi/utils/zh.dart';
 
 enum _TileKind { plain, toggle, radio }
 
@@ -196,10 +197,10 @@ class SettingsCategoryTile extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(title, style: textTheme.bodyLarge),
+                  Text(zh(title), style: textTheme.bodyLarge),
                   const SizedBox(height: 2),
                   Text(
-                    description,
+                    zh(description),
                     style: textTheme.bodySmall
                         ?.copyWith(color: colorScheme.onSurfaceVariant),
                     maxLines: 1,

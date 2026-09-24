@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kazumi/utils/zh.dart';
 
 // Material 3 connected-button small tokens.
 
@@ -123,7 +124,7 @@ class _ConnectedSegmentState extends State<_ConnectedSegment> {
           onHighlightChanged: (value) => setState(() => _pressed = value),
           child: Center(
             child: Text(
-              widget.label,
+              zh(widget.label),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: theme.textTheme.labelLarge?.copyWith(

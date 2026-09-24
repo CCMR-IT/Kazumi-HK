@@ -6,6 +6,7 @@ import 'package:kazumi/services/network/proxy_utils.dart';
 import 'package:kazumi/services/network/proxy_manager.dart';
 import 'package:kazumi/request/core/dio_factory.dart';
 import 'package:kazumi/request/core/network_config.dart';
+import 'package:kazumi/utils/zh.dart';
 
 class ProxyEditorPage extends StatefulWidget {
   const ProxyEditorPage({super.key});
@@ -88,7 +89,7 @@ class _ProxyEditorPageState extends State<ProxyEditorPage> {
   @override
   Widget build(BuildContext context) {
     return SettingsDetailScaffold(
-      title: const Text('代理配置'),
+      title: Text(zh('代理配置')),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Center(
@@ -100,17 +101,17 @@ class _ProxyEditorPageState extends State<ProxyEditorPage> {
                 children: [
                   TextFormField(
                     controller: urlController,
-                    decoration: const InputDecoration(
-                      labelText: '代理地址',
+                    decoration: InputDecoration(
+                      labelText: zh('代理地址'),
                       hintText: 'http://127.0.0.1:7890',
-                      border: OutlineInputBorder(),
+                      border: const OutlineInputBorder(),
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return '请输入代理地址';
+                        return zh('请输入代理地址');
                       }
                       if (!ProxyUtils.isValidProxyUrl(value)) {
-                        return '格式错误，请使用 http://host:port 格式';
+                        return zh('格式错误，请使用 http://host:port 格式');
                       }
                       return null;
                     },
@@ -118,10 +119,10 @@ class _ProxyEditorPageState extends State<ProxyEditorPage> {
                   const SizedBox(height: 16),
                   TextFormField(
                     controller: testUrlController,
-                    decoration: const InputDecoration(
-                      labelText: '测试地址',
+                    decoration: InputDecoration(
+                      labelText: zh('测试地址'),
                       hintText: 'https://www.google.com',
-                      border: OutlineInputBorder(),
+                      border: const OutlineInputBorder(),
                     ),
                   ),
                 ],
@@ -133,7 +134,7 @@ class _ProxyEditorPageState extends State<ProxyEditorPage> {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: saveAndTest,
         icon: const Icon(Icons.save),
-        label: const Text('保存并测试'),
+        label: Text(zh('保存并测试')),
       ),
     );
   }

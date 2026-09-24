@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:kazumi/bean/dialog/adaptive_bottom_sheet.dart';
 import 'package:kazumi/bean/dialog/material_bottom_sheet.dart';
 import 'package:kazumi/bean/widget/split_list_row.dart';
+import 'package:kazumi/utils/zh.dart';
 
 enum DanmakuDestination {
   chatRoom,
@@ -26,15 +27,15 @@ Future<DanmakuDestination?> showDanmakuDestinationSheet(BuildContext context) {
               children: [
                 ListTile(
                   leading: const Icon(Icons.groups_rounded),
-                  title: const Text('一起看聊天室'),
-                  subtitle: const Text('与同房间的朋友聊天'),
+                  title: Text(zh('一起看聊天室')),
+                  subtitle: Text(zh('与同房间的朋友聊天')),
                   onTap: () =>
                       Navigator.of(context).pop(DanmakuDestination.chatRoom),
                 ),
                 ListTile(
                   leading: const Icon(Icons.subtitles_outlined),
-                  title: const Text('视频弹幕'),
-                  subtitle: const Text('发送至远程弹幕库'),
+                  title: Text(zh('视频弹幕')),
+                  subtitle: Text(zh('发送至远程弹幕库')),
                   onTap: () => Navigator.of(context)
                       .pop(DanmakuDestination.remoteDanmaku),
                 ),

@@ -5,6 +5,7 @@ import 'package:kazumi/bean/widget/loading_indicator.dart';
 import 'package:kazumi/bean/widget/tonal_card.dart';
 import 'package:kazumi/pages/onboarding/onboarding_step_layout.dart';
 import 'package:kazumi/services/logging/logger.dart';
+import 'package:kazumi/utils/zh.dart';
 
 class DisclaimerStep extends StatefulWidget {
   const DisclaimerStep({super.key});
@@ -63,7 +64,7 @@ class _DisclaimerStepState extends State<DisclaimerStep> {
                         color: Theme.of(context).colorScheme.primary),
                     const SizedBox(width: 12),
                     Expanded(
-                      child: Text('免责声明',
+                      child: Text(zh('免责声明'),
                           style: textTheme.titleLarge
                               ?.copyWith(fontWeight: FontWeight.w600)),
                     ),

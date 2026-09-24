@@ -17,6 +17,7 @@ import 'package:kazumi/plugins/plugins_controller.dart';
 import 'package:kazumi/services/logging/logger.dart';
 import 'package:kazumi/services/storage/storage.dart';
 import 'package:kazumi/services/update/startup_update_check.dart';
+import 'package:kazumi/utils/zh.dart';
 
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({
@@ -38,9 +39,11 @@ enum _OnboardingStep {
   mirrors('网络镜像'),
   rules('添加规则');
 
-  const _OnboardingStep(this.label);
+  const _OnboardingStep(this._label);
 
-  final String label;
+  final String _label;
+
+  String get label => zh(_label);
 }
 
 class _OnboardingPageState extends State<OnboardingPage> {
@@ -272,19 +275,19 @@ class _SkipRulesDialog extends StatelessWidget {
         scrollable: true,
         constraints: const BoxConstraints(maxWidth: 560),
         icon: const Icon(Icons.warning_amber_rounded),
-        title: const Text('暂不添加规则？'),
-        content: const Text(
-          '你还没有安装额外规则。仅使用内置规则可能导致部分番剧无法搜索或播放，影响观看体验。\n\n确定仍要继续吗？',
+        title: Text(zh('暂不添加规则？')),
+        content: Text(
+          zh('你还没有安装额外规则。仅使用内置规则可能导致部分番剧无法搜索或播放，影响观看体验。\n\n确定仍要继续吗？'),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(true),
-            child: const Text('仍然继续'),
+            child: Text(zh('仍然继续')),
           ),
           FilledButton(
             autofocus: true,
             onPressed: () => Navigator.of(context).pop(false),
-            child: const Text('返回安装'),
+            child: Text(zh('返回安装')),
           ),
         ],
       );

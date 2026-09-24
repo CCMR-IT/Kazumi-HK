@@ -7,6 +7,7 @@ import 'package:kazumi/bean/widget/empty_state_widget.dart';
 import 'package:kazumi/bean/widget/loading_indicator.dart';
 import 'package:kazumi/modules/bangumi/episode_item.dart';
 import 'package:kazumi/modules/comments/comment_item.dart';
+import 'package:kazumi/utils/zh.dart';
 
 class EpisodeCommentsView extends StatelessWidget {
   const EpisodeCommentsView({
@@ -95,7 +96,7 @@ class EpisodeCommentsView extends StatelessWidget {
                         padding: const EdgeInsets.fromLTRB(16, 4, 8, 4),
                         child: Row(children: [
                           Expanded(
-                            child: Text('刷新失败，已保留现有讨论',
+                            child: Text(zh('刷新失败，已保留现有讨论'),
                                 style:
                                     TextStyle(color: colors.onErrorContainer)),
                           ),
@@ -103,7 +104,7 @@ class EpisodeCommentsView extends StatelessWidget {
                             onPressed: onRefresh,
                             style: TextButton.styleFrom(
                                 foregroundColor: colors.onErrorContainer),
-                            child: const Text('重试'),
+                            child: Text(zh('重试')),
                           ),
                         ]),
                       ),
@@ -138,7 +139,7 @@ class EpisodeCommentsView extends StatelessWidget {
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
-                  child: Text('已显示全部 ${comments.length} 条讨论 · 来自 Bangumi',
+                  child: Text('${zh('已显示全部')} ${comments.length} ${zh('条讨论')} · ${zh('来自')} Bangumi',
                       textAlign: TextAlign.center,
                       style: Theme.of(context)
                           .textTheme
@@ -161,7 +162,7 @@ class EpisodeCommentsView extends StatelessWidget {
     final type = Theme.of(context).textTheme;
     return LayoutBuilder(builder: (context, constraints) {
       final title = Row(mainAxisSize: MainAxisSize.min, children: [
-        Text('讨论',
+        Text(zh('讨论'),
             style: type.titleMedium?.copyWith(fontWeight: FontWeight.w700)),
         if ((!isLoading && !hasError) || comments.isNotEmpty) ...[
           const SizedBox(width: 8),
@@ -289,7 +290,7 @@ class _EpisodeHeader extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                     ),
                     icon: const Icon(Icons.video_library_outlined, size: 18),
-                    label: const Text('切换分集'),
+                    label: Text(zh('切换分集')),
                   ),
                 ],
               ),

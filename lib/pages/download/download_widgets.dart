@@ -5,6 +5,7 @@ import 'package:kazumi/bean/card/rule_card.dart';
 import 'package:kazumi/bean/widget/loading_indicator.dart';
 import 'package:kazumi/modules/download/download_module.dart';
 import 'package:kazumi/utils/format.dart';
+import 'package:kazumi/utils/zh.dart';
 
 const Duration _kExpandDuration = Duration(milliseconds: 250);
 const Curve _kExpandCurve = Curves.easeInOutCubic;
@@ -125,7 +126,7 @@ class DownloadRecordCard extends StatelessWidget {
                       Icons.more_vert,
                       color: colorScheme.onSurfaceVariant,
                     ),
-                    tooltip: '更多操作',
+                    tooltip: zh('更多操作'),
                     onSelected: (value) {
                       if (value == 'resume_all') {
                         onResumeAll();
@@ -134,14 +135,14 @@ class DownloadRecordCard extends StatelessWidget {
                       }
                     },
                     itemBuilder: (context) => [
-                      const PopupMenuItem(
+                      PopupMenuItem(
                         value: 'resume_all',
-                        child: Text('全部开始'),
+                        child: Text(zh('全部开始')),
                       ),
                       PopupMenuItem(
                         value: 'delete',
                         child: Text(
-                          '全部删除',
+                          zh('全部删除'),
                           style: TextStyle(color: colorScheme.error),
                         ),
                       ),

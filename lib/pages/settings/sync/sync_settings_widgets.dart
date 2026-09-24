@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:kazumi/bean/widget/state_presentation.dart';
+import 'package:kazumi/utils/zh.dart';
 
 class SyncPageBody extends StatelessWidget {
   const SyncPageBody({super.key, required this.children, this.maxWidth = 880});
@@ -61,10 +62,10 @@ class SyncPageIntro extends StatelessWidget {
               children: [
                 Semantics(
                   header: true,
-                  child: Text(title, style: theme.textTheme.headlineSmall),
+                  child: Text(zh(title), style: theme.textTheme.headlineSmall),
                 ),
                 const SizedBox(height: 6),
-                Text(description,
+                Text(zh(description),
                     style: theme.textTheme.bodyMedium
                         ?.copyWith(color: theme.colorScheme.onSurfaceVariant)),
               ],
@@ -120,7 +121,7 @@ class SyncFeedback extends StatelessWidget {
                 ),
                 const SizedBox(width: 10),
                 Expanded(
-                  child: Text(message,
+                  child: Text(zh(message),
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           color: error
                               ? colors.onErrorContainer

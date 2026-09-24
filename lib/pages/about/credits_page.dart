@@ -4,13 +4,14 @@ import 'package:kazumi/bean/settings/settings_detail_scaffold.dart';
 import 'package:kazumi/bean/widget/content_section.dart';
 import 'package:kazumi/pages/about/about_widgets.dart';
 import 'package:kazumi/request/config/api_endpoints.dart';
+import 'package:kazumi/utils/zh.dart';
 
 class CreditsPage extends StatelessWidget {
   const CreditsPage({super.key});
 
   @override
   Widget build(BuildContext context) => SettingsDetailScaffold(
-        title: const Text('致谢'),
+      title: Text(zh('致谢')),
         body: AboutContent(
           children: [
             ContentSection.group(

@@ -7,6 +7,7 @@ import 'package:kazumi/modules/collect/collect_layout.dart';
 import 'package:kazumi/modules/collect/collect_module.dart';
 import 'package:kazumi/modules/collect/collect_type.dart';
 import 'package:kazumi/pages/collect/collect_library_query.dart';
+import 'package:kazumi/utils/zh.dart';
 
 part 'collect_library_card.dart';
 part 'collect_library_controls.dart';
@@ -278,7 +279,7 @@ class _CollectLibraryViewState extends State<CollectLibraryView>
   }
 
   Widget _searchBar() => Semantics(
-        label: '搜索收藏',
+      label: zh('搜索收藏'),
         child: SearchBar(
           controller: _searchController,
           focusNode: _searchFocus,
@@ -286,7 +287,7 @@ class _CollectLibraryViewState extends State<CollectLibraryView>
           trailing: [
             if (_query.isNotEmpty)
               IconButton(
-                tooltip: '清除搜索',
+                tooltip: zh('清除搜索'),
                 onPressed: () {
                   _searchController.clear();
                   _search('');

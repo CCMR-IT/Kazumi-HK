@@ -4,6 +4,7 @@ import 'package:kazumi/bean/widget/empty_state_widget.dart';
 import 'package:kazumi/bean/widget/state_presentation.dart';
 import 'package:kazumi/modules/history/history_module.dart';
 import 'package:kazumi/pages/history/history_list_query.dart';
+import 'package:kazumi/utils/zh.dart';
 
 class HistoryListView extends StatefulWidget {
   const HistoryListView({
@@ -121,12 +122,12 @@ class _HistoryListViewState extends State<HistoryListView> {
                             focusNode: _searchFocus,
                             textInputAction: TextInputAction.search,
                             decoration: InputDecoration(
-                              hintText: '搜索番剧、别名或来源',
+                              hintText: zh('搜索番剧、别名或来源'),
                               prefixIcon: const Icon(Icons.search_rounded),
                               suffixIcon: _query.isEmpty
                                   ? null
                                   : IconButton(
-                                      tooltip: '清除搜索',
+                                      tooltip: zh('清除搜索'),
                                       onPressed: _clearSearch,
                                       icon: const Icon(Icons.close_rounded),
                                     ),
@@ -160,10 +161,10 @@ class _HistoryListViewState extends State<HistoryListView> {
                             liveRegion: true,
                             child: Text(
                               widget.editing
-                                  ? '共 $count 条记录 · 点按删除按钮移除'
+                                  ? '${zh('共')} $count ${zh('条记录')} · ${zh('点按删除按钮移除')}'
                                   : filtered
-                                      ? '找到 $count 条记录 · 最近观看优先'
-                                      : '共 $count 条记录 · 最近观看优先',
+                                    ? '${zh('找到')} $count ${zh('条记录')} · ${zh('最近观看优先')}'
+                                    : '${zh('共')} $count ${zh('条记录')} · ${zh('最近观看优先')}',
                               style: theme.textTheme.bodyMedium
                                   ?.copyWith(color: colors.onSurfaceVariant),
                             ),
@@ -213,7 +214,7 @@ class _HistoryListViewState extends State<HistoryListView> {
                     style: theme.textTheme.titleLarge
                         ?.copyWith(fontWeight: FontWeight.w700)),
               ),
-              Text('${group.entries.length} 条',
+              Text('${group.entries.length} ${zh('条')}',
                   style: theme.textTheme.labelLarge
                       ?.copyWith(color: theme.colorScheme.onSurfaceVariant)),
             ],

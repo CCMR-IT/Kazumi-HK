@@ -4,6 +4,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:kazumi/bean/widget/content_section.dart';
 import 'package:kazumi/bean/widget/empty_state_widget.dart';
 import 'package:kazumi/pages/my/my_controller.dart';
+import 'package:kazumi/utils/zh.dart';
 
 class DanmakuShieldEditor extends StatefulWidget {
   const DanmakuShieldEditor({
@@ -50,11 +51,11 @@ class _DanmakuShieldEditorState extends State<DanmakuShieldEditor> {
             TextField(
               controller: textEditingController,
               decoration: InputDecoration(
-                hintText: '关键词或 /正则表达式/',
+                hintText: zh('关键词或 /正则表达式/'),
                 border:
                     OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
                 suffixIcon: IconButton(
-                  tooltip: '添加规则',
+                  tooltip: zh('添加规则'),
                   onPressed: _addRule,
                   icon: const Icon(Icons.add_rounded),
                 ),
@@ -62,7 +63,7 @@ class _DanmakuShieldEditorState extends State<DanmakuShieldEditor> {
               onSubmitted: (_) => _addRule(),
             ),
             const SizedBox(height: 8),
-            Text('包含关键词的弹幕会被隐藏。用 / / 包裹正则表达式。',
+            Text(zh('包含关键词的弹幕会被隐藏。用 / / 包裹正则表达式。'),
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
                       color: Theme.of(context).colorScheme.onSurfaceVariant,
                     )),
@@ -85,10 +86,10 @@ class _DanmakuShieldEditorState extends State<DanmakuShieldEditor> {
                 ListTile(
                   title: Text(rule),
                   subtitle: rule.startsWith('/') && rule.endsWith('/')
-                      ? const Text('正则表达式')
+                      ? Text(zh('正则表达式'))
                       : null,
                   trailing: IconButton(
-                    tooltip: '删除规则',
+                    tooltip: zh('删除规则'),
                     icon: const Icon(Icons.close_rounded, size: 20),
                     onPressed: () => myController.removeShieldList(rule),
                   ),

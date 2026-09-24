@@ -3,6 +3,7 @@ import 'package:kazumi/bean/settings/settings_detail_scaffold.dart';
 import 'package:kazumi/services/storage/storage.dart';
 import 'package:kazumi/utils/constants.dart';
 import 'package:kazumi/bean/settings/settings_list.dart';
+import 'package:kazumi/utils/zh.dart';
 
 class DecoderSettings extends StatefulWidget {
   const DecoderSettings({super.key});
@@ -17,11 +18,11 @@ class _DecoderSettingsState extends State<DecoderSettings> {
   @override
   Widget build(BuildContext context) {
     return SettingsDetailScaffold(
-      title: const Text('硬件解码器'),
+      title: Text(zh('硬件解码器')),
       body: SettingsList(
         sections: [
           SettingsRadioSection<String>(
-            title: Text('选择不受支持的解码器将回退到软件解码'),
+            title: Text(zh('选择不受支持的解码器将回退到软件解码')),
             groupValue: _decoder,
             onChanged: (String? value) {
               if (value != null) {
@@ -35,7 +36,7 @@ class _DecoderSettingsState extends State<DecoderSettings> {
             tiles: hardwareDecodersList.entries
                 .map((e) => SettingsTile<String>.radioTile(
                       title: Text(e.key),
-                      description: Text(e.value),
+                      description: Text(zh(e.value)),
                       radioValue: e.key,
                     ))
                 .toList(),

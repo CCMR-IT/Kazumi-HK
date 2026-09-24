@@ -10,6 +10,7 @@ import 'package:kazumi/bean/dialog/dialog_helper.dart';
 import 'package:kazumi/bean/widget/empty_state_widget.dart';
 import 'package:kazumi/bean/widget/error_widget.dart';
 import 'package:kazumi/bean/widget/loading_indicator.dart';
+import 'package:kazumi/utils/zh.dart';
 
 class LogsPage extends StatefulWidget {
   const LogsPage({super.key});
@@ -161,8 +162,8 @@ class _LogsPageState extends State<LogsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const SysAppBar(
-        title: Text('日志'),
+      appBar: SysAppBar(
+        title: Text(zh('日志')),
       ),
       body: buildBody,
       floatingActionButton: buildFloatingButtons,
@@ -229,14 +230,14 @@ class _LogsPageState extends State<LogsPage> {
         FloatingActionButton(
           heroTag: null,
           onPressed: _clearLogs,
-          tooltip: '清空日志',
+          tooltip: zh('清空日志'),
           child: const Icon(Icons.clear_all),
         ),
         const SizedBox(width: 15),
         FloatingActionButton(
           heroTag: null,
           onPressed: _copyLogs,
-          tooltip: '复制日志',
+          tooltip: zh('复制日志'),
           child: const Icon(Icons.copy),
         ),
       ],

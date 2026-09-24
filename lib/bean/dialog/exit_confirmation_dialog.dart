@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kazumi/utils/zh.dart';
 
 enum ExitDialogAction { exit, minimizeToTray }
 
@@ -71,7 +72,7 @@ class _ExitConfirmationDialogState extends State<ExitConfirmationDialog> {
         ),
       ),
       titlePadding: const EdgeInsets.fromLTRB(24, 16, 24, 0),
-      title: const Text('关闭 Kazumi？', textAlign: TextAlign.center),
+      title: Text(zh('关闭 Kazumi？'), textAlign: TextAlign.center),
       titleTextStyle: theme.textTheme.headlineSmall?.copyWith(
         color: colors.onSurface,
         fontWeight: FontWeight.w600,
@@ -84,7 +85,7 @@ class _ExitConfirmationDialogState extends State<ExitConfirmationDialog> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              '选择关闭窗口后的操作',
+              zh('选择关闭窗口后的操作'),
               textAlign: TextAlign.center,
               style: theme.textTheme.bodyMedium?.copyWith(
                 color: colors.onSurfaceVariant,
@@ -128,9 +129,9 @@ class _ExitConfirmationDialogState extends State<ExitConfirmationDialog> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
-              title: Text('记住我的选择', style: theme.textTheme.bodyMedium),
+              title: Text(zh('记住我的选择'), style: theme.textTheme.bodyMedium),
               subtitle: Text(
-                '下次关闭窗口时不再询问',
+                zh('下次关闭窗口时不再询问'),
                 style: theme.textTheme.bodySmall?.copyWith(
                   color: colors.onSurfaceVariant,
                 ),
@@ -145,7 +146,7 @@ class _ExitConfirmationDialogState extends State<ExitConfirmationDialog> {
         TextButton(
           style: buttonStyle,
           onPressed: () => Navigator.of(context).pop(),
-          child: const Text('取消'),
+          child: Text(zh('取消')),
         ),
         FilledButton(
           style: buttonStyle,
@@ -154,8 +155,8 @@ class _ExitConfirmationDialogState extends State<ExitConfirmationDialog> {
           ),
           child: Text(
             switch (_action) {
-              ExitDialogAction.minimizeToTray => '最小化至托盘',
-              ExitDialogAction.exit => '退出',
+              ExitDialogAction.minimizeToTray => zh('最小化至托盘'),
+              ExitDialogAction.exit => zh('退出'),
             },
           ),
         ),

@@ -10,6 +10,7 @@ import 'package:kazumi/services/sync/webdav.dart';
 import 'package:kazumi/repositories/collect_crud_repository.dart';
 import 'package:mobx/mobx.dart';
 import 'package:kazumi/services/logging/logger.dart';
+import 'package:kazumi/utils/zh.dart';
 
 part 'collect_controller.g.dart';
 
@@ -113,28 +114,28 @@ abstract class _CollectController with Store {
     return KazumiDialog.show<_BangumiDeleteSyncAction>(
       clickMaskDismiss: true,
       builder: (context) => AlertDialog(
-        title: const Text('Bangumi 不支持删除收藏'),
-        content: const Text(
-          '因为安全考虑，Bangumi 未提供删除接口，您可以选择把本地和远端标记为“抛弃”，或者选择仅删除本地收藏并打开网页后手动删除 Bangumi 数据。',
+        title: Text(zh('Bangumi 不支持删除收藏')),
+        content: Text(
+          zh('因为安全考虑，Bangumi 未提供删除接口，您可以选择把本地和远端标记为“抛弃”，或者选择仅删除本地收藏并打开网页后手动删除 Bangumi 数据。'),
         ),
         actions: [
           TextButton(
             onPressed: () {
               Navigator.of(context).pop(_BangumiDeleteSyncAction.cancel);
             },
-            child: const Text('取消'),
+            child: Text(zh('取消')),
           ),
           TextButton(
             onPressed: () {
               Navigator.of(context).pop(_BangumiDeleteSyncAction.openWeb);
             },
-            child: const Text('打开网页'),
+            child: Text(zh('打开网页')),
           ),
           FilledButton(
             onPressed: () {
               Navigator.of(context).pop(_BangumiDeleteSyncAction.markAbandoned);
             },
-            child: const Text('标记为抛弃'),
+            child: Text(zh('标记为抛弃')),
           ),
         ],
       ),

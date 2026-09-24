@@ -13,6 +13,7 @@ import 'package:kazumi/services/player/history_playback_service.dart';
 import 'package:kazumi/services/plugin/rule_engine_models.dart'
     show RuleCancelToken;
 import 'package:kazumi/utils/device.dart';
+import 'package:kazumi/utils/zh.dart';
 
 class HistoryPage extends StatefulWidget {
   const HistoryPage({super.key, required this.controller});
@@ -57,20 +58,20 @@ class _HistoryPageState extends State<HistoryPage> {
       context: context,
       builder: (context) => AlertDialog(
         icon: const Icon(Icons.delete_sweep_outlined),
-        title: const Text('清空历史记录？'),
+        title: Text(zh('清空历史记录？')),
         content: Text(
-            '将删除全部 ${widget.controller.histories.length} 条观看记录，包括在线和缓存记录。此操作无法撤销。'),
+            '${zh('将删除全部')} ${widget.controller.histories.length} ${zh('条观看记录，包括在线和缓存记录。此操作无法撤销。')}'),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(false),
-            child: const Text('取消'),
+            child: Text(zh('取消')),
           ),
           FilledButton(
             style: FilledButton.styleFrom(
                 backgroundColor: Theme.of(context).colorScheme.error,
                 foregroundColor: Theme.of(context).colorScheme.onError),
             onPressed: () => Navigator.of(context).pop(true),
-            child: const Text('清空全部'),
+            child: Text(zh('清空全部')),
           ),
         ],
       ),
@@ -102,7 +103,7 @@ class _HistoryPageState extends State<HistoryPage> {
         },
         child: Scaffold(
           appBar: SysAppBar(
-            title: Text('历史记录',
+            title: Text(zh('历史记录'),
                 style: Theme.of(context)
                     .textTheme
                     .headlineSmall
@@ -116,17 +117,17 @@ class _HistoryPageState extends State<HistoryPage> {
                           onPressed: _clearing
                               ? null
                               : () => setState(() => _editing = false),
-                          child: const Text('完成'),
+                          child: Text(zh('完成')),
                         )
                       : IconButton.filledTonal(
-                          tooltip: '管理历史记录',
+                          tooltip: zh('管理历史记录'),
                           onPressed: () => setState(() => _editing = true),
                           icon: const Icon(Icons.edit_outlined),
                         ),
                 ),
                 if (_editing)
                   IconButton(
-                    tooltip: '清空全部历史记录',
+                    tooltip: zh('清空全部历史记录'),
                     onPressed: _clearing || _deleting.isNotEmpty
                         ? null
                         : _clearHistory,

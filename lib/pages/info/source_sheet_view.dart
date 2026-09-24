@@ -292,7 +292,7 @@ class _SourceSheetViewState extends State<_SourceSheetView> {
                 ),
                 TextButton(
                   onPressed: () => widget.onSourceAliasSearch(group.name),
-                  child: const Text('使用别名'),
+                  child: Text(zh('使用别名')),
                 ),
               ],
             ),
@@ -358,25 +358,25 @@ class _SourceSheetViewState extends State<_SourceSheetView> {
   Widget _buildSourceMenu(_SourceSearchGroup group) => TooltipVisibility(
         visible: false,
         child: PopupMenuButton<VoidCallback>(
-          tooltip: '${group.name} 的更多操作',
+          tooltip: '${group.name} ${zh('的更多操作')}',
           icon: const Icon(Icons.more_horiz_rounded, size: 20),
           onSelected: (action) => action(),
           itemBuilder: (_) => [
             PopupMenuItem(
               value: () => widget.onSourceSearch(group.name),
-              child: const Text('修改此来源的检索词'),
+              child: Text(zh('修改此来源的检索词')),
             ),
             PopupMenuItem(
               value: () => widget.onSourceAliasSearch(group.name),
-              child: const Text('使用别名检索此来源'),
+              child: Text(zh('使用别名检索此来源')),
             ),
             PopupMenuItem(
               value: () => widget.onRetry(group.name),
-              child: const Text('重新检索此来源'),
+              child: Text(zh('重新检索此来源')),
             ),
             PopupMenuItem(
               value: () => widget.onOpenBrowser(group.name),
-              child: const Text('在浏览器中打开'),
+              child: Text(zh('在浏览器中打开')),
             ),
           ],
         ),
@@ -427,7 +427,7 @@ class _SourceSheetViewState extends State<_SourceSheetView> {
               const LoadingIndicator(size: 20, semanticsLabel: '正在检索'),
               const SizedBox(width: 12),
               Expanded(
-                  child: Text('正在检索…',
+                  child: Text(zh('正在检索…'),
                       style: Theme.of(context).textTheme.bodyMedium)),
             ],
           ),
@@ -498,7 +498,7 @@ class _SourceSheetViewState extends State<_SourceSheetView> {
               FilledButton.tonal(onPressed: onAction, child: Text(action)),
               TextButton(
                 onPressed: () => widget.onOpenBrowser(sourceName),
-                child: const Text('打开网站'),
+                child: Text(zh('打开网站')),
               ),
             ],
           ),

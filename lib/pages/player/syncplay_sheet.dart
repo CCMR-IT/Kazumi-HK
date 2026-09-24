@@ -13,6 +13,7 @@ import 'package:kazumi/pages/player/player_controller.dart';
 import 'package:kazumi/services/player/syncplay_endpoint.dart';
 import 'package:kazumi/services/storage/storage.dart';
 import 'package:kazumi/utils/device.dart';
+import 'package:kazumi/utils/zh.dart';
 
 // Close each step before opening the next to avoid stacked modal routes.
 enum _SyncPlayDestination { create, join, server }
@@ -115,7 +116,7 @@ class _SyncPlaySheetScaffold extends StatelessWidget {
                       const SizedBox(width: 8),
                       IconButton(
                         onPressed: () => Navigator.of(context).pop(),
-                        tooltip: '关闭',
+                        tooltip: zh('关闭'),
                         icon: const Icon(Icons.close_rounded),
                       ),
                     ],
@@ -138,7 +139,7 @@ class _SyncPlaySheetScaffold extends StatelessWidget {
                   if (showCancel)
                     TextButton(
                       onPressed: () => Navigator.of(context).pop(),
-                      child: const Text('取消'),
+                      child: Text(zh('取消')),
                     ),
                   const Spacer(),
                   if (primaryAction != null) primaryAction!,
@@ -272,7 +273,7 @@ class _SyncPlayHomeSheet extends StatelessWidget {
         const SizedBox(height: 16),
         ListTile(
           contentPadding: const EdgeInsets.symmetric(horizontal: 8),
-          title: const Text('同步服务器'),
+          title: Text(zh('同步服务器')),
           subtitle: Text(_readEndPoint(), overflow: TextOverflow.ellipsis),
           trailing: const Icon(Icons.chevron_right_rounded),
           onTap: () => Navigator.of(context).pop(_SyncPlayDestination.server),
@@ -488,18 +489,18 @@ class _SyncPlayRoomSheetState extends State<_SyncPlayRoomSheet> {
         onPressed: _submit,
         icon: Icon(
             isCreate ? Icons.play_circle_outline_rounded : Icons.login_rounded),
-        label: Text(isCreate ? '创建并加入' : '加入房间'),
+        label: Text(isCreate ? zh('创建并加入') : zh('加入房间')),
       ),
       bodyBuilder: (context, compact) {
         final Widget lead = isCreate
             ? _RoomNumberCard(
                 room: _createdRoom,
-                label: '房间号',
+                label: zh('房间号'),
                 trailing: [
                   IconButton(
                     onPressed: () =>
                         setState(() => _createdRoom = _generateRoomNumber()),
-                    tooltip: '重新生成',
+                    tooltip: zh('重新生成'),
                     color: Theme.of(context).colorScheme.onSurface,
                     icon: const Icon(Icons.refresh_rounded),
                   ),
@@ -541,16 +542,16 @@ class _SyncPlayRoomSheetState extends State<_SyncPlayRoomSheet> {
       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
       autovalidateMode: AutovalidateMode.onUserInteraction,
       decoration: _sheetInputDecoration(
-        labelText: '房间号',
-        hintText: '6-10 位数字',
+        labelText: zh('房间号'),
+        hintText: zh('6-10 位数字'),
       ),
       validator: (value) {
         final String text = (value ?? '').trim();
         if (text.isEmpty) {
-          return '请输入房间号';
+          return zh('请输入房间号');
         }
         if (!RegExp(r'^[0-9]{6,10}$').hasMatch(text)) {
-          return '房间号为 6-10 位数字';
+          return zh('房间号为 6-10 位数字');
         }
         return null;
       },
@@ -563,16 +564,16 @@ class _SyncPlayRoomSheetState extends State<_SyncPlayRoomSheet> {
       textInputAction: TextInputAction.done,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       decoration: _sheetInputDecoration(
-        labelText: '昵称',
-        helperText: compact ? null : '4-12 位英文字母，房间内可见',
+        labelText: zh('昵称'),
+        helperText: compact ? null : zh('4-12 位英文字母，房间内可见'),
       ),
       validator: (value) {
         final String text = (value ?? '').trim();
         if (text.isEmpty) {
-          return '请输入昵称';
+          return zh('请输入昵称');
         }
         if (!RegExp(r'^[a-zA-Z]{4,12}$').hasMatch(text)) {
-          return '昵称为 4-12 位英文字母';
+          return zh('昵称为 4-12 位英文字母');
         }
         return null;
       },
@@ -623,7 +624,7 @@ class _SyncPlayServerSheetState extends State<_SyncPlayServerSheet> {
     if (endPoint == _customOption) {
       endPoint = _customEndPointController.text.trim();
       if (parseSyncPlayEndPoint(endPoint) == null) {
-        setState(() => _customEndPointError = '地址格式为 host:port');
+        setState(() => _customEndPointError = zh('地址格式为 host:port'));
         return;
       }
     }
@@ -639,7 +640,7 @@ class _SyncPlayServerSheetState extends State<_SyncPlayServerSheet> {
       showCancel: true,
       primaryAction: FilledButton(
         onPressed: _save,
-        child: const Text('保存'),
+        child: Text(zh('保存')),
       ),
       bodyBuilder: (context, compact) {
         final List<String> endPoints = [
@@ -662,7 +663,7 @@ class _SyncPlayServerSheetState extends State<_SyncPlayServerSheet> {
                 keyboardType: TextInputType.url,
                 autocorrect: false,
                 decoration: _sheetInputDecoration(
-                  labelText: '服务器地址',
+                  labelText: zh('服务器地址'),
                   hintText: 'example.com:8996',
                   errorText: _customEndPointError,
                 ),

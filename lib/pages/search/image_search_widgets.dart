@@ -102,9 +102,9 @@ class _ScreenshotTip extends StatelessWidget {
       Expanded(
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Text('保留完整画面，识别更准确', style: type.titleSmall),
+        Text(zh('保留完整画面，识别更准确'), style: type.titleSmall),
         const SizedBox(height: 4),
-        Text('保持原始比例，尽量避开黑边、水印和拼图。',
+        Text(zh('保持原始比例，尽量避开黑边、水印和拼图。'),
             style: type.bodyMedium?.copyWith(color: colors.onSurfaceVariant)),
       ])),
     ]);
@@ -152,11 +152,11 @@ class _ImageSearchResults extends StatelessWidget {
       Semantics(
           header: true,
           liveRegion: true,
-          child: Text('找到 ${results.length} 个相似片段',
+          child: Text('${zh('找到')} ${results.length} ${zh('个相似片段')}',
               style:
                   type.headlineSmall?.copyWith(fontWeight: FontWeight.w700))),
       const SizedBox(height: 6),
-      Text('按画面相似度排序，先对照截图再确认。',
+      Text(zh('按画面相似度排序，先对照截图再确认。'),
           style: type.bodyMedium?.copyWith(color: colors.onSurfaceVariant)),
       if (error.isNotEmpty) ...[
         const SizedBox(height: 12),
@@ -167,7 +167,7 @@ class _ImageSearchResults extends StatelessWidget {
           result: results.first, onSelect: onSelect, onPreview: onPreview),
       if (results.length > 1) ...[
         const SizedBox(height: 28),
-        Text('其他相似片段',
+        Text(zh('其他相似片段'),
             style: type.titleMedium?.copyWith(fontWeight: FontWeight.w700)),
         const SizedBox(height: 12),
         ...results.skip(1).indexed.map((entry) => Padding(
@@ -193,14 +193,14 @@ class _ImageSearchLoadingState extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 32),
           child: Column(children: [
-            const LoadingIndicator(size: 72, semanticsLabel: '正在匹配动画画面'),
+            LoadingIndicator(size: 72, semanticsLabel: zh('正在匹配动画画面')),
             const SizedBox(height: 24),
-            Text('正在寻找这一幕',
+            Text(zh('正在寻找这一幕'),
                 textAlign: TextAlign.center,
                 style:
                     type.headlineSmall?.copyWith(fontWeight: FontWeight.w700)),
             const SizedBox(height: 12),
-            Text('正在比对动画画面，匹配番名、集数与时间。\n请稍等片刻。',
+            Text(zh('正在比对动画画面，匹配番名、集数与时间。\n请稍等片刻。'),
                 textAlign: TextAlign.center,
                 style: type.bodyLarge?.copyWith(
                     color: Theme.of(context).colorScheme.onSurfaceVariant)),
@@ -234,7 +234,7 @@ class _BestMatch extends StatelessWidget {
         ]),
         if (lowSimilarity) ...[
           const SizedBox(height: 12),
-          Text('相似度偏低，建议对照画面，或换一张截图。',
+          Text(zh('相似度偏低，建议对照画面，或换一张截图。'),
               style: type.bodyMedium?.copyWith(color: colors.onSurface)),
         ],
         const SizedBox(height: 16),
@@ -243,7 +243,7 @@ class _BestMatch extends StatelessWidget {
             onPressed: () => onSelect(_title(result)),
             style: FilledButton.styleFrom(minimumSize: const Size(0, 48)),
             icon: const Icon(Icons.search_rounded, size: 20),
-            label: const Text('搜索这部番'),
+            label: Text(zh('搜索这部番')),
           ),
           if (video != null)
             OutlinedButton.icon(
@@ -254,7 +254,7 @@ class _BestMatch extends StatelessWidget {
                 minimumSize: const Size(0, 48),
               ),
               icon: const Icon(Icons.play_arrow_rounded, size: 20),
-              label: const Text('预览片段'),
+              label: Text(zh('预览片段')),
             ),
         ]),
       ]),
@@ -283,10 +283,10 @@ class _BestMatch extends StatelessWidget {
                 runSpacing: 4,
                 crossAxisAlignment: WrapCrossAlignment.center,
                 children: [
-                  Text('相似度最高',
+                  Text(zh('相似度最高'),
                       style:
                           type.labelLarge?.copyWith(color: colors.onSurface)),
-                  Text('${_similarity(result)} 相似',
+                  Text('${_similarity(result)} ${zh('相似')}',
                       style: type.titleMedium?.copyWith(
                           color: colors.onSurface,
                           fontWeight: FontWeight.w700)),

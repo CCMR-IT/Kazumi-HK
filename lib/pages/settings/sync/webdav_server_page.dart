@@ -8,6 +8,7 @@ import 'package:kazumi/pages/settings/sync/sync_settings_widgets.dart';
 import 'package:kazumi/services/logging/logger.dart';
 import 'package:kazumi/services/storage/storage.dart';
 import 'package:kazumi/services/sync/webdav.dart';
+import 'package:kazumi/utils/zh.dart';
 
 class WebDavServerPage extends StatefulWidget {
   const WebDavServerPage({super.key});
@@ -71,7 +72,7 @@ class _WebDavServerPageState extends State<WebDavServerPage> {
   Widget build(BuildContext context) => PopScope(
         canPop: !_busy,
         child: SettingsDetailScaffold(
-          title: const Text('同步服务器'),
+          title: Text(zh('同步服务器')),
           body: SyncPageBody(
             maxWidth: 640,
             children: [
@@ -98,10 +99,10 @@ class _WebDavServerPageState extends State<WebDavServerPage> {
                         keyboardType: TextInputType.url,
                         textInputAction: TextInputAction.next,
                         autocorrect: false,
-                        decoration: const InputDecoration(
-                          labelText: '服务器地址',
+                        decoration: InputDecoration(
+                          labelText: zh('服务器地址'),
                           hintText: 'https://example.com/dav/',
-                          border: OutlineInputBorder(),
+                          border: const OutlineInputBorder(),
                           errorMaxLines: 3,
                         ),
                         validator: (value) {
@@ -109,7 +110,7 @@ class _WebDavServerPageState extends State<WebDavServerPage> {
                           if (uri == null ||
                               !['http', 'https'].contains(uri.scheme) ||
                               uri.host.isEmpty) {
-                            return '请输入完整的 http:// 或 https:// 地址';
+                            return zh('请输入完整的 http:// 或 https:// 地址');
                           }
                           return null;
                         },
@@ -119,9 +120,9 @@ class _WebDavServerPageState extends State<WebDavServerPage> {
                         enabled: !_busy,
                         textInputAction: TextInputAction.next,
                         autocorrect: false,
-                        decoration: const InputDecoration(
-                          labelText: '用户名',
-                          border: OutlineInputBorder(),
+                        decoration: InputDecoration(
+                          labelText: zh('用户名'),
+                          border: const OutlineInputBorder(),
                         ),
                       ),
                       TextFormField(
@@ -132,10 +133,10 @@ class _WebDavServerPageState extends State<WebDavServerPage> {
                         enableSuggestions: false,
                         onFieldSubmitted: (_) => _save(),
                         decoration: InputDecoration(
-                          labelText: '密码或应用授权码',
+                          labelText: zh('密码或应用授权码'),
                           border: const OutlineInputBorder(),
                           suffixIcon: IconButton(
-                            tooltip: _passwordVisible ? '隐藏密码' : '显示密码',
+                            tooltip: _passwordVisible ? zh('隐藏密码') : zh('显示密码'),
                             onPressed: () => setState(
                                 () => _passwordVisible = !_passwordVisible),
                             icon: Icon(_passwordVisible
@@ -158,7 +159,7 @@ class _WebDavServerPageState extends State<WebDavServerPage> {
               if (_message != null && !_busy && !_failed)
                 TextButton(
                   onPressed: () => context.maybePop(),
-                  child: const Text('返回同步设置'),
+                  child: Text(zh('返回同步设置')),
                 ),
             ],
           ),

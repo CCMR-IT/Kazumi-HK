@@ -3,6 +3,7 @@ import 'package:kazumi/bean/card/network_img_layer.dart';
 import 'package:kazumi/bean/widget/loading_indicator.dart';
 import 'package:kazumi/modules/collect/collect_type.dart';
 import 'package:kazumi/modules/history/history_module.dart';
+import 'package:kazumi/utils/zh.dart';
 
 class HistoryRecordTile extends StatelessWidget {
   const HistoryRecordTile({
@@ -204,7 +205,7 @@ class HistoryRecordTile extends StatelessWidget {
     }
     if (editing) {
       return IconButton.filledTonal(
-        tooltip: '删除记录',
+        tooltip: zh('删除记录'),
         style: IconButton.styleFrom(
           minimumSize: const Size(48, 48),
           backgroundColor: colors.errorContainer,
@@ -217,7 +218,7 @@ class HistoryRecordTile extends StatelessWidget {
 
     final buttons = [
       IconButton.filledTonal(
-        tooltip: '继续播放',
+        tooltip: zh('继续播放'),
         style: IconButton.styleFrom(
           minimumSize: const Size(48, 48),
           backgroundColor: colors.primaryContainer,
@@ -232,7 +233,7 @@ class HistoryRecordTile extends StatelessWidget {
           MenuItemButton(
             leadingIcon: const Icon(Icons.info_outline_rounded),
             onPressed: onDetails,
-            child: const Text('番剧详情'),
+            child: Text(zh('番剧详情')),
           ),
           SubmenuButton(
             leadingIcon: const Icon(Icons.bookmark_outline_rounded),
@@ -248,18 +249,18 @@ class HistoryRecordTile extends StatelessWidget {
                   child: Text(type.label),
                 ),
             ],
-            child: Text('收藏 · ${collectType.label}'),
+            child: Text('${zh('收藏')} · ${collectType.label}'),
           ),
           const Divider(),
           MenuItemButton(
             leadingIcon:
                 Icon(Icons.delete_outline_rounded, color: colors.error),
             onPressed: onDelete,
-            child: Text('删除记录', style: TextStyle(color: colors.error)),
+            child: Text(zh('删除记录'), style: TextStyle(color: colors.error)),
           ),
         ],
         builder: (context, controller, child) => IconButton(
-          tooltip: '更多操作',
+          tooltip: zh('更多操作'),
           constraints: const BoxConstraints(minWidth: 48, minHeight: 48),
           onPressed: () =>
               controller.isOpen ? controller.close() : controller.open(),

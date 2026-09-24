@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:material_new_shapes/material_new_shapes.dart';
+import 'package:kazumi/utils/zh.dart';
 
 class StateIconBadge extends StatelessWidget {
   const StateIconBadge({
@@ -88,7 +89,7 @@ class StateActionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final button = _tonal ? FilledButton.tonalIcon : FilledButton.icon;
-    final label = Text(text, textAlign: TextAlign.center);
+    final label = Text(zh(text), textAlign: TextAlign.center);
     return button(
       onPressed: onPressed,
       style: styleOf(context),
@@ -103,7 +104,7 @@ class StateActionButton extends StatelessWidget {
                   maintainSize: true,
                   maintainState: true,
                   maintainAnimation: true,
-                  child: Text(reserveText!, textAlign: TextAlign.center),
+                  child: Text(zh(reserveText), textAlign: TextAlign.center),
                 ),
                 label,
               ],

@@ -16,6 +16,7 @@ import 'package:kazumi/navigation.dart';
 import 'package:kazumi/utils/constants.dart';
 import 'package:kazumi/utils/device.dart';
 import 'package:kazumi/utils/theme.dart';
+import 'package:kazumi/utils/zh.dart';
 
 class AppWidget extends StatefulWidget {
   const AppWidget({super.key});
@@ -279,8 +280,10 @@ class _AppWidgetState extends State<AppWidget>
     final ThemeProvider themeProvider = context.watch<ThemeProvider>();
     bool oledEnhance = GStorage.getSetting(SettingsKeys.oledEnhance);
 
-    var app = DynamicColorBuilder(
-      builder: (theme, darkTheme) {
+    var app = ValueListenableBuilder<bool>(
+      valueListenable: ZhConverterService.hongKongTraditionalEnabled,
+      builder: (context, hongKongTraditional, _) => DynamicColorBuilder(
+        builder: (theme, darkTheme) {
         final useDynamicColor =
             themeProvider.useDynamicColor && theme != null && darkTheme != null;
         final lightTheme = useDynamicColor
@@ -305,10 +308,15 @@ class _AppWidgetState extends State<AppWidget>
           title: "Kazumi",
           localizationsDelegates: GlobalMaterialLocalizations.delegates,
           supportedLocales: const [
+          Locale.fromSubtags(
+            languageCode: 'zh', scriptCode: 'Hant', countryCode: "HK"),
             Locale.fromSubtags(
                 languageCode: 'zh', scriptCode: 'Hans', countryCode: "CN")
           ],
-          locale: const Locale.fromSubtags(
+          locale: hongKongTraditional
+            ? const Locale.fromSubtags(
+              languageCode: 'zh', scriptCode: 'Hant', countryCode: "HK")
+            : const Locale.fromSubtags(
               languageCode: 'zh', scriptCode: 'Hans', countryCode: "CN"),
           theme: lightTheme,
           darkTheme: effectiveDarkTheme,
@@ -316,7 +324,8 @@ class _AppWidgetState extends State<AppWidget>
           scaffoldMessengerKey: rootScaffoldMessengerKey,
           routerConfig: ModularApp.routerConfigOf(context),
         );
-      },
+        },
+      ),
     );
 
     return app;

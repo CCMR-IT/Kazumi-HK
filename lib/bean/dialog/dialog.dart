@@ -5,6 +5,7 @@ import 'package:flutter/scheduler.dart';
 
 import 'package:kazumi/navigation.dart';
 import 'package:kazumi/utils/constants.dart';
+import 'package:kazumi/utils/zh.dart';
 
 /// Single-use ownership of a route, including before its first frame.
 class KazumiDialogHandle<T> {
@@ -103,7 +104,7 @@ class KazumiDialog {
           ..removeCurrentSnackBar()
           ..showSnackBar(
             SnackBar(
-              content: Text(message),
+              content: Text(zh(message)),
               behavior: SnackBarBehavior.floating,
               width: MediaQuery.sizeOf(toastContext).width >
                       LayoutBreakpoint.medium['width']!
@@ -113,7 +114,7 @@ class KazumiDialog {
               persist: false,
               action: showActionButton
                   ? SnackBarAction(
-                      label: actionLabel ?? 'Dismiss',
+                      label: zh(actionLabel ?? 'Dismiss'),
                       onPressed: () {
                         // Let SnackBarAction close the old toast before replacing it.
                         if (onActionPressed != null) {

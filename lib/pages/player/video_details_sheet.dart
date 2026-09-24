@@ -10,6 +10,7 @@ import 'package:kazumi/bean/widget/content_section.dart';
 import 'package:kazumi/bean/widget/empty_state_widget.dart';
 import 'package:kazumi/bean/widget/tonal_card.dart';
 import 'package:kazumi/pages/player/player_controller.dart';
+import 'package:kazumi/utils/zh.dart';
 
 void showVideoDetailsSheet(
   BuildContext context, {
@@ -151,7 +152,7 @@ class _VideoDetailsSheetState extends State<_VideoDetailsSheet>
           ContentSection.group(title: '技术信息', children: [
             ExpansionTile(
               key: const PageStorageKey('video-parameters'),
-              title: const Text('视频参数'),
+              title: Text(zh('视频参数')),
               shape: const Border(),
               collapsedShape: const Border(),
               children: [
@@ -161,7 +162,7 @@ class _VideoDetailsSheetState extends State<_VideoDetailsSheet>
             ),
             ExpansionTile(
               key: const PageStorageKey('audio-parameters'),
-              title: const Text('音频参数'),
+              title: Text(zh('音频参数')),
               shape: const Border(),
               collapsedShape: const Border(),
               children: [
@@ -178,7 +179,7 @@ class _VideoDetailsSheetState extends State<_VideoDetailsSheet>
   Widget _metric(BuildContext context, String label, String value) {
     final theme = Theme.of(context);
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Text(label,
+      Text(zh(label),
           style: theme.textTheme.labelMedium
               ?.copyWith(color: theme.colorScheme.onSurfaceVariant)),
       const SizedBox(height: 4),
@@ -189,16 +190,16 @@ class _VideoDetailsSheetState extends State<_VideoDetailsSheet>
   Widget _statusField(BuildContext context, String label, String value,
       {bool compact = false}) {
     return ListTile(
-      title: Text(label),
+      title: Text(zh(label)),
       subtitle: Text(
-        value.isEmpty ? '尚未获取' : value,
+        value.isEmpty ? zh('尚未获取') : value,
         maxLines: compact ? 2 : null,
         overflow: compact ? TextOverflow.ellipsis : null,
       ),
       trailing: value.isEmpty
           ? null
           : IconButton(
-              tooltip: '复制$label',
+              tooltip: '${zh('复制')}${zh(label)}',
               icon: const Icon(Icons.content_copy_rounded, size: 18),
               onPressed: () => _copyToClipboard(context, value),
             ),
@@ -237,14 +238,14 @@ class _VideoDetailsSheetState extends State<_VideoDetailsSheet>
         padding: materialBottomSheetContentPadding,
         child: Column(children: [
           Row(children: [
-            Text('${logs.length} 条记录', style: theme.textTheme.labelMedium),
+            Text('${logs.length} ${zh('条记录')}', style: theme.textTheme.labelMedium),
             const Spacer(),
             TextButton.icon(
               onPressed: logs.isEmpty
                   ? null
                   : () => _copyToClipboard(context, logs.join('\n')),
               icon: const Icon(Icons.content_copy_rounded, size: 18),
-              label: const Text('复制全部'),
+              label: Text(zh('复制全部')),
             ),
           ]),
           const SizedBox(height: 8),

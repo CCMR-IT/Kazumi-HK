@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kazumi/modules/bangumi/bangumi_item.dart';
 import 'package:kazumi/pages/collect/collect_controller.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:kazumi/utils/zh.dart';
 
 class CollectButton extends StatefulWidget {
   CollectButton({
@@ -51,17 +52,17 @@ class _CollectButtonState extends State<CollectButton> {
   String getTypeStringByInt(int collectType) {
     switch (collectType) {
       case 1:
-        return "在看";
+        return zh('在看');
       case 2:
-        return "想看";
+        return zh('想看');
       case 3:
-        return "搁置";
+        return zh('搁置');
       case 4:
-        return "看过";
+        return zh('看过');
       case 5:
-        return "抛弃";
+        return zh('抛弃');
       default:
-        return "未追";
+        return zh('未追');
     }
   }
 

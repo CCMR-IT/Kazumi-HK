@@ -8,6 +8,7 @@ import 'package:kazumi/bean/widget/state_presentation.dart';
 import 'package:kazumi/modules/bangumi/bangumi_item.dart';
 import 'package:kazumi/modules/bangumi/bangumi_review.dart';
 import 'package:kazumi/services/logging/logger.dart';
+import 'package:kazumi/utils/zh.dart';
 
 class RatingReviewDialog extends StatefulWidget {
   const RatingReviewDialog({
@@ -167,16 +168,16 @@ class _RatingReviewDialogState extends State<RatingReviewDialog> {
       context: context,
       builder: (dialogContext) => AlertDialog(
         icon: const Icon(Icons.edit_note_rounded),
-        title: const Text('放弃编辑？'),
-        content: const Text('未保存的修改将丢失。'),
+        title: Text(zh('放弃编辑？')),
+        content: Text(zh('未保存的修改将丢失。')),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(dialogContext, false),
-            child: const Text('继续编辑'),
+            child: Text(zh('继续编辑')),
           ),
           TextButton(
             onPressed: () => Navigator.pop(dialogContext, true),
-            child: const Text('放弃编辑'),
+            child: Text(zh('放弃编辑')),
           ),
         ],
       ),
@@ -322,7 +323,7 @@ class _RatingReviewDialogState extends State<RatingReviewDialog> {
         padding: const EdgeInsets.fromLTRB(12, 12, 24, 12),
         child: Row(children: [
           IconButton(
-            tooltip: '关闭',
+            tooltip: zh('关闭'),
             onPressed: _submitting ? null : _requestClose,
             icon: const Icon(Icons.close_rounded),
           ),
@@ -348,7 +349,7 @@ class _RatingReviewDialogState extends State<RatingReviewDialog> {
       textInputAction: TextInputAction.newline,
       style: Theme.of(context).textTheme.bodyLarge?.copyWith(height: 1.6),
       decoration: InputDecoration(
-        labelText: '吐槽',
+        labelText: zh('吐槽'),
         alignLabelWithHint: true,
         floatingLabelBehavior: FloatingLabelBehavior.always,
         filled: true,
@@ -401,7 +402,7 @@ class _RatingReviewDialogState extends State<RatingReviewDialog> {
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                Text('评分',
+                Text(zh('评分'),
                     style: theme.textTheme.labelLarge
                         ?.copyWith(color: colors.onSecondaryContainer)),
                 const SizedBox(height: 4),
@@ -411,7 +412,7 @@ class _RatingReviewDialogState extends State<RatingReviewDialog> {
               ])),
           if (_score != 0)
             IconButton(
-              tooltip: '清除评分',
+              tooltip: zh('清除评分'),
               onPressed: _submitting ? null : () => _setScore(0),
               icon: Icon(Icons.restart_alt_rounded,
                   color: colors.onSecondaryContainer),
@@ -495,7 +496,7 @@ class _RatingReviewDialogState extends State<RatingReviewDialog> {
     final suggestions = _showAllTags ? _popularTags : _popularTags.take(6);
     return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
       Row(children: [
-        Expanded(child: Text('标签', style: theme.textTheme.titleMedium)),
+        Expanded(child: Text(zh('标签'), style: theme.textTheme.titleMedium)),
         Text('${_selectedTags.length} / $_maxTags',
             style: theme.textTheme.labelLarge
                 ?.copyWith(color: colors.onSurfaceVariant)),
@@ -515,7 +516,7 @@ class _RatingReviewDialogState extends State<RatingReviewDialog> {
         const SizedBox(height: 12),
       ],
       if (_popularTags.isNotEmpty) ...[
-        Text('热门标签',
+        Text(zh('热门标签'),
             style: theme.textTheme.labelMedium
                 ?.copyWith(color: colors.onSurfaceVariant)),
         const SizedBox(height: 4),
@@ -543,7 +544,7 @@ class _RatingReviewDialogState extends State<RatingReviewDialog> {
         if (!_showCustomTag)
           ActionChip(
             avatar: const Icon(Icons.add_rounded, size: 18),
-            label: const Text('自定义标签'),
+            label: Text(zh('自定义标签')),
             onPressed: _submitting
                 ? null
                 : () {
@@ -569,14 +570,14 @@ class _RatingReviewDialogState extends State<RatingReviewDialog> {
                   onSubmitted: (_) => _addCustomTag(),
                   onChanged: (_) => setState(() => _tagError = null),
                   decoration: InputDecoration(
-                    labelText: '自定义标签',
-                    hintText: '例如：治愈',
+                    labelText: zh('自定义标签'),
+                    hintText: zh('例如：治愈'),
                     filled: true,
                     fillColor: colors.surfaceContainerLowest,
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(16)),
                     suffixIcon: IconButton(
-                      tooltip: '添加标签',
+                      tooltip: zh('添加标签'),
                       onPressed: _submitting ? null : _addCustomTag,
                       icon: const Icon(Icons.add_rounded),
                     ),
@@ -622,7 +623,7 @@ class _RatingReviewDialogState extends State<RatingReviewDialog> {
       padding: const EdgeInsets.fromLTRB(24, 12, 24, 16),
       child: Row(children: [
         Expanded(
-            child: Text('发布至 Bangumi',
+            child: Text(zh('发布至 Bangumi'),
                 style: Theme.of(context)
                     .textTheme
                     .bodySmall
@@ -639,7 +640,7 @@ class _RatingReviewDialogState extends State<RatingReviewDialog> {
                         color: colors.primary,
                         semanticsLabel: '正在发表'),
                     const SizedBox(width: 12),
-                    const Text('正在发表…'),
+                    Text(zh('正在发表…')),
                   ])))
         else
           StateActionButton(

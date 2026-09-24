@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kazumi/bean/widget/state_presentation.dart';
+import 'package:kazumi/utils/zh.dart';
 
 /// Shrink-wraps in slivers and scrolls within bounded viewports.
 class GeneralEmptyState extends StatelessWidget {
@@ -45,7 +46,7 @@ class GeneralEmptyState extends StatelessWidget {
                 header: true,
                 liveRegion: true,
                 child: Text(
-                  title,
+                  zh(title),
                   textAlign: TextAlign.center,
                   style:
                       (compact ? textTheme.titleMedium : textTheme.titleLarge)

@@ -20,6 +20,7 @@ import 'package:kazumi/utils/device.dart';
 import 'package:kazumi/services/platform/webview_feature_service.dart';
 import 'package:kazumi/bean/dialog/dialog_helper.dart';
 import 'package:kazumi/navigation.dart';
+import 'package:kazumi/utils/zh.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -42,6 +43,7 @@ void main() async {
     final hivePath = '${(await getApplicationSupportDirectory()).path}/hive';
     await Hive.initFlutter(hivePath);
     await GStorage.init();
+    ZhConverterService.initialize();
   } catch (e) {
     // Log the error for debugging (if logger is available)
     debugPrint('Storage initialization failed: $e');

@@ -20,6 +20,7 @@ import 'package:kazumi/plugins/plugins.dart';
 import 'package:kazumi/plugins/plugins_controller.dart';
 import 'package:kazumi/services/logging/logger.dart';
 import 'package:kazumi/services/plugin/plugin_import_parser.dart';
+import 'package:kazumi/utils/zh.dart';
 
 class PluginViewPage extends StatefulWidget {
   const PluginViewPage({super.key, required this.controller});
@@ -197,14 +198,14 @@ class _PluginViewPageState extends State<PluginViewPage> {
           title: Text(_selecting ? '已选择 ${_selected.length} 条' : '规则管理'),
           leading: _selecting
               ? IconButton(
-                  tooltip: '退出多选',
+                  tooltip: zh('退出多选'),
                   onPressed: _leaveSelection,
                   icon: const Icon(Icons.close_rounded))
               : null,
           actions: [
             if (_selecting)
               IconButton(
-                tooltip: '删除所选规则',
+                tooltip: zh('删除所选规则'),
                 onPressed: _selected.isEmpty || _deleting
                     ? null
                     : () => _delete(Set.of(_selected)),
@@ -212,7 +213,7 @@ class _PluginViewPageState extends State<PluginViewPage> {
               )
             else
               IconButton(
-                tooltip: '批量选择',
+                tooltip: zh('批量选择'),
                 onPressed: () => setState(() => _selecting = true),
                 icon: const Icon(Icons.checklist_rounded),
               ),
@@ -263,14 +264,14 @@ class _PluginViewPageState extends State<PluginViewPage> {
                                     minimumSize: const Size(120, 48)),
                                 onPressed: _add,
                                 icon: const Icon(Icons.add_rounded),
-                                label: const Text('添加规则')),
+                                label: Text(zh('添加规则'))),
                             FilledButton.tonalIcon(
                                 style: FilledButton.styleFrom(
                                     minimumSize: const Size(120, 48)),
                                 onPressed: () =>
                                     context.pushNamed('/settings/plugin/shop'),
                                 icon: const Icon(Icons.travel_explore_rounded),
-                                label: const Text('规则仓库')),
+                                label: Text(zh('规则仓库'))),
                           ],
                         ),
                         const SizedBox(height: 20),
@@ -283,7 +284,7 @@ class _PluginViewPageState extends State<PluginViewPage> {
                               suffix: query.isEmpty
                                   ? null
                                   : IconButton(
-                                      tooltip: '清除搜索',
+                                      tooltip: zh('清除搜索'),
                                       onPressed: () => setState(_search.clear),
                                       icon: const Icon(Icons.close_rounded))),
                         ),
@@ -294,12 +295,12 @@ class _PluginViewPageState extends State<PluginViewPage> {
                           crossAxisAlignment: WrapCrossAlignment.center,
                           children: [
                             FilterChip(
-                                label: Text('全部 ${all.length}'),
+                                label: Text('${zh('全部')} ${all.length}'),
                                 selected: !_updatesOnly,
                                 onSelected: (_) =>
                                     setState(() => _updatesOnly = false)),
                             FilterChip(
-                                label: Text('可更新 $updates'),
+                                label: Text('${zh('可更新')} $updates'),
                                 selected: _updatesOnly,
                                 onSelected: (value) =>
                                     setState(() => _updatesOnly = value)),
@@ -334,7 +335,7 @@ class _PluginViewPageState extends State<PluginViewPage> {
                         if (_catalogFailed)
                           Padding(
                               padding: const EdgeInsets.symmetric(vertical: 8),
-                              child: Text('暂时无法检查更新，已安装的规则仍可使用。',
+                              child: Text(zh('暂时无法检查更新，已安装的规则仍可使用。'),
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodySmall
@@ -448,7 +449,7 @@ class _PluginViewPageState extends State<PluginViewPage> {
           padding: const WidgetStatePropertyAll(EdgeInsets.all(8)),
         ),
         builder: (context, controller, child) => IconButton(
-            tooltip: '${plugin.name} 的更多操作',
+            tooltip: '${plugin.name} ${zh('的更多操作')}',
             onPressed: () =>
                 controller.isOpen ? controller.close() : controller.open(),
             icon: const Icon(Icons.more_horiz_rounded)),
@@ -457,37 +458,37 @@ class _PluginViewPageState extends State<PluginViewPage> {
               leadingIcon: const Icon(Icons.edit_outlined),
               onPressed: () => context.pushNamed('/settings/plugin/editor',
                   arguments: plugin),
-              child: const Text('编辑规则')),
+              child: Text(zh('编辑规则'))),
           MenuItemButton(
               leadingIcon: const Icon(Icons.bug_report_outlined),
               onPressed: () =>
                   context.pushNamed('/settings/plugin/test', arguments: plugin),
-              child: const Text('测试规则')),
+              child: Text(zh('测试规则'))),
           MenuItemButton(
               leadingIcon: const Icon(Icons.sync_rounded),
               onPressed: _updating ? null : () => _updateOne(plugin),
-              child: const Text('检查更新')),
+              child: Text(zh('检查更新'))),
           MenuItemButton(
               leadingIcon: const Icon(Icons.ios_share_rounded),
               onPressed: () => showRuleShareDialog(context, plugin),
-              child: const Text('分享规则')),
+              child: Text(zh('分享规则'))),
           const Divider(),
           MenuItemButton(
               leadingIcon: const Icon(Icons.arrow_upward_rounded),
               onPressed: index == 0 ? null : () => _reorder(index, index - 1),
-              child: const Text('上移')),
+              child: Text(zh('上移'))),
           MenuItemButton(
               leadingIcon: const Icon(Icons.arrow_downward_rounded),
               onPressed: index == _controller.pluginList.length - 1
                   ? null
                   : () => _reorder(index, index + 1),
-              child: const Text('下移')),
+              child: Text(zh('下移'))),
           const Divider(),
           MenuItemButton(
               leadingIcon: Icon(Icons.delete_outline_rounded,
                   color: Theme.of(context).colorScheme.error),
               onPressed: _deleting ? null : () => _delete({plugin.name}),
-              child: Text('删除规则',
+              child: Text(zh('删除规则'),
                   style:
                       TextStyle(color: Theme.of(context).colorScheme.error))),
         ],

@@ -3,6 +3,7 @@ import 'package:kazumi/bean/settings/settings_detail_scaffold.dart';
 import 'package:kazumi/pages/player/controller/player_super_resolution.dart';
 import 'package:kazumi/services/storage/storage.dart';
 import 'package:kazumi/bean/settings/settings_list.dart';
+import 'package:kazumi/utils/zh.dart';
 
 class SuperResolutionSettings extends StatefulWidget {
   const SuperResolutionSettings({super.key});
@@ -30,11 +31,11 @@ class _SuperResolutionSettingsState extends State<SuperResolutionSettings> {
   @override
   Widget build(BuildContext context) {
     return SettingsDetailScaffold(
-      title: const Text('超分辨率'),
+      title: Text(zh('超分辨率')),
       body: SettingsList(
         sections: [
           SettingsRadioSection<SuperResolutionMode>(
-            title: Text('超分辨率需要启用硬件解码, 若启用硬件解码后仍然不生效, 尝试切换视频渲染器为 gpu'),
+            title: Text(zh('超分辨率需要启用硬件解码, 若启用硬件解码后仍然不生效, 尝试切换视频渲染器为 gpu')),
             groupValue: superResolutionMode,
             onChanged: (SuperResolutionMode? value) {
               if (value == null) return;
@@ -56,12 +57,12 @@ class _SuperResolutionSettingsState extends State<SuperResolutionSettings> {
             ],
           ),
           SettingsSection(
-            title: Text('默认行为'),
+            title: Text(zh('默认行为')),
             tiles: [
               SettingsTile.switchTile(
                 leading: Icons.notifications_off_rounded,
-                title: Text('关闭提示'),
-                description: Text('关闭每次启用超分辨率时的提示'),
+                title: Text(zh('关闭提示')),
+                description: Text(zh('关闭每次启用超分辨率时的提示')),
                 initialValue: disableWarning,
                 onToggle: (value) async {
                   disableWarning = value ?? !disableWarning;

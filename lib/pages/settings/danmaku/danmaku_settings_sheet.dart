@@ -9,6 +9,7 @@ import 'package:kazumi/bean/widget/content_section.dart';
 import 'package:kazumi/pages/settings/danmaku/danmaku_shield_settings_sheet.dart';
 import 'package:kazumi/pages/settings/danmaku/danmaku_time_offset_sheet.dart';
 import 'package:kazumi/services/storage/storage.dart';
+import 'package:kazumi/utils/zh.dart';
 
 enum _DanmakuSettingsDestination {
   timeOffset,
@@ -83,8 +84,8 @@ class _DanmakuSettingsSheetState extends State<_DanmakuSettingsSheet> {
             title: '弹幕设置',
             onClose: () => Navigator.of(context).pop(),
           ),
-          const ConnectedTabs(
-              padding: materialBottomSheetTabsPadding, labels: ['外观', '播放']),
+            ConnectedTabs(
+              padding: materialBottomSheetTabsPadding, labels: [zh('外观'), zh('播放')]),
           Expanded(
               child: TabBarView(children: [
             ListView(
@@ -93,7 +94,7 @@ class _DanmakuSettingsSheetState extends State<_DanmakuSettingsSheet> {
               children: [
                 ContentSection.group(title: '显示效果', children: [
                   SettingsSliderTile(
-                    title: Text('字体大小'),
+                    title: Text(zh('字体大小')),
                     value: _option.fontSize,
                     min: 10,
                     max: 48,
@@ -106,7 +107,7 @@ class _DanmakuSettingsSheetState extends State<_DanmakuSettingsSheet> {
                     },
                   ),
                   SettingsSliderTile(
-                    title: Text('不透明度'),
+                    title: Text(zh('不透明度')),
                     value: _option.opacity,
                     min: 0.1,
                     max: 1,
@@ -118,7 +119,7 @@ class _DanmakuSettingsSheetState extends State<_DanmakuSettingsSheet> {
                     },
                   ),
                   SettingsSliderTile(
-                    title: Text('显示区域'),
+                    title: Text(zh('显示区域')),
                     value: _option.area,
                     min: 0,
                     max: 1,
@@ -131,7 +132,7 @@ class _DanmakuSettingsSheetState extends State<_DanmakuSettingsSheet> {
                     },
                   ),
                   SettingsSliderTile(
-                    title: Text('行间距'),
+                    title: Text(zh('行间距')),
                     value: _option.lineHeight,
                     min: 0,
                     max: 3,
@@ -173,12 +174,12 @@ class _DanmakuSettingsSheetState extends State<_DanmakuSettingsSheet> {
               children: [
                 ContentSection.group(title: '速度', children: [
                   SettingsSliderTile(
-                    title: Text('停留时间'),
+                    title: Text(zh('停留时间')),
                     value: _duration,
                     min: 2,
                     max: 16,
                     divisions: 14,
-                    valueLabel: '${_duration.round()} 秒',
+                    valueLabel: '${_duration.round()} ${zh('秒')}',
                     onChanged: (value) {
                       final duration = value.roundToDouble();
                       setState(() => _duration = duration);
@@ -197,7 +198,7 @@ class _DanmakuSettingsSheetState extends State<_DanmakuSettingsSheet> {
                       widget.onUpdateDanmakuSpeed();
                       setState(() {});
                     },
-                    title: Text('跟随视频倍速'),
+                    title: Text(zh('跟随视频倍速')),
                     initialValue: GStorage.getSetting<bool>(
                         SettingsKeys.danmakuFollowSpeed),
                   ),
@@ -206,7 +207,7 @@ class _DanmakuSettingsSheetState extends State<_DanmakuSettingsSheet> {
                 ContentSection.group(title: '校准与过滤', children: [
                   SettingsTile(
                     leading: Icons.sync_rounded,
-                    title: const Text('时间校准'),
+                    title: Text(zh('时间校准')),
                     description: Text(formatDanmakuTimeOffset(
                       normalizeDanmakuTimeOffset(GStorage.getSetting<double>(
                           SettingsKeys.danmakuTimeOffset)),
@@ -216,8 +217,8 @@ class _DanmakuSettingsSheetState extends State<_DanmakuSettingsSheet> {
                   ),
                   SettingsTile(
                     leading: Icons.filter_alt_outlined,
-                    title: const Text('屏蔽规则'),
-                    description: const Text('关键词与正则表达式'),
+                    title: Text(zh('屏蔽规则')),
+                    description: Text(zh('关键词与正则表达式')),
                     onPressed: (context) => Navigator.of(context)
                         .pop(_DanmakuSettingsDestination.shield),
                   ),
@@ -232,6 +233,6 @@ class _DanmakuSettingsSheetState extends State<_DanmakuSettingsSheet> {
 
   Widget _typeChip(String label, bool selected, ValueChanged<bool> onSelected) {
     return FilterChip(
-        label: Text(label), selected: selected, onSelected: onSelected);
+      label: Text(zh(label)), selected: selected, onSelected: onSelected);
   }
 }

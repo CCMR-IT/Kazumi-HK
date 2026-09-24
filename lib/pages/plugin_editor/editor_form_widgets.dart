@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kazumi/pages/plugin_editor/rule_management_widgets.dart';
+import 'package:kazumi/utils/zh.dart';
 
 class EditorTextField extends StatelessWidget {
   const EditorTextField({
@@ -20,11 +21,12 @@ class EditorTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final displayLabel = zh(label);
     return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-      Text(label, style: theme.textTheme.labelLarge),
+      Text(displayLabel, style: theme.textTheme.labelLarge),
       const SizedBox(height: 8),
       Semantics(
-        label: label,
+        label: displayLabel,
         child: TextField(
           controller: controller,
           maxLines: maxLines,
@@ -33,12 +35,12 @@ class EditorTextField extends StatelessWidget {
           style: maxLines > 1
               ? theme.textTheme.bodyMedium?.copyWith(fontFamily: 'monospace')
               : null,
-          decoration: ruleInputDecoration(context, hint: hint),
+          decoration: ruleInputDecoration(context, hint: zhn(hint)),
         ),
       ),
       if (helper != null) ...[
         const SizedBox(height: 6),
-        Text(helper!,
+        Text(zh(helper),
             style: theme.textTheme.bodySmall
                 ?.copyWith(color: theme.colorScheme.onSurfaceVariant)),
       ],
@@ -134,13 +136,13 @@ class EditorSegmentedField<T> extends StatelessWidget {
   Widget build(BuildContext context) => Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(label, style: Theme.of(context).textTheme.labelLarge),
+            Text(zh(label), style: Theme.of(context).textTheme.labelLarge),
           const SizedBox(height: 8),
           EditorChoiceGroup<T>(
               value: value, segments: segments, onChanged: onChanged),
           if (description != null) ...[
             const SizedBox(height: 8),
-            Text(description!(value),
+            Text(zh(description!(value)),
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
                     color: Theme.of(context).colorScheme.onSurfaceVariant)),
           ],
@@ -172,7 +174,7 @@ class EditorSubheader extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Padding(
         padding: const EdgeInsets.only(top: 24, bottom: 12),
-        child: Text(label,
+      child: Text(zh(label),
             style: Theme.of(context).textTheme.titleMedium?.copyWith(
                 color: Theme.of(context).colorScheme.primary,
                 fontWeight: FontWeight.w600)),
