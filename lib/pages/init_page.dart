@@ -57,6 +57,7 @@ class _InitPageState extends State<InitPage> {
   }
 
   Future<void> _initializeApp() async {
+    await ZhConverterService.ensureReady();
     widget.danmakuShieldSync.start();
     _migrateStorage();
     _loadShaders();
