@@ -31,6 +31,7 @@ class _AppWidgetState extends State<AppWidget>
   bool _isHandlingWindowClose = false;
   bool _didApplyStoredThemeSettings = false;
   Brightness? _lastTitleBarBrightness;
+  RouterConfig<Object>? _routerConfig;
 
   @override
   void initState() {
@@ -83,6 +84,7 @@ class _AppWidgetState extends State<AppWidget>
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    _routerConfig ??= ModularApp.routerConfigOf(context);
     final themeProvider = context.watch<ThemeProvider>();
     _applyStoredThemeSettings(themeProvider);
     _syncWindowsTitleBarBrightness(themeProvider);
@@ -278,53 +280,71 @@ class _AppWidgetState extends State<AppWidget>
   @override
   Widget build(BuildContext context) {
     final ThemeProvider themeProvider = context.watch<ThemeProvider>();
+    final routerConfig = _routerConfig ??= ModularApp.routerConfigOf(context);
     bool oledEnhance = GStorage.getSetting(SettingsKeys.oledEnhance);
 
     var app = ValueListenableBuilder<bool>(
       valueListenable: ZhConverterService.hongKongTraditionalEnabled,
-      builder: (context, hongKongTraditional, _) => DynamicColorBuilder(
-        builder: (theme, darkTheme) {
-        final useDynamicColor =
-            themeProvider.useDynamicColor && theme != null && darkTheme != null;
-        final lightTheme = useDynamicColor
-            ? _buildAppTheme(
-                brightness: Brightness.light,
-                colorScheme: theme,
-                fontFamily: themeProvider.currentFontFamily,
-              )
-            : themeProvider.light;
-        final dynamicDarkTheme = useDynamicColor
-            ? _buildAppTheme(
-                brightness: Brightness.dark,
-                colorScheme: darkTheme,
-                fontFamily: themeProvider.currentFontFamily,
-              )
-            : themeProvider.dark;
-        final effectiveDarkTheme = useDynamicColor && oledEnhance
-            ? oledDarkTheme(dynamicDarkTheme)
-            : dynamicDarkTheme;
+      builder: (context, hongKongTraditional, _) =>
+          ValueListenableBuilder<int>(
+        valueListenable: ZhConverterService.epoch,
+        builder: (context, __, ___) => DynamicColorBuilder(
+          builder: (theme, darkTheme) {
+            final useDynamicColor = themeProvider.useDynamicColor &&
+                theme != null &&
+                darkTheme != null;
+            final lightTheme = useDynamicColor
+                ? _buildAppTheme(
+                    brightness: Brightness.light,
+                    colorScheme: theme,
+                    fontFamily: themeProvider.currentFontFamily,
+                  )
+                : themeProvider.light;
+            final dynamicDarkTheme = useDynamicColor
+                ? _buildAppTheme(
+                    brightness: Brightness.dark,
+                    colorScheme: darkTheme,
+                    fontFamily: themeProvider.currentFontFamily,
+                  )
+                : themeProvider.dark;
+            final effectiveDarkTheme = useDynamicColor && oledEnhance
+                ? oledDarkTheme(dynamicDarkTheme)
+                : dynamicDarkTheme;
 
-        return MaterialApp.router(
-          title: "Kazumi",
-          localizationsDelegates: GlobalMaterialLocalizations.delegates,
-          supportedLocales: const [
-          Locale.fromSubtags(
-            languageCode: 'zh', scriptCode: 'Hant', countryCode: "HK"),
-            Locale.fromSubtags(
-                languageCode: 'zh', scriptCode: 'Hans', countryCode: "CN")
-          ],
-          locale: hongKongTraditional
-            ? const Locale.fromSubtags(
-              languageCode: 'zh', scriptCode: 'Hant', countryCode: "HK")
-            : const Locale.fromSubtags(
-              languageCode: 'zh', scriptCode: 'Hans', countryCode: "CN"),
-          theme: lightTheme,
-          darkTheme: effectiveDarkTheme,
-          themeMode: themeProvider.themeMode,
-          scaffoldMessengerKey: rootScaffoldMessengerKey,
-          routerConfig: ModularApp.routerConfigOf(context),
-        );
-        },
+            return MaterialApp.router(
+              title: "Kazumi",
+              localizationsDelegates: GlobalMaterialLocalizations.delegates,
+              supportedLocales: const [
+                Locale.fromSubtags(
+                  languageCode: 'zh',
+                  scriptCode: 'Hant',
+                  countryCode: "HK",
+                ),
+                Locale.fromSubtags(
+                  languageCode: 'zh',
+                  scriptCode: 'Hans',
+                  countryCode: "CN",
+                ),
+              ],
+              locale: hongKongTraditional
+                  ? const Locale.fromSubtags(
+                      languageCode: 'zh',
+                      scriptCode: 'Hant',
+                      countryCode: "HK",
+                    )
+                  : const Locale.fromSubtags(
+                      languageCode: 'zh',
+                      scriptCode: 'Hans',
+                      countryCode: "CN",
+                    ),
+              theme: lightTheme,
+              darkTheme: effectiveDarkTheme,
+              themeMode: themeProvider.themeMode,
+              scaffoldMessengerKey: rootScaffoldMessengerKey,
+              routerConfig: routerConfig,
+            );
+          },
+        ),
       ),
     );
 
