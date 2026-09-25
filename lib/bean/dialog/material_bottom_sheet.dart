@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kazumi/utils/zh.dart';
 
 const EdgeInsets materialBottomSheetContentPadding =
     EdgeInsets.fromLTRB(24, 0, 24, 24);
@@ -46,7 +47,7 @@ class MaterialBottomSheetHeader extends StatelessWidget {
                 child: Semantics(
                   header: true,
                   child: Text(
-                    title,
+                    zh(title),
                     style: theme.textTheme.titleLarge?.copyWith(
                       color: colorScheme.onSurface,
                       fontWeight: FontWeight.w700,
@@ -61,7 +62,7 @@ class MaterialBottomSheetHeader extends StatelessWidget {
                 const SizedBox(width: 12),
                 IconButton(
                   onPressed: onClose,
-                  tooltip: '关闭',
+                  tooltip: zh('关闭'),
                   icon: const Icon(Icons.close_rounded),
                 ),
               ],
@@ -70,7 +71,7 @@ class MaterialBottomSheetHeader extends StatelessWidget {
           if (description != null) ...[
             const SizedBox(height: 4),
             Text(
-              description!,
+              zh(description),
               style: theme.textTheme.bodyMedium?.copyWith(
                 color: colorScheme.onSurfaceVariant,
               ),

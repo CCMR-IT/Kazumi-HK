@@ -3,6 +3,7 @@ import 'package:kazumi/bean/settings/settings_list.dart';
 import 'package:kazumi/bean/widget/content_section.dart';
 import 'package:kazumi/bean/widget/state_presentation.dart';
 import 'package:kazumi/modules/my/watch_stats.dart';
+import 'package:kazumi/utils/zh.dart';
 import 'package:material_new_shapes/material_new_shapes.dart';
 
 enum MyDestination {
@@ -129,14 +130,14 @@ class _WideSpaceLayout extends StatelessWidget {
             color: colors.surfaceContainerLow,
             foreground: colors.onSurfaceVariant,
             onTap: () => onOpen(MyDestination.about),
-            child: const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(Icons.info_outline_rounded, size: 20),
-                  SizedBox(width: 8),
-                  Flexible(child: Text('关于 Kazumi')),
+                  const Icon(Icons.info_outline_rounded, size: 20),
+                  const SizedBox(width: 8),
+                  Flexible(child: Text(zh('关于 Kazumi'))),
                 ],
               ),
             ),
@@ -220,7 +221,7 @@ class _CompactSpaceLayout extends StatelessWidget {
 
   Widget _entry(String title, IconData icon, MyDestination destination) =>
       SettingsTile(
-        title: Text(title),
+        title: Text(zh(title)),
         leading: icon,
         trailing: const Icon(Icons.chevron_right_rounded, size: 20),
         onPressed: (_) => onOpen(destination),
@@ -263,7 +264,7 @@ class _WatchStatsPanel extends StatelessWidget {
                   Expanded(
                     child: Semantics(
                       header: true,
-                      child: Text('观看足迹',
+                      child: Text(zh('观看足迹'),
                           style: Theme.of(context)
                               .textTheme
                               .titleSmall
@@ -275,7 +276,7 @@ class _WatchStatsPanel extends StatelessWidget {
                 ],
               )
             else
-              Text('观看统计',
+              Text(zh('观看统计'),
                   style: Theme.of(context)
                       .textTheme
                       .labelMedium
@@ -361,7 +362,7 @@ class _SpaceHeading extends StatelessWidget {
       children: [
         Expanded(
           child: Text(
-            '个人中心',
+            zh('个人中心'),
             style: Theme.of(context).textTheme.displaySmall?.copyWith(
                   fontWeight: FontWeight.w800,
                   color: colors.onSurface,
@@ -410,12 +411,12 @@ class _RulesTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('规则设置',
+                  Text(zh('规则设置'),
                       style: text.headlineSmall?.copyWith(
                           fontWeight: FontWeight.w700,
                           color: colors.onPrimary)),
                   const SizedBox(height: 6),
-                  Text('管理番剧来源',
+                  Text(zh('管理番剧来源'),
                       style:
                           text.bodyMedium?.copyWith(color: colors.onPrimary)),
                   const SizedBox(height: 20),
@@ -479,11 +480,11 @@ class _ToolTile extends StatelessWidget {
               ],
             ),
             SizedBox(height: compact ? 12 : 26),
-            Text(title,
+            Text(zh(title),
                 style: text.titleMedium
                     ?.copyWith(fontWeight: FontWeight.w700, color: foreground)),
             SizedBox(height: compact ? 4 : 6),
-            Text(caption,
+            Text(zh(caption),
                 style:
                     text.bodySmall?.copyWith(color: foreground, height: 1.4)),
           ],
@@ -518,7 +519,7 @@ class _PreferencesPanel extends StatelessWidget {
           children: [
             Semantics(
               header: true,
-              child: Text('偏好设置',
+              child: Text(zh('偏好设置'),
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.w700, color: colors.onSurface)),
             ),
@@ -585,7 +586,7 @@ class _PreferenceAction extends StatelessWidget {
           children: [
             Icon(icon, size: 28),
             const SizedBox(height: 10),
-            Text(label,
+            Text(zh(label),
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.labelLarge?.copyWith(
                     fontWeight: FontWeight.w700,
@@ -606,7 +607,7 @@ class MySettingsButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
     return Tooltip(
-      message: '全部设置',
+      message: zh('全部设置'),
       child: FilledButton.tonalIcon(
         style: StateActionButton.styleOf(context).copyWith(
           backgroundColor: WidgetStatePropertyAll(colors.surfaceContainerHigh),
@@ -617,7 +618,7 @@ class MySettingsButton extends StatelessWidget {
         ),
         onPressed: onTap,
         icon: const Icon(Icons.tune_rounded, size: 20),
-        label: const Text('设置'),
+        label: Text(zh('设置')),
       ),
     );
   }

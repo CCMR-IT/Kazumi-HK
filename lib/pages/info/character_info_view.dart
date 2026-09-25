@@ -7,6 +7,7 @@ import 'package:kazumi/bean/widget/empty_state_widget.dart';
 import 'package:kazumi/bean/widget/image_preview.dart';
 import 'package:kazumi/bean/widget/tonal_card.dart';
 import 'package:kazumi/modules/character/character_full_item.dart';
+import 'package:kazumi/utils/zh.dart';
 
 class CharacterInfoView extends StatelessWidget {
   const CharacterInfoView({
@@ -279,7 +280,7 @@ class _CharacterPortrait extends StatelessWidget {
                           size: 20, color: colors.primary),
                       const SizedBox(width: 8),
                       Flexible(
-                        child: Text('查看原图',
+                        child: Text(zh('查看原图'),
                             style: Theme.of(context)
                                 .textTheme
                                 .labelLarge

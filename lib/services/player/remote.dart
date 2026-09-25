@@ -4,6 +4,7 @@ import 'package:dlna_dart/dlna.dart';
 import 'package:flutter/material.dart';
 import 'package:kazumi/bean/dialog/dialog_helper.dart';
 import 'package:kazumi/services/logging/logger.dart';
+import 'package:kazumi/utils/zh.dart';
 
 class RemotePlay {
   Future<void> castVideo(String video, String referer) async {
@@ -13,7 +14,7 @@ class RemotePlay {
     await KazumiDialog.show(builder: (BuildContext context) {
       return StatefulBuilder(builder: (context, setState) {
         return AlertDialog(
-          title: const Text('远程投屏'),
+          title: Text(zh('远程投屏')),
           content: SingleChildScrollView(
             child: Column(
               children: dlnaDevice,
@@ -26,7 +27,7 @@ class RemotePlay {
                 KazumiDialog.dismiss();
               },
               child: Text(
-                '退出',
+                zh('退出'),
                 style: TextStyle(color: Theme.of(context).colorScheme.outline),
               ),
             ),

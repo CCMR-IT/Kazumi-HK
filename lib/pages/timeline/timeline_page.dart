@@ -15,6 +15,7 @@ import 'package:kazumi/modules/bangumi/bangumi_item.dart';
 import 'package:kazumi/pages/timeline/timeline_controller.dart';
 import 'package:kazumi/services/storage/storage.dart';
 import 'package:kazumi/utils/anime_season.dart';
+import 'package:kazumi/utils/zh.dart';
 
 part 'timeline_options.dart';
 part 'timeline_week_selector.dart';
@@ -116,7 +117,7 @@ class _TimelinePageState extends State<TimelinePage> {
               _controller.loadSeason(date);
             }
           : null,
-      child: Text('${getSeasonStringByMonth(date.month)}季'),
+      child: Text('${zh(getSeasonStringByMonth(date.month))}${zh('季')}'),
     );
   }
 

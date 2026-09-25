@@ -59,7 +59,7 @@ class _CollectPosterCard extends StatelessWidget {
     final colors = theme.colorScheme;
     final scaler = MediaQuery.textScalerOf(context);
     final item = entry.bangumiItem;
-    final title = CollectLibraryQuery.titleOf(entry);
+    final title = zh(CollectLibraryQuery.titleOf(entry));
     final year = DateTime.tryParse(item.airDate)?.year;
     final type = CollectType.fromValue(entry.type);
     final hasRating = showRating && item.ratingScore > 0;
@@ -112,7 +112,7 @@ class _CollectPosterCard extends StatelessWidget {
                 ],
               )
             : detailLine([
-                if (hasRating) '${item.ratingScore.toStringAsFixed(1)} 分',
+                if (hasRating) '${item.ratingScore.toStringAsFixed(1)} ${zh('分')}',
                 if (showStatus) type.label,
               ].join(' · ')),
       );
@@ -187,8 +187,8 @@ class _CollectPosterCard extends StatelessWidget {
           label: [
             title,
             type.label,
-            if (year != null) '$year 年',
-            if (hasRating) '${item.ratingScore.toStringAsFixed(1)} 分',
+            if (year != null) '$year ${zh('年')}',
+            if (hasRating) '${item.ratingScore.toStringAsFixed(1)} ${zh('分')}',
           ].join('，'),
           child: InkWell(
             onTap: onOpen,
@@ -230,12 +230,12 @@ class _CollectListTile extends StatelessWidget {
     final theme = Theme.of(context);
     final colors = theme.colorScheme;
     final item = entry.bangumiItem;
-    final title = CollectLibraryQuery.titleOf(entry);
+    final title = zh(CollectLibraryQuery.titleOf(entry));
     final airDate = DateTime.tryParse(item.airDate);
     final metadata = [
-      if (airDate != null) '${airDate.year} 年',
+      if (airDate != null) '${airDate.year} ${zh('年')}',
       if (showRating && item.ratingScore > 0)
-        '${item.ratingScore.toStringAsFixed(1)} 分',
+        '${item.ratingScore.toStringAsFixed(1)} ${zh('分')}',
     ];
 
     return Material(
@@ -396,7 +396,7 @@ class _CollectEntryMenu extends StatelessWidget {
           style: itemStyle,
           onPressed:
               onChanged == null ? null : () => onChanged!(CollectType.none),
-          child: Text('取消收藏', style: TextStyle(color: colors.error)),
+          child: Text(zh('取消收藏'), style: TextStyle(color: colors.error)),
         ),
       ],
       builder: (context, controller, child) {
@@ -405,7 +405,7 @@ class _CollectEntryMenu extends StatelessWidget {
             : () => controller.isOpen ? controller.close() : controller.open();
         return showStatusLabel
             ? Tooltip(
-                message: '调整《$title》的观看状态',
+              message: '${zh('调整')}《$title》${zh('的观看状态')}',
                 child: FilledButton.tonalIcon(
                   style: FilledButton.styleFrom(
                     visualDensity: VisualDensity.standard,
@@ -420,7 +420,7 @@ class _CollectEntryMenu extends StatelessWidget {
                 ),
               )
             : IconButton(
-                tooltip: '管理《$title》 · ${type.label}',
+              tooltip: '${zh('管理')}《$title》 · ${type.label}',
                 onPressed: toggle,
                 style: IconButton.styleFrom(
                   foregroundColor: colors.onSurfaceVariant,

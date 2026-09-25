@@ -5,6 +5,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:kazumi/bean/dialog/dialog_helper.dart';
 import 'package:kazumi/bean/widget/split_list_row.dart';
 import 'package:kazumi/bean/widget/state_presentation.dart';
+import 'package:kazumi/utils/zh.dart';
 
 void _showMessage(BuildContext context, String message) {
   KazumiDialog.showToast(context: context, message: message);
@@ -94,11 +95,11 @@ class AboutLinkTile extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(title, style: theme.textTheme.titleMedium),
+                    Text(zh(title), style: theme.textTheme.titleMedium),
                     if (subtitle != null) ...[
                       const SizedBox(height: 4),
                       Text(
-                        subtitle!,
+                        zh(subtitle),
                         style: theme.textTheme.bodyMedium?.copyWith(
                           color: colors.onSurfaceVariant,
                         ),

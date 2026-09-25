@@ -287,7 +287,7 @@ class _CaptchaDialogState extends State<_CaptchaDialog> {
         TextButton(
           style: TextButton.styleFrom(minimumSize: const Size(72, 48)),
           onPressed: () => KazumiDialog.dismiss(context: context),
-          child: const Text('返回来源'),
+          child: Text(zh('返回来源')),
         ),
         FilledButton(
           style: FilledButton.styleFrom(minimumSize: const Size(88, 48)),
@@ -314,7 +314,7 @@ class _CaptchaDialogState extends State<_CaptchaDialog> {
                 style: TextButton.styleFrom(minimumSize: const Size(48, 48)),
                 onPressed: _submitting ? null : _reload,
                 icon: const Icon(Icons.refresh_rounded, size: 18),
-                label: const Text('换一张'),
+                label: Text(zh('换一张')),
               ),
             ),
             TextField(
@@ -329,7 +329,7 @@ class _CaptchaDialogState extends State<_CaptchaDialog> {
               },
               onSubmitted: (_) => _submit(),
               decoration: InputDecoration(
-                labelText: '验证码',
+                labelText: zh('验证码'),
                 floatingLabelBehavior: FloatingLabelBehavior.always,
                 errorText: _inputError,
                 errorMaxLines: 2,
@@ -356,7 +356,7 @@ class _CaptchaDialogState extends State<_CaptchaDialog> {
             style: TextButton.styleFrom(minimumSize: const Size(48, 48)),
             onPressed: _reload,
             icon: const Icon(Icons.refresh_rounded, size: 18),
-            label: const Text('重新加载'),
+            label: Text(zh('重新加载')),
           ),
         ],
       );
@@ -406,7 +406,7 @@ class _AutomatedVerifyDialog extends StatelessWidget {
           TextButton(
             style: TextButton.styleFrom(minimumSize: const Size(72, 48)),
             onPressed: () => KazumiDialog.dismiss(context: context),
-            child: const Text('返回来源'),
+            child: Text(zh('返回来源')),
           ),
         ],
         child: const Padding(

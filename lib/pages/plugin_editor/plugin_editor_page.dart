@@ -13,6 +13,7 @@ import 'package:kazumi/plugins/plugins.dart';
 import 'package:kazumi/plugins/plugins_controller.dart';
 import 'package:kazumi/request/config/api_endpoints.dart';
 import 'package:kazumi/services/plugin/api_rule_engine.dart';
+import 'package:kazumi/utils/zh.dart';
 
 abstract final class _RuleEditorText {
   static const pageTitle = '规则编辑器';
@@ -241,31 +242,31 @@ class _PluginEditorPageState extends State<PluginEditorPage> {
   int captchaType = CaptchaType.imageCaptcha;
   int captchaDetectType = CaptchaDetectType.xpath;
 
-  static const List<ButtonSegment<String>> _ruleModeSegments = [
+  static List<ButtonSegment<String>> get _ruleModeSegments => [
     ButtonSegment(
       value: RuleMode.xpath,
-      label: Text(_RuleEditorText.modeXPath),
+      label: Text(zh(_RuleEditorText.modeXPath)),
     ),
-    ButtonSegment(value: RuleMode.api, label: Text(_RuleEditorText.modeApi)),
+    ButtonSegment(value: RuleMode.api, label: Text(zh(_RuleEditorText.modeApi))),
   ];
 
-  static const List<ButtonSegment<String>> _methodSegments = [
-    ButtonSegment(value: 'GET', label: Text(_RuleEditorText.methodGet)),
-    ButtonSegment(value: 'POST', label: Text(_RuleEditorText.methodPost)),
+  static List<ButtonSegment<String>> get _methodSegments => [
+    ButtonSegment(value: 'GET', label: Text(zh(_RuleEditorText.methodGet))),
+    ButtonSegment(value: 'POST', label: Text(zh(_RuleEditorText.methodPost))),
   ];
 
-  static const List<ButtonSegment<String>> _bodyTypeSegments = [
+  static List<ButtonSegment<String>> get _bodyTypeSegments => [
     ButtonSegment(
       value: ApiBodyType.none,
-      label: Text(_RuleEditorText.bodyTypeNone),
+      label: Text(zh(_RuleEditorText.bodyTypeNone)),
     ),
     ButtonSegment(
       value: ApiBodyType.json,
-      label: Text(_RuleEditorText.bodyTypeJson),
+      label: Text(zh(_RuleEditorText.bodyTypeJson)),
     ),
     ButtonSegment(
       value: ApiBodyType.form,
-      label: Text(_RuleEditorText.bodyTypeForm),
+      label: Text(zh(_RuleEditorText.bodyTypeForm)),
     ),
   ];
 
@@ -432,7 +433,7 @@ class _PluginEditorPageState extends State<PluginEditorPage> {
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
     return Scaffold(
-      appBar: const SysAppBar(title: Text(_RuleEditorText.pageTitle)),
+      appBar: SysAppBar(title: Text(zh(_RuleEditorText.pageTitle))),
       body: SafeArea(
         top: false,
         bottom: false,
@@ -469,11 +470,11 @@ class _PluginEditorPageState extends State<PluginEditorPage> {
                   ],
                   EditorChoiceGroup<int>(
                     value: _section,
-                    segments: const [
-                      ButtonSegment(value: 0, label: Text('基本')),
-                      ButtonSegment(value: 1, label: Text('搜索')),
-                      ButtonSegment(value: 2, label: Text('选集')),
-                      ButtonSegment(value: 3, label: Text('高级')),
+                    segments: [
+                      ButtonSegment(value: 0, label: Text(zh('基本'))),
+                      ButtonSegment(value: 1, label: Text(zh('搜索'))),
+                      ButtonSegment(value: 2, label: Text(zh('选集'))),
+                      ButtonSegment(value: 3, label: Text(zh('高级'))),
                     ],
                     onChanged: (value) => setState(() => _section = value),
                   ),
@@ -608,15 +609,15 @@ class _PluginEditorPageState extends State<PluginEditorPage> {
           const EditorSubheader(label: _RuleEditorText.groupBehavior),
           SwitchListTile(
             contentPadding: EdgeInsets.zero,
-            title: const Text(_RuleEditorText.legacyParser),
-            subtitle: const Text(_RuleEditorText.legacyParserDesc),
+            title: Text(zh(_RuleEditorText.legacyParser)),
+            subtitle: Text(zh(_RuleEditorText.legacyParserDesc)),
             value: useLegacyParser,
             onChanged: (value) => setState(() => useLegacyParser = value),
           ),
           SwitchListTile(
             contentPadding: EdgeInsets.zero,
-            title: const Text(_RuleEditorText.adBlocker),
-            subtitle: const Text(_RuleEditorText.adBlockerDesc),
+            title: Text(zh(_RuleEditorText.adBlocker)),
+            subtitle: Text(zh(_RuleEditorText.adBlockerDesc)),
             value: adBlocker,
             onChanged: (value) => setState(() => adBlocker = value),
           ),
@@ -636,8 +637,8 @@ class _PluginEditorPageState extends State<PluginEditorPage> {
             const EditorSubheader(label: _RuleEditorText.groupAntiCrawler),
             SwitchListTile(
               contentPadding: EdgeInsets.zero,
-              title: const Text(_RuleEditorText.antiCrawlerEnable),
-              subtitle: const Text(_RuleEditorText.antiCrawlerEnableDesc),
+              title: Text(zh(_RuleEditorText.antiCrawlerEnable)),
+              subtitle: Text(zh(_RuleEditorText.antiCrawlerEnableDesc)),
               value: antiCrawlerEnabled,
               onChanged: (value) => setState(() => antiCrawlerEnabled = value),
             ),
@@ -664,18 +665,18 @@ class _PluginEditorPageState extends State<PluginEditorPage> {
         EditorSegmentedField<int>(
           label: _RuleEditorText.captchaTypeLabel,
           value: captchaType,
-          segments: const [
+          segments: [
             ButtonSegment(
               value: CaptchaType.imageCaptcha,
-              label: Text(_RuleEditorText.captchaTypeImage),
+              label: Text(zh(_RuleEditorText.captchaTypeImage)),
             ),
             ButtonSegment(
               value: CaptchaType.autoClickButton,
-              label: Text(_RuleEditorText.captchaTypeAutoClick),
+              label: Text(zh(_RuleEditorText.captchaTypeAutoClick)),
             ),
             ButtonSegment(
               value: CaptchaType.customJavaScript,
-              label: Text(_RuleEditorText.captchaTypeScript),
+              label: Text(zh(_RuleEditorText.captchaTypeScript)),
             ),
           ],
           onChanged: (value) => setState(() => captchaType = value),
@@ -691,18 +692,18 @@ class _PluginEditorPageState extends State<PluginEditorPage> {
         EditorSegmentedField<int>(
           label: _RuleEditorText.captchaDetectTypeLabel,
           value: captchaDetectType,
-          segments: const [
+          segments: [
             ButtonSegment(
               value: CaptchaDetectType.xpath,
-              label: Text(_RuleEditorText.modeXPath),
+              label: Text(zh(_RuleEditorText.modeXPath)),
             ),
             ButtonSegment(
               value: CaptchaDetectType.text,
-              label: Text(_RuleEditorText.captchaDetectText),
+              label: Text(zh(_RuleEditorText.captchaDetectText)),
             ),
             ButtonSegment(
               value: CaptchaDetectType.regex,
-              label: Text(_RuleEditorText.captchaDetectRegex),
+              label: Text(zh(_RuleEditorText.captchaDetectRegex)),
             ),
           ],
           onChanged: (value) => setState(() => captchaDetectType = value),
@@ -881,14 +882,14 @@ class _PluginEditorPageState extends State<PluginEditorPage> {
         EditorSegmentedField<String>(
           label: _RuleEditorText.chapterResponseFormat,
           value: chapterApiFormat,
-          segments: const [
+          segments: [
             ButtonSegment(
               value: ApiChapterFormat.nested,
-              label: Text(_RuleEditorText.formatNested),
+              label: Text(zh(_RuleEditorText.formatNested)),
             ),
             ButtonSegment(
               value: ApiChapterFormat.delimited,
-              label: Text(_RuleEditorText.formatDelimited),
+              label: Text(zh(_RuleEditorText.formatDelimited)),
             ),
           ],
           onChanged: (value) => setState(() => chapterApiFormat = value),

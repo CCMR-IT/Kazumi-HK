@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kazumi/utils/zh.dart';
 
 enum PlayerAspectRatio {
   automatic(
@@ -25,13 +26,16 @@ enum PlayerAspectRatio {
 
   const PlayerAspectRatio({
     required this.storageValue,
-    required this.label,
+    required String label,
     required this.fit,
     this.frameAspectRatio,
-  });
+  }) : _label = label;
 
   final int storageValue;
-  final String label;
+  final String _label;
+
+  String get label => zh(_label);
+
   final BoxFit fit;
   final double? frameAspectRatio;
 

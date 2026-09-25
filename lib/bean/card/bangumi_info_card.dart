@@ -6,6 +6,7 @@ import 'package:kazumi/modules/bangumi/bangumi_item.dart';
 import 'package:kazumi/bean/card/network_img_layer.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:skeletonizer/skeletonizer.dart';
+import 'package:kazumi/utils/zh.dart';
 
 // 视频卡片 - 水平布局
 class BangumiInfoCardV extends StatefulWidget {
@@ -33,7 +34,7 @@ class _BangumiInfoCardVState extends State<BangumiInfoCardV> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            '  评分透视:',
+            zh('  评分透视:'),
           ),
           SizedBox(height: 16),
           AspectRatio(

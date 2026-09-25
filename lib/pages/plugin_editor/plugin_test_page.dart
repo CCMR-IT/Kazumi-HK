@@ -12,6 +12,7 @@ import 'package:kazumi/pages/plugin_editor/rule_management_widgets.dart';
 import 'package:kazumi/plugins/api_rule_config.dart';
 import 'package:kazumi/plugins/plugins.dart';
 import 'package:kazumi/services/logging/logger.dart';
+import 'package:kazumi/utils/zh.dart';
 
 const _h8 = SizedBox(height: 8.0);
 const _h12 = SizedBox(height: 12.0);
@@ -150,12 +151,12 @@ class _PluginTestPageState extends State<PluginTestPage> {
     final theme = Theme.of(context);
     return Scaffold(
       appBar: SysAppBar(
-        title: const Text('规则测试'),
+        title: Text(zh('规则测试')),
         actions: [
           IconButton(
             onPressed: _resetState,
             icon: const Icon(Icons.restart_alt_rounded),
-            tooltip: '重置测试',
+            tooltip: zh('重置测试'),
           ),
           const SizedBox(width: 8),
         ],
@@ -339,7 +340,7 @@ class _PluginTestPageState extends State<PluginTestPage> {
                 style: TextButton.styleFrom(
                     backgroundColor:
                         theme.colorScheme.error.withValues(alpha: 0.1)),
-                child: Text('重试测试',
+                child: Text(zh('重试测试'),
                     style:
                         TextStyle(color: theme.colorScheme.onErrorContainer)),
               ),
@@ -387,9 +388,9 @@ class _PluginTestPageState extends State<PluginTestPage> {
           Padding(
             padding: const EdgeInsets.only(left: 16, right: 4, top: 4),
             child: Row(children: [
-              Expanded(child: Text('响应内容', style: theme.textTheme.labelLarge)),
+              Expanded(child: Text(zh('响应内容'), style: theme.textTheme.labelLarge)),
               IconButton(
-                  tooltip: '复制响应内容',
+                  tooltip: zh('复制响应内容'),
                   onPressed: () async {
                     try {
                       await Clipboard.setData(ClipboardData(text: raw));
@@ -479,7 +480,7 @@ class _PluginTestPageState extends State<PluginTestPage> {
                 color: theme.colorScheme.error, size: 20),
             const SizedBox(width: 8.0),
             Expanded(
-                child: Text('部分节点被跳过（${diagnostics.length}）',
+                child: Text('${zh('部分节点被跳过')}（${diagnostics.length}）',
                     style: theme.textTheme.bodyMedium?.copyWith(
                         color: theme.colorScheme.onErrorContainer,
                         fontWeight: FontWeight.w500))),
@@ -533,7 +534,7 @@ class _PluginTestPageState extends State<PluginTestPage> {
               ),
             ]),
             _h8,
-            Text('链接：${item.src}',
+            Text('${zh('链接')}：${item.src}',
                 style: theme.textTheme.bodySmall
                     ?.copyWith(color: theme.colorScheme.onSurfaceVariant)),
           ]),
@@ -616,7 +617,7 @@ class _PluginTestPageState extends State<PluginTestPage> {
                       ?.copyWith(fontWeight: FontWeight.w500),
                 ),
                 _h8,
-                Text('章节数量：${road.data.length}',
+                Text('${zh('章节数量')}：${road.data.length}',
                     style: theme.textTheme.bodySmall
                         ?.copyWith(color: theme.colorScheme.onSurfaceVariant)),
                 _h8,

@@ -17,6 +17,7 @@ import 'package:kazumi/modules/danmaku/danmaku_search_response.dart';
 import 'package:kazumi/pages/player/controller/player_danmaku_controller.dart';
 import 'package:kazumi/request/apis/danmaku_api.dart';
 import 'package:kazumi/services/logging/logger.dart';
+import 'package:kazumi/utils/zh.dart';
 
 const _episodeToolThreshold = 25;
 const _episodeSegmentSize = 100;
@@ -351,12 +352,12 @@ class _DanmakuSourceSheetState extends State<_DanmakuSourceSheet> {
               textInputAction: TextInputAction.search,
               onSubmitted: (_) => _searchAnime(),
               decoration: InputDecoration(
-                hintText: '番剧名称',
+                hintText: zh('番剧名称'),
                 prefixIcon: const Icon(Icons.search),
                 suffixIcon: value.text.isEmpty
                     ? null
                     : IconButton(
-                        tooltip: '清空',
+                      tooltip: zh('清空'),
                         onPressed: () => _keywordController.clear(),
                         icon: const Icon(Icons.close, size: 18),
                       ),
@@ -376,7 +377,7 @@ class _DanmakuSourceSheetState extends State<_DanmakuSourceSheet> {
                 ],
                 if (_recentKeywords.isNotEmpty) ...[
                   Text(
-                    '最近搜索',
+                    zh('最近搜索'),
                     style: Theme.of(context).textTheme.labelLarge,
                   ),
                   const SizedBox(height: 10),
@@ -413,7 +414,7 @@ class _DanmakuSourceSheetState extends State<_DanmakuSourceSheet> {
               children: [
                 TextButton(
                   onPressed: () => KazumiDialog.dismiss(context: context),
-                  child: const Text('取消'),
+                  child: Text(zh('取消')),
                 ),
                 const SizedBox(width: 10),
                 StateActionButton(
@@ -590,7 +591,7 @@ class _SheetHeader extends StatelessWidget {
             leading: onBack == null
                 ? null
                 : IconButton(
-                    tooltip: '返回',
+                  tooltip: zh('返回'),
                     onPressed: onBack,
                     icon: const Icon(Icons.arrow_back),
                   ),
@@ -684,12 +685,12 @@ class _EpisodeToolbar extends StatelessWidget {
                     onChanged: onSearch,
                     decoration: InputDecoration(
                       isDense: true,
-                      hintText: '标题或集号',
+                      hintText: zh('标题或集号'),
                       prefixIcon: const Icon(Icons.search, size: 18),
                       suffixIcon: searchController.text.isEmpty
                           ? null
                           : IconButton(
-                              tooltip: '清空',
+                              tooltip: zh('清空'),
                               onPressed: () {
                                 searchController.clear();
                                 onSearch('');
@@ -713,9 +714,9 @@ class _EpisodeToolbar extends StatelessWidget {
                     onSubmitted: (_) => onJump(),
                     decoration: InputDecoration(
                       isDense: true,
-                      hintText: '集号',
+                      hintText: zh('集号'),
                       suffixIcon: IconButton(
-                        tooltip: '跳转',
+                        tooltip: zh('跳转'),
                         onPressed: onJump,
                         icon: const Icon(Icons.arrow_forward, size: 18),
                       ),

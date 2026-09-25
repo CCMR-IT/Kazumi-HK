@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kazumi/pages/onboarding/onboarding_step_layout.dart';
+import 'package:kazumi/utils/zh.dart';
 
 class UpdateSourceStep extends StatelessWidget {
   const UpdateSourceStep({
@@ -111,7 +112,7 @@ class _OptionCard extends StatelessWidget {
                   decoration: ShapeDecoration(
                       color: colors.tertiaryContainer,
                       shape: const StadiumBorder()),
-                  child: Text('推荐',
+                  child: Text(zh('推荐'),
                       style: theme.textTheme.labelMedium
                           ?.copyWith(color: colors.onTertiaryContainer)),
                 ),

@@ -1,3 +1,5 @@
+import 'package:kazumi/utils/zh.dart';
+
 enum SuperResolutionMode {
   off(
     storageValue: 1,
@@ -17,13 +19,18 @@ enum SuperResolutionMode {
 
   const SuperResolutionMode({
     required this.storageValue,
-    required this.label,
-    required this.description,
-  });
+    required String label,
+    required String description,
+  })  : _label = label,
+        _description = description;
 
   final int storageValue;
-  final String label;
-  final String description;
+  final String _label;
+  final String _description;
+
+  String get label => zh(_label);
+
+  String get description => zh(_description);
 
   static SuperResolutionMode fromStorageValue(int value) {
     return SuperResolutionMode.values.firstWhere(

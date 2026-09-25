@@ -1,3 +1,5 @@
+import 'package:kazumi/utils/zh.dart';
+
 /// 收藏类型枚举
 ///
 /// 用于标识番剧的收藏状态
@@ -20,13 +22,15 @@ enum CollectType {
   /// 抛弃
   abandoned(5, '抛弃');
 
-  const CollectType(this.value, this.label);
+  const CollectType(this.value, this._label);
 
   /// 数值表示
   final int value;
 
   /// 显示标签
-  final String label;
+  final String _label;
+
+  String get label => zh(_label);
 
   /// 根据数值获取枚举
   static CollectType fromValue(int value) {

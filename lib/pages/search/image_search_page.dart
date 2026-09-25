@@ -18,6 +18,7 @@ import 'package:kazumi/bean/widget/loading_indicator.dart';
 import 'package:kazumi/bean/widget/state_presentation.dart';
 import 'package:kazumi/modules/search/image_search_module.dart';
 import 'package:kazumi/pages/search/search_controller.dart';
+import 'package:kazumi/utils/zh.dart';
 
 part 'image_search_widgets.dart';
 
@@ -209,27 +210,27 @@ class _ImageSearchPageState extends State<ImageSearchPage> {
       context: context,
       builder: (context) => AlertDialog(
         icon: const Icon(Icons.image_search_rounded),
-        title: const Text('让截图更容易被找到'),
-        content: const SingleChildScrollView(
+        title: Text(zh('让截图更容易被找到')),
+        content: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             spacing: 16,
             children: [
-              Text('使用动画正片截图，保留原始比例。尽量避开黑边、字幕遮挡、水印与拼接画面。'),
-              Text('插画、漫画和经过大幅裁剪的图片通常无法匹配。相似度仅供参考，建议对照画面或预览片段确认。'),
-              Text('识别由 trace.moe 提供。开始识别后，所选图片或图片链接会发送至该服务。'),
+              Text(zh('使用动画正片截图，保留原始比例。尽量避开黑边、字幕遮挡、水印与拼接画面。')),
+              Text(zh('插画、漫画和经过大幅裁剪的图片通常无法匹配。相似度仅供参考，建议对照画面或预览片段确认。')),
+              Text(zh('识别由 trace.moe 提供。开始识别后，所选图片或图片链接会发送至该服务。')),
             ],
           ),
         ),
         actions: [
           TextButton(
             onPressed: () => _openExternal(Uri.parse('https://trace.moe')),
-            child: const Text('访问 trace.moe'),
+            child: Text(zh('访问 trace.moe')),
           ),
           FilledButton(
               onPressed: () => Navigator.pop(context),
-              child: const Text('知道了')),
+              child: Text(zh('知道了'))),
         ],
       ),
     );
@@ -245,7 +246,7 @@ class _ImageSearchPageState extends State<ImageSearchPage> {
         actions: [
           IconButton(
               onPressed: _showHelp,
-              tooltip: '搜图小贴士',
+              tooltip: zh('搜图小贴士'),
               icon: const Icon(Icons.help_outline_rounded)),
         ],
       ),
@@ -398,10 +399,10 @@ class _ImageSearchPageState extends State<ImageSearchPage> {
           header: true,
           child: Text(
             showResults
-                ? '搜索图片'
+              ? zh('搜索图片')
                 : short
-                    ? '用截图找到番名'
-                    : '这一幕，\n出自哪部番？',
+                ? zh('用截图找到番名')
+                : zh('这一幕，\n出自哪部番？'),
             style:
                 (showResults || short ? type.headlineSmall : type.displaySmall)
                     ?.copyWith(
@@ -410,7 +411,7 @@ class _ImageSearchPageState extends State<ImageSearchPage> {
         ),
         if (!showResults && !short) ...[
           const SizedBox(height: 8),
-          Text('用一张截图，找到番名与出现的集数。',
+          Text(zh('用一张截图，找到番名与出现的集数。'),
               style: type.bodyLarge?.copyWith(color: colors.onSurfaceVariant)),
         ],
         SizedBox(height: short ? 12 : 24),
@@ -429,7 +430,7 @@ class _ImageSearchPageState extends State<ImageSearchPage> {
             onSubmitted: (_) => _search(),
             onTapOutside: (_) => _urlFocus.unfocus(),
             decoration: InputDecoration(
-              labelText: '图片链接',
+              labelText: zh('图片链接'),
               hintText: 'https://…',
               filled: true,
               fillColor: colors.surfaceContainerLow,
@@ -437,13 +438,13 @@ class _ImageSearchPageState extends State<ImageSearchPage> {
                   OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
               suffixIcon: IconButton(
                 onPressed: busy ? null : _pasteUrl,
-                tooltip: '粘贴图片链接',
+                tooltip: zh('粘贴图片链接'),
                 icon: const Icon(Icons.content_paste_rounded),
               ),
             ),
           ),
           const SizedBox(height: 8),
-          Text('使用可直接访问的 HTTP 或 HTTPS 图片地址',
+          Text(zh('使用可直接访问的 HTTP 或 HTTPS 图片地址'),
               style: type.bodySmall?.copyWith(color: colors.onSurfaceVariant)),
           if (_previewUrl.isNotEmpty) ...[
             const SizedBox(height: 16),
@@ -461,7 +462,7 @@ class _ImageSearchPageState extends State<ImageSearchPage> {
                       const _ImageSearchEmblem(size: 48),
                       const SizedBox(width: 12),
                       Expanded(
-                          child: Text('截图预览',
+                          child: Text(zh('截图预览'),
                               style: type.titleMedium
                                   ?.copyWith(color: colors.onSurfaceVariant))),
                     ])
@@ -469,7 +470,7 @@ class _ImageSearchPageState extends State<ImageSearchPage> {
                       children: [
                         const _ImageSearchEmblem(size: 72),
                         const SizedBox(height: 12),
-                        Text('截图预览',
+                        Text(zh('截图预览'),
                             textAlign: TextAlign.center,
                             style: type.titleMedium
                                 ?.copyWith(color: colors.onSurfaceVariant)),
@@ -488,12 +489,12 @@ class _ImageSearchPageState extends State<ImageSearchPage> {
                             ?.copyWith(color: colors.onSurfaceVariant))),
                 TextButton.icon(
                     onPressed: busy ? null : _pickImage,
-                    label: const Text('更换截图'),
+                  label: Text(zh('更换截图')),
                     icon: const Icon(Icons.swap_horiz_rounded, size: 20)),
               ],
             )
           else
-            Text('JPG、PNG、WebP · 最大 25 MB',
+            Text(zh('JPG、PNG、WebP · 最大 25 MB'),
                 textAlign: TextAlign.center,
                 style:
                     type.bodySmall?.copyWith(color: colors.onSurfaceVariant)),
@@ -508,7 +509,7 @@ class _ImageSearchPageState extends State<ImageSearchPage> {
         const SizedBox(height: 16),
         if (inlineAction) _buildPrimaryAction(searching),
         const SizedBox(height: 12),
-        Text('由 trace.moe 识别动画截图',
+        Text(zh('由 trace.moe 识别动画截图'),
             textAlign: TextAlign.center,
             style: type.bodySmall?.copyWith(color: colors.onSurfaceVariant)),
         if (!showResults && !short) ...[
@@ -565,10 +566,10 @@ class _ImageSearchPageState extends State<ImageSearchPage> {
   Widget _buildPreview({required bool short}) {
     final colors = Theme.of(context).colorScheme;
     Widget fallback(BuildContext context, Object error, StackTrace? stack) =>
-        const Center(
+        Center(
             child: Padding(
-          padding: EdgeInsets.all(16),
-          child: Text('暂时无法预览\n仍可尝试识别，或更换图片', textAlign: TextAlign.center),
+          padding: const EdgeInsets.all(16),
+          child: Text(zh('暂时无法预览\n仍可尝试识别，或更换图片'), textAlign: TextAlign.center),
         ));
     return Semantics(
       label: '待识别的完整截图',

@@ -10,6 +10,7 @@ import 'package:kazumi/modules/download/download_module.dart';
 import 'package:kazumi/modules/roads/road_module.dart';
 import 'package:kazumi/pages/download/download_controller.dart';
 import 'package:kazumi/pages/video/video_controller.dart';
+import 'package:kazumi/utils/zh.dart';
 
 class DownloadEpisodeSheet extends StatefulWidget {
   final int road;
@@ -172,8 +173,8 @@ class _DownloadEpisodeSheetState extends State<DownloadEpisodeSheet> {
                         child: Stack(
                           alignment: Alignment.center,
                           children: [
-                            const Opacity(opacity: 0, child: Text('取消全选')),
-                            Text(allSelected ? '取消全选' : '全选'),
+                            Opacity(opacity: 0, child: Text(zh('取消全选'))),
+                            Text(allSelected ? zh('取消全选') : zh('全选')),
                           ],
                         ),
                       ),

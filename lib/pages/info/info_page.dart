@@ -22,6 +22,7 @@ import 'package:kazumi/pages/info/source_sheet.dart';
 import 'package:kazumi/services/logging/logger.dart';
 import 'package:kazumi/services/storage/storage.dart';
 import 'package:kazumi/utils/device.dart';
+import 'package:kazumi/utils/zh.dart';
 
 class InfoPage extends StatefulWidget {
   const InfoPage({
@@ -459,7 +460,7 @@ class _InfoPageState extends State<InfoPage>
         }),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        tooltip: '开始观看',
+        tooltip: zh('开始观看'),
         onPressed: () {
           showAdaptiveBottomSheet<void>(
             context: context,
@@ -469,7 +470,7 @@ class _InfoPageState extends State<InfoPage>
             },
           );
         },
-        label: const Text('开始观看'),
+        label: Text(zh('开始观看')),
         icon: const Icon(Icons.play_arrow_rounded),
       ),
     );

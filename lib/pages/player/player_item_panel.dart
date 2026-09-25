@@ -25,6 +25,7 @@ import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:kazumi/services/player/timed_shutdown_service.dart';
 import 'package:kazumi/utils/format.dart';
 import 'package:kazumi/pages/player/player_transport_bar.dart';
+import 'package:kazumi/utils/zh.dart';
 
 class PlayerItemPanel extends StatefulWidget {
   const PlayerItemPanel({
@@ -220,7 +221,7 @@ class _PlayerItemPanelState extends State<PlayerItemPanel> {
                               BorderRadius.circular(_desktop ? 8 : 20),
                         ),
                       ),
-                      child: const Text('发送'),
+                      child: Text(zh('发送')),
                     ),
                   ],
                 ),
@@ -241,7 +242,7 @@ class _PlayerItemPanelState extends State<PlayerItemPanel> {
     KazumiDialog.show(builder: (context) {
       var input = '';
       return AlertDialog(
-        title: const Text('跳过秒数'),
+        title: Text(zh('跳过秒数')),
         content: TextField(
           inputFormatters: [
             FilteringTextInputFormatter.digitsOnly,
@@ -258,7 +259,7 @@ class _PlayerItemPanelState extends State<PlayerItemPanel> {
           TextButton(
             onPressed: () => KazumiDialog.dismiss(),
             child: Text(
-              '取消',
+              zh('取消'),
               style: TextStyle(color: Theme.of(context).colorScheme.outline),
             ),
           ),
@@ -269,7 +270,7 @@ class _PlayerItemPanelState extends State<PlayerItemPanel> {
               }
               KazumiDialog.dismiss();
             },
-            child: const Text('确定'),
+            child: Text(zh('确定')),
           ),
         ],
       );
@@ -602,7 +603,7 @@ class _PlayerItemPanelState extends State<PlayerItemPanel> {
         onPressed: _showDanmakuSettings,
         color: Colors.white,
         icon: _cachedDanmakuSettingsIcon,
-        tooltip: '弹幕设置',
+        tooltip: zh('弹幕设置'),
       );
 
   Widget get _desktopDanmakuControls => LayoutBuilder(
@@ -620,12 +621,12 @@ class _PlayerItemPanelState extends State<PlayerItemPanel> {
 
   Widget get _syncPlayMenuItem => MenuItemButton(
         onPressed: widget.showSyncPlayPanel,
-        child: _menuLabel('一起看'),
+        child: _menuLabel(zh('一起看')),
       );
 
   Widget get _danmakuSettingsMenuItem => MenuItemButton(
         onPressed: _showDanmakuSettings,
-        child: _menuLabel('弹幕设置'),
+        child: _menuLabel(zh('弹幕设置')),
       );
 
   Widget _menuLabel(String label, {bool selected = false}) => Container(
@@ -647,7 +648,7 @@ class _PlayerItemPanelState extends State<PlayerItemPanel> {
                 ? _danmakuOnIcon(context)
                 : _cachedDanmakuOffIcon,
             onPressed: widget.handleDanmaku,
-            tooltip: playerController.danmaku.danmakuOn ? '关闭弹幕' : '打开弹幕',
+            tooltip: playerController.danmaku.danmakuOn ? zh('关闭弹幕') : zh('打开弹幕'),
           ),
           if (playerController.danmaku.danmakuOn) ...[
             _danmakuSettingsButton,
@@ -656,27 +657,27 @@ class _PlayerItemPanelState extends State<PlayerItemPanel> {
             const Spacer(),
         ],
         _menuButton(
-          child: const Text('超分辨率', style: TextStyle(color: Colors.white)),
+          child: Text(zh('超分辨率'), style: const TextStyle(color: Colors.white)),
           items: _superResolutionItems,
         ),
         _menuButton(
           child: Text(
               playerController.playback.playerSpeed == 1
-                  ? '倍速'
+                  ? zh('倍速')
                   : '${playerController.playback.playerSpeed}x',
               style: const TextStyle(color: Colors.white)),
           items: _speedItems,
         ),
         _menuButton(
           child: const Icon(Icons.aspect_ratio_rounded, color: Colors.white),
-          tooltip: '视频比例',
+          tooltip: zh('视频比例'),
           items: _aspectRatioItems,
         ),
         if (widget.onToggleSidePanel != null)
           IconButton(
             color: Colors.white,
             icon: const Icon(Icons.menu_open_rounded),
-            tooltip: '选集面板',
+            tooltip: zh('选集面板'),
             onPressed: widget.onToggleSidePanel,
           ),
       ]);
@@ -699,7 +700,7 @@ class _PlayerItemPanelState extends State<PlayerItemPanel> {
               desktop: _desktop,
             ),
             playPause: IconButton(
-              tooltip: playerController.playback.playing ? '暂停' : '播放',
+              tooltip: playerController.playback.playing ? zh('暂停') : zh('播放'),
               onPressed: () => playerController.playOrPause(),
               icon: PlayPauseIcon(
                 iconColor: Colors.white,
@@ -709,7 +710,7 @@ class _PlayerItemPanelState extends State<PlayerItemPanel> {
             nextEpisode: IconButton(
               color: Colors.white,
               icon: const Icon(Icons.skip_next_rounded),
-              tooltip: '下一集',
+              tooltip: zh('下一集'),
               onPressed: widget.onNextEpisode,
             ),
             // Playback ticks only rebuild the progress bar and its time labels.
@@ -758,7 +759,7 @@ class _PlayerItemPanelState extends State<PlayerItemPanel> {
       icon: Icon(videoPageController.isFullscreen
           ? Icons.fullscreen_exit_rounded
           : Icons.fullscreen_rounded),
-      tooltip: videoPageController.isFullscreen ? '退出全屏' : '全屏',
+        tooltip: videoPageController.isFullscreen ? zh('退出全屏') : zh('全屏'),
       onPressed: widget.handleFullscreen,
     );
   }
@@ -782,7 +783,7 @@ class _PlayerItemPanelState extends State<PlayerItemPanel> {
               IconButton(
                 color: Colors.white,
                 icon: const Icon(Icons.arrow_back_rounded),
-                tooltip: '返回',
+                tooltip: zh('返回'),
                 onPressed: widget.onBackPressed,
               ),
               Expanded(
@@ -822,7 +823,7 @@ class _PlayerItemPanelState extends State<PlayerItemPanel> {
                     }
                     await widget.enterAndroidPictureInPicture();
                   },
-                  tooltip: '画中画',
+                  tooltip: zh('画中画'),
                   icon: const Icon(
                     Icons.picture_in_picture,
                     color: Colors.white,
@@ -847,7 +848,7 @@ class _PlayerItemPanelState extends State<PlayerItemPanel> {
                         controller.open();
                       }
                     },
-                    tooltip: '更多选项',
+                    tooltip: zh('更多选项'),
                     icon: const Icon(
                       Icons.more_vert,
                       color: Colors.white,
@@ -858,9 +859,9 @@ class _PlayerItemPanelState extends State<PlayerItemPanel> {
                   if (compact) ...[
                     SubmenuButton(
                         menuChildren: _aspectRatioItems,
-                        child: _menuLabel('视频比例')),
+                      child: _menuLabel(zh('视频比例'))),
                     SubmenuButton(
-                        menuChildren: _speedItems, child: _menuLabel('倍速')),
+                      menuChildren: _speedItems, child: _menuLabel(zh('倍速'))),
                     SubmenuButton(
                         menuChildren: _superResolutionItems,
                         child: _menuLabel('超分辨率')),
@@ -967,7 +968,7 @@ class _PlayerItemPanelState extends State<PlayerItemPanel> {
                 Icons.photo_camera_outlined,
                 color: Colors.white,
               ),
-              tooltip: '截图',
+              tooltip: zh('截图'),
               onPressed: widget.handleScreenShot,
             ),
           IconButton(

@@ -5,6 +5,7 @@ import 'package:kazumi/bean/settings/settings_list.dart';
 import 'package:kazumi/modules/collect/collect_layout.dart';
 import 'package:kazumi/services/storage/storage.dart';
 import 'package:kazumi/utils/device.dart';
+import 'package:kazumi/utils/zh.dart';
 
 class InterfaceSettingsPage extends StatefulWidget {
   const InterfaceSettingsPage({super.key});
@@ -15,6 +16,7 @@ class InterfaceSettingsPage extends StatefulWidget {
 
 class _InterfaceSettingsPageState extends State<InterfaceSettingsPage> {
   late bool showRating;
+  late bool hongKongTraditional;
   late String defaultPage;
   late CollectLayout _defaultCollectLayout;
   bool _savingCollectLayout = false;
@@ -36,6 +38,7 @@ class _InterfaceSettingsPageState extends State<InterfaceSettingsPage> {
   void initState() {
     super.initState();
     showRating = GStorage.getSetting(SettingsKeys.showRating);
+    hongKongTraditional = ZhConverterService.enabled;
     defaultPage = GStorage.getSetting(SettingsKeys.defaultStartupPage);
     _defaultCollectLayout = CollectLayout.fromValue(
       GStorage.getSetting(SettingsKeys.defaultCollectLayout),
@@ -75,7 +78,7 @@ class _InterfaceSettingsPageState extends State<InterfaceSettingsPage> {
           constraints: const BoxConstraints(minWidth: 112),
           alignment: Alignment.centerLeft,
           child: Text(
-            label,
+            zh(label),
             style: TextStyle(
               color: selected ? Theme.of(context).colorScheme.primary : null,
             ),
@@ -86,10 +89,10 @@ class _InterfaceSettingsPageState extends State<InterfaceSettingsPage> {
   @override
   Widget build(BuildContext context) {
     return SettingsDetailScaffold(
-      title: Text('界面设置'),
+      title: Text(zh('界面设置')),
       body: SettingsList(
         sections: [
-          SettingsSection(title: Text('启动'), tiles: [
+          SettingsSection(title: Text(zh('启动')), tiles: [
             SettingsTile(
               leading: Icons.home_rounded,
               onPressed: (_) async {
@@ -99,14 +102,14 @@ class _InterfaceSettingsPageState extends State<InterfaceSettingsPage> {
                   defaultPageMenuController.open();
                 }
               },
-              title: Text('启动界面设置'),
-              description: Text('设置应用开启时的默认页面'),
+              title: Text(zh('启动界面设置')),
+              description: Text(zh('设置应用开启时的默认页面')),
               value: MenuAnchor(
                 consumeOutsideTap: true,
                 controller: defaultPageMenuController,
                 builder: (_, __, ___) {
                   return Text(
-                    defaultPageMap[defaultPage] ?? '推荐',
+                    zh(defaultPageMap[defaultPage] ?? '推荐'),
                   );
                 },
                 menuChildren: [
@@ -120,11 +123,22 @@ class _InterfaceSettingsPageState extends State<InterfaceSettingsPage> {
               ),
             ),
           ]),
-          SettingsSection(title: Text('展示信息'), tiles: [
+          SettingsSection(title: Text(zh('展示信息')), tiles: [
+            SettingsTile.switchTile(
+              leading: Icons.translate_rounded,
+              onToggle: (value) async {
+                final next = value ?? !hongKongTraditional;
+                await ZhConverterService.setEnabled(next);
+                if (mounted) setState(() => hongKongTraditional = next);
+              },
+              title: Text(zh('香港繁體')),
+              description: Text(zh('关闭后显示原始简体界面文字')),
+              initialValue: hongKongTraditional,
+            ),
             SettingsTile(
               leading: Icons.view_agenda_rounded,
-              title: const Text('追番默认布局'),
-              description: const Text('下次打开追番页时使用，页面内切换不会改变此设置'),
+              title: Text(zh('追番默认布局')),
+              description: Text(zh('下次打开追番页时使用，页面内切换不会改变此设置')),
               enabled: !_savingCollectLayout,
               onPressed: (_) => _collectLayoutMenuController.isOpen
                   ? _collectLayoutMenuController.close()
@@ -142,7 +156,7 @@ class _InterfaceSettingsPageState extends State<InterfaceSettingsPage> {
                           : () => _updateDefaultCollectLayout(layout),
                     ),
                 ],
-                builder: (_, __, ___) => Text(_defaultCollectLayout.label),
+                builder: (_, __, ___) => Text(zh(_defaultCollectLayout.label)),
               ),
             ),
             SettingsTile.switchTile(
@@ -152,19 +166,19 @@ class _InterfaceSettingsPageState extends State<InterfaceSettingsPage> {
                 await GStorage.putSetting(SettingsKeys.showRating, showRating);
                 setState(() {});
               },
-              title: Text('显示评分'),
-              description: Text('关闭后隐藏概览和番剧列表中的评分信息'),
+              title: Text(zh('显示评分')),
+              description: Text(zh('关闭后隐藏概览和番剧列表中的评分信息')),
               initialValue: showRating,
             ),
           ]),
           if (isDesktop())
             SettingsSection(
-              title: const Text('窗口行为'),
+              title: Text(zh('窗口行为')),
               tiles: [
                 SettingsTile(
                   leading: Icons.exit_to_app_rounded,
-                  title: const Text('关闭窗口时'),
-                  description: const Text('设置点击窗口关闭按钮后的行为'),
+                  title: Text(zh('关闭窗口时')),
+                  description: Text(zh('设置点击窗口关闭按钮后的行为')),
                   onPressed: (_) => _exitBehaviorMenuController.isOpen
                       ? _exitBehaviorMenuController.close()
                       : _exitBehaviorMenuController.open(),
@@ -172,7 +186,7 @@ class _InterfaceSettingsPageState extends State<InterfaceSettingsPage> {
                     controller: _exitBehaviorMenuController,
                     consumeOutsideTap: true,
                     builder: (_, __, ___) =>
-                        Text(_exitBehaviorTitles[_exitBehavior]),
+                        Text(zh(_exitBehaviorTitles[_exitBehavior])),
                     menuChildren: [
                       for (var i = 0; i < _exitBehaviorTitles.length; i++)
                         _menuItem(

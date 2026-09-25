@@ -35,13 +35,13 @@ void _showCustomKeywordDialog({
 
   KazumiDialog.show(
     builder: (context) => AlertDialog(
-      title: const Text('修改检索词'),
+      title: Text(zh('修改检索词')),
       content: TextFormField(
         initialValue: initialKeyword,
         autofocus: true,
         textInputAction: TextInputAction.search,
         decoration: InputDecoration(
-          labelText: '检索关键词',
+          labelText: zh('检索关键词'),
           helperText: '仅检索来源：$sourceName',
           helperMaxLines: 3,
           border: const OutlineInputBorder(),
@@ -59,7 +59,7 @@ void _showCustomKeywordDialog({
         ),
         TextButton(
           onPressed: () => submit(keyword),
-          child: const Text('检索'),
+          child: Text(zh('检索')),
         ),
       ],
     ),
@@ -87,8 +87,8 @@ class _AliasPickerDialogState extends State<_AliasPickerDialog> {
   void _confirmDelete(int index) {
     KazumiDialog.show(
       builder: (context) => AlertDialog(
-        title: const Text('删除确认'),
-        content: const Text('删除后无法恢复，确认要永久删除这个别名吗？'),
+        title: Text(zh('删除确认')),
+        content: Text(zh('删除后无法恢复，确认要永久删除这个别名吗？')),
         actions: [
           TextButton(
             onPressed: KazumiDialog.dismiss,
@@ -107,7 +107,7 @@ class _AliasPickerDialogState extends State<_AliasPickerDialog> {
                 Navigator.of(this.context).pop();
               }
             },
-            child: const Text('确认'),
+            child: Text(zh('确认')),
           ),
         ],
       ),
@@ -128,7 +128,7 @@ class _AliasPickerDialogState extends State<_AliasPickerDialog> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('别名检索', style: Theme.of(context).textTheme.titleLarge),
+                  Text(zh('别名检索'), style: Theme.of(context).textTheme.titleLarge),
                   const SizedBox(height: 8),
                   Text(
                     '仅检索来源：${widget.sourceName}',

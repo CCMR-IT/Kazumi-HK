@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:kazumi/bean/card/network_img_layer.dart';
 import 'package:kazumi/modules/bangumi/bangumi_item.dart';
+import 'package:kazumi/utils/zh.dart';
 
 class BangumiTimelineCard extends StatelessWidget {
   const BangumiTimelineCard({
@@ -61,7 +62,7 @@ class BangumiTimelineCard extends StatelessWidget {
           .where((name) => name.isNotEmpty)
           .toSet(),
     ];
-    if (metadata.isNotEmpty) return metadata.take(3).join(' · ');
+    if (metadata.isNotEmpty) return metadata.take(3).map(zh).join(' · ');
     final originalName = bangumiItem.name.trim();
     return originalName != title ? originalName : '';
   }
@@ -104,8 +105,8 @@ class BangumiTimelineCard extends StatelessWidget {
     final theme = Theme.of(context);
     final colors = theme.colorScheme;
     final translatedName = bangumiItem.nameCn.trim();
-    final title =
-        translatedName.isNotEmpty ? translatedName : bangumiItem.name.trim();
+    final title = zh(
+      translatedName.isNotEmpty ? translatedName : bangumiItem.name.trim());
     final supportingText = _supportingText(title);
 
     return Column(
@@ -205,14 +206,14 @@ class BangumiTimelineCard extends StatelessWidget {
       height: _labelLineHeight,
     );
     if (bangumiItem.ratingScore <= 0) {
-      return Text('暂无评分',
+      return Text(zh('暂无评分'),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: labelStyle?.copyWith(color: colors.onSurfaceVariant));
     }
     final score = bangumiItem.ratingScore.toStringAsFixed(1);
     return Semantics(
-      label: '评分 $score',
+      label: '${zh('评分')} $score',
       excludeSemantics: true,
       child: Container(
         padding: _ratingPadding,

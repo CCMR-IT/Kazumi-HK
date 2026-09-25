@@ -6,6 +6,7 @@ import 'package:kazumi/bean/settings/settings_detail_scaffold.dart';
 import 'package:kazumi/bean/settings/settings_list.dart';
 import 'package:kazumi/services/network/proxy_manager.dart';
 import 'package:kazumi/services/storage/storage.dart';
+import 'package:kazumi/utils/zh.dart';
 
 class ProxySettingsPage extends StatefulWidget {
   const ProxySettingsPage({super.key});
@@ -33,18 +34,18 @@ class _ProxySettingsPageState extends State<ProxySettingsPage> {
   Widget build(BuildContext context) {
     final proxyEnabled = GStorage.getSetting(SettingsKeys.proxyEnable);
     return SettingsDetailScaffold(
-      title: const Text('网络设置'),
+      title: Text(zh('网络设置')),
       body: SettingsList(
         sections: [
           const NetworkMirrorSettings(),
           SettingsSection(
-            title: const Text('代理'),
+            title: Text(zh('代理')),
             tiles: [
               SettingsTile.switchTile(
                 leading: Icons.vpn_key_rounded,
                 onToggle: (value) => _setProxyEnabled(value ?? !proxyEnabled),
-                title: const Text('启用代理'),
-                description: const Text('启用后网络请求将通过代理服务器'),
+                title: Text(zh('启用代理')),
+                description: Text(zh('启用后网络请求将通过代理服务器')),
                 initialValue: proxyEnabled,
               ),
               SettingsTile(
@@ -53,8 +54,8 @@ class _ProxySettingsPageState extends State<ProxySettingsPage> {
                   await context.pushNamed('/settings/proxy/editor');
                   if (mounted) setState(() {});
                 },
-                title: const Text('代理配置'),
-                description: const Text('配置代理服务器地址和认证信息'),
+                title: Text(zh('代理配置')),
+                description: Text(zh('配置代理服务器地址和认证信息')),
               ),
             ],
           ),

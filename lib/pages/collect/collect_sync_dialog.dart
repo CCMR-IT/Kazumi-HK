@@ -4,6 +4,7 @@ import 'package:kazumi/bean/widget/loading_indicator.dart';
 import 'package:kazumi/bean/widget/state_presentation.dart';
 import 'package:kazumi/modules/bangumi/sync_priority.dart';
 import 'package:kazumi/modules/collect/collect_sync_plan.dart';
+import 'package:kazumi/utils/zh.dart';
 
 enum CollectSyncDestination { webDavSettings, bangumiSettings }
 
@@ -402,7 +403,7 @@ class _CollectSyncDialogState extends State<CollectSyncDialog> {
                         onPressed: () =>
                             Navigator.of(context).pop(state.step._settings),
                         icon: const Icon(Icons.settings_rounded, size: 18),
-                        label: const Text('检查设置'),
+                        label: Text(zh('检查设置')),
                       ),
                     ],
                     if (active && state.progress != null) ...[

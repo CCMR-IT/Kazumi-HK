@@ -19,6 +19,7 @@ import 'package:kazumi/services/platform/windows_shortcut.dart';
 import 'package:kazumi/services/platform/platform_environment_service.dart';
 import 'package:kazumi/services/update/startup_update_check.dart';
 import 'package:kazumi/navigation.dart';
+import 'package:kazumi/utils/zh.dart';
 
 class InitPage extends StatefulWidget {
   const InitPage({
@@ -120,23 +121,23 @@ class _InitPageState extends State<InitPage> {
         clickMaskDismiss: false,
         builder: (context) {
           return AlertDialog(
-            title: const Text('需要通知权限'),
-            content: const Text(
-              '开启通知权限后，可以在后台下载时显示进度，并防止系统终止下载任务。\n\n'
-              '如果拒绝，下载功能仍可使用，但在后台时可能被系统中断。',
+            title: Text(zh('需要通知权限')),
+            content: Text(
+              zh('开启通知权限后，可以在后台下载时显示进度，并防止系统终止下载任务。\n\n'
+                  '如果拒绝，下载功能仍可使用，但在后台时可能被系统中断。'),
             ),
             actions: [
               TextButton(
                 onPressed: () => KazumiDialog.dismiss(popWith: false),
                 child: Text(
-                  '稍后再说',
+                  zh('稍后再说'),
                   style:
                       TextStyle(color: Theme.of(context).colorScheme.outline),
                 ),
               ),
               TextButton(
                 onPressed: () => KazumiDialog.dismiss(popWith: true),
-                child: const Text('允许'),
+                child: Text(zh('允许')),
               ),
             ],
           );
@@ -228,16 +229,16 @@ class _InitPageState extends State<InitPage> {
           return PopScope(
             canPop: false,
             child: AlertDialog(
-              title: const Text('X11环境检测'),
-              content: const Text(
-                  '检测到您当前运行在X11环境下，Kazumi在X11环境下可能出现性能问题或界面异常，建议切换到Wayland以获得更好的体验。您是否希望在X11下继续使用Kazumi？'),
+              title: Text(zh('X11环境检测')),
+              content: Text(
+                  zh('检测到您当前运行在X11环境下，Kazumi在X11环境下可能出现性能问题或界面异常，建议切换到Wayland以获得更好的体验。您是否希望在X11下继续使用Kazumi？')),
               actions: [
                 TextButton(
                   onPressed: () {
                     exit(0);
                   },
                   child: Text(
-                    '退出',
+                    zh('退出'),
                     style:
                         TextStyle(color: Theme.of(context).colorScheme.outline),
                   ),
@@ -246,7 +247,7 @@ class _InitPageState extends State<InitPage> {
                   onPressed: () {
                     KazumiDialog.dismiss();
                   },
-                  child: const Text('继续'),
+                  child: Text(zh('继续')),
                 ),
               ],
             ),
@@ -265,17 +266,17 @@ class _InitPageState extends State<InitPage> {
     final create = await KazumiDialog.show<bool>(
       clickMaskDismiss: false,
       builder: (context) => AlertDialog(
-        title: const Text('创建桌面快捷方式'),
-        content: const Text('是否在桌面创建 Kazumi 的快捷方式？'),
+        title: Text(zh('创建桌面快捷方式')),
+        content: Text(zh('是否在桌面创建 Kazumi 的快捷方式？')),
         actions: [
           TextButton(
             onPressed: () => KazumiDialog.dismiss(popWith: false),
-            child: Text('暂不创建',
+            child: Text(zh('暂不创建'),
                 style: TextStyle(color: Theme.of(context).colorScheme.outline)),
           ),
           TextButton(
             onPressed: () => KazumiDialog.dismiss(popWith: true),
-            child: const Text('创建'),
+            child: Text(zh('创建')),
           ),
         ],
       ),

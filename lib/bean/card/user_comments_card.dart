@@ -3,6 +3,7 @@ import 'package:kazumi/bbcode/bbcode_widget.dart';
 import 'package:kazumi/bean/widget/bangumi_avatar.dart';
 import 'package:kazumi/modules/comments/comment_item.dart';
 import 'package:kazumi/utils/date_time.dart';
+import 'package:kazumi/utils/zh.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class UserCommentsCard extends StatefulWidget {
@@ -59,7 +60,7 @@ class _UserCommentsCardState extends State<UserCommentsCard> {
                 children: [
                   Icon(Icons.forum_outlined, size: 16, color: colors.primary),
                   const SizedBox(width: 8),
-                  Text('${replies.length} 条回复',
+                  Text('${replies.length} ${zh('条回复')}',
                       style: type.labelLarge?.copyWith(color: colors.primary)),
                 ],
               ),
@@ -203,7 +204,7 @@ class _CommentBody extends StatelessWidget {
         height: 1.65,
       ),
       child: content.isEmpty
-          ? Text('该评论已被删除',
+          ? Text(zh('该评论已被删除'),
               style: TextStyle(color: theme.colorScheme.onSurfaceVariant))
           : BBCodeWidget(
               bbcode: content,

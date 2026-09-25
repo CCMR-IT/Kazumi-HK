@@ -59,7 +59,7 @@ class SettingsKeys {
   );
   static const autoUpdate = SettingKey<bool>(
     _SettingBoxKey.autoUpdate,
-    true,
+    false,
     group: SettingGroup.update,
   );
   static const checkPluginUpdateOnStartup = SettingKey<bool>(
@@ -454,6 +454,11 @@ class SettingsKeys {
     true,
     group: SettingGroup.interface,
   );
+  static const hongKongTraditional = SettingKey<bool>(
+    'hongKongTraditional',
+    true,
+    group: SettingGroup.interface,
+  );
   static const defaultCollectLayout = SettingKey<String>(
     'defaultCollectLayout',
     'list',
@@ -630,6 +635,7 @@ class SettingsKeys {
     proxyUrl,
     proxyTestUrl,
     showRating,
+    hongKongTraditional,
     defaultCollectLayout,
     downloadParallelEpisodes,
     downloadParallelSegments,

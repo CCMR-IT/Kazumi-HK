@@ -1,5 +1,6 @@
 import 'package:kazumi/modules/collect/collect_module.dart';
 import 'package:kazumi/modules/collect/collect_type.dart';
+import 'package:kazumi/utils/zh.dart';
 
 enum CollectSort {
   recentlyChanged('最近变更'),
@@ -7,8 +8,10 @@ enum CollectSort {
   rating('评分最高'),
   airDate('开播时间');
 
-  const CollectSort(this.label);
-  final String label;
+  const CollectSort(this._label);
+  final String _label;
+
+  String get label => zh(_label);
 }
 
 class CollectLibraryQuery {
@@ -58,7 +61,7 @@ class CollectLibraryQuery {
 
   static String titleOf(CollectedBangumi entry) {
     final item = entry.bangumiItem;
-    return item.nameCn.trim().isNotEmpty ? item.nameCn : item.name;
+    return item.nameCn.trim().isNotEmpty ? zh(item.nameCn) : zh(item.name);
   }
 
   static DateTime _airDate(CollectedBangumi entry) =>

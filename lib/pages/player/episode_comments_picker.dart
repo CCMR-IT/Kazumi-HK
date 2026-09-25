@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kazumi/modules/bangumi/episode_item.dart';
+import 'package:kazumi/utils/zh.dart';
 
 class EpisodeCommentsPicker extends StatelessWidget {
   const EpisodeCommentsPicker({
@@ -31,11 +32,11 @@ class EpisodeCommentsPicker extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('选择讨论分集',
+                  Text(zh('选择讨论分集'),
                       style: type.headlineSmall
                           ?.copyWith(fontWeight: FontWeight.w700)),
                   const SizedBox(height: 8),
-                  Text('切换想看的讨论，视频会继续播放。',
+                  Text(zh('切换想看的讨论，视频会继续播放。'),
                       style: type.bodyMedium
                           ?.copyWith(color: colors.onSurfaceVariant)),
                 ],
@@ -104,7 +105,7 @@ class EpisodeCommentsPicker extends StatelessWidget {
                 child: TextButton(
                   onPressed: () => Navigator.pop(context),
                   style: TextButton.styleFrom(minimumSize: const Size(64, 48)),
-                  child: const Text('取消'),
+                  child: Text(zh('取消')),
                 ),
               ),
             ),

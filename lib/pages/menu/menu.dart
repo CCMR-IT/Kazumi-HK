@@ -6,6 +6,7 @@ import 'package:kazumi/bean/widget/embedded_native_control_area.dart';
 import 'package:kazumi/navigation.dart';
 import 'package:kazumi/pages/menu/route_visibility.dart';
 import 'package:kazumi/pages/router.dart';
+import 'package:kazumi/utils/zh.dart';
 
 class ScaffoldMenu extends StatefulWidget {
   const ScaffoldMenu({super.key, required this.location});
@@ -140,26 +141,26 @@ class _ScaffoldMenu extends State<ScaffoldMenu> with RouteAware {
     return Scaffold(
       body: _outlet(context),
       bottomNavigationBar: NavigationBar(
-        destinations: const <Widget>[
+        destinations: <Widget>[
           NavigationDestination(
-            selectedIcon: Icon(Icons.home),
-            icon: Icon(Icons.home_outlined),
-            label: '推荐',
+            selectedIcon: const Icon(Icons.home),
+            icon: const Icon(Icons.home_outlined),
+            label: zh('推荐'),
           ),
           NavigationDestination(
-            selectedIcon: Icon(Icons.timeline),
-            icon: Icon(Icons.timeline_outlined),
-            label: '时间表',
+            selectedIcon: const Icon(Icons.timeline),
+            icon: const Icon(Icons.timeline_outlined),
+            label: zh('时间表'),
           ),
           NavigationDestination(
-            selectedIcon: Icon(Icons.favorite),
-            icon: Icon(Icons.favorite_outlined),
-            label: '追番',
+            selectedIcon: const Icon(Icons.favorite),
+            icon: const Icon(Icons.favorite_outlined),
+            label: zh('追番'),
           ),
           NavigationDestination(
-            selectedIcon: Icon(Icons.settings),
-            icon: Icon(Icons.settings),
-            label: '我的',
+            selectedIcon: const Icon(Icons.settings),
+            icon: const Icon(Icons.settings),
+            label: zh('我的'),
           ),
         ],
         selectedIndex: selectedIndex,
@@ -188,26 +189,26 @@ class _ScaffoldMenu extends State<ScaffoldMenu> with RouteAware {
                 child: const Icon(Icons.search),
               ),
               labelType: NavigationRailLabelType.selected,
-              destinations: const <NavigationRailDestination>[
+              destinations: <NavigationRailDestination>[
                 NavigationRailDestination(
-                  selectedIcon: Icon(Icons.home),
-                  icon: Icon(Icons.home_outlined),
-                  label: Text('推荐'),
+                  selectedIcon: const Icon(Icons.home),
+                  icon: const Icon(Icons.home_outlined),
+                  label: Text(zh('推荐')),
                 ),
                 NavigationRailDestination(
-                  selectedIcon: Icon(Icons.timeline),
-                  icon: Icon(Icons.timeline_outlined),
-                  label: Text('时间表'),
+                  selectedIcon: const Icon(Icons.timeline),
+                  icon: const Icon(Icons.timeline_outlined),
+                  label: Text(zh('时间表')),
                 ),
                 NavigationRailDestination(
-                  selectedIcon: Icon(Icons.favorite),
-                  icon: Icon(Icons.favorite_border),
-                  label: Text('追番'),
+                  selectedIcon: const Icon(Icons.favorite),
+                  icon: const Icon(Icons.favorite_border),
+                  label: Text(zh('追番')),
                 ),
                 NavigationRailDestination(
-                  selectedIcon: Icon(Icons.settings),
-                  icon: Icon(Icons.settings_outlined),
-                  label: Text('我的'),
+                  selectedIcon: const Icon(Icons.settings),
+                  icon: const Icon(Icons.settings_outlined),
+                  label: Text(zh('我的')),
                 ),
               ],
               selectedIndex: selectedIndex,

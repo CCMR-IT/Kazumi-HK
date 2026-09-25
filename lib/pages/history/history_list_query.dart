@@ -1,13 +1,16 @@
 import 'package:kazumi/modules/history/history_module.dart';
+import 'package:kazumi/utils/zh.dart';
 
 enum HistorySourceFilter {
   all('全部'),
   online('在线'),
   offline('缓存');
 
-  const HistorySourceFilter(this.label);
+  const HistorySourceFilter(this._label);
 
-  final String label;
+  final String _label;
+
+  String get label => zh(_label);
 
   bool _matches(History history) => switch (this) {
         all => true,
@@ -27,10 +30,10 @@ class HistoryDateGroup {
   String label(DateTime now) {
     final localNow = now.toLocal();
     final today = DateTime(localNow.year, localNow.month, localNow.day);
-    if (date == today) return '今天';
-    if (date == DateTime(today.year, today.month, today.day - 1)) return '昨天';
-    final prefix = date.year == today.year ? '' : '${date.year}年';
-    return '$prefix${date.month}月${date.day}日';
+    if (date == today) return zh('今天');
+    if (date == DateTime(today.year, today.month, today.day - 1)) return zh('昨天');
+    final prefix = date.year == today.year ? '' : '${date.year}${zh('年')}';
+    return '$prefix${date.month}${zh('月')}${date.day}${zh('日')}';
   }
 }
 

@@ -6,6 +6,7 @@ import 'package:kazumi/bean/widget/state_presentation.dart';
 import 'package:kazumi/pages/settings/sync/sync_settings_widgets.dart';
 import 'package:kazumi/services/storage/storage.dart';
 import 'package:kazumi/services/sync/bangumi_sync_service.dart';
+import 'package:kazumi/utils/zh.dart';
 
 enum _SyncStatus {
   unconnected('未连接', Icons.link_off_rounded),
@@ -37,7 +38,7 @@ class _SyncSettingsPageState extends State<SyncSettingsPage> {
 
   @override
   Widget build(BuildContext context) => SettingsDetailScaffold(
-        title: const Text('同步设置'),
+      title: Text(zh('同步设置')),
         body: ListenableBuilder(
           listenable: BangumiSyncService(),
           builder: (context, _) {
@@ -196,9 +197,9 @@ class _SyncServiceCard extends StatelessWidget {
                     ?.copyWith(fontWeight: FontWeight.w600)),
           ),
           const SizedBox(height: 8),
-          Text(description, style: theme.textTheme.bodyMedium),
+          Text(zh(description), style: theme.textTheme.bodyMedium),
           const SizedBox(height: 16),
-          Text(content,
+          Text(zh(content),
               style: theme.textTheme.bodySmall
                   ?.copyWith(color: theme.colorScheme.onSurfaceVariant)),
           const SizedBox(height: 24),
@@ -244,7 +245,7 @@ class _SyncStatusChip extends StatelessWidget {
           Icon(status.icon, size: 16, color: foreground),
           const SizedBox(width: 6),
           Flexible(
-            child: Text(status.label,
+            child: Text(zh(status.label),
                 style: Theme.of(context)
                     .textTheme
                     .labelMedium

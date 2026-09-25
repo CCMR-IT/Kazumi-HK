@@ -10,6 +10,7 @@ import 'package:kazumi/bean/widget/loading_indicator.dart';
 import 'package:kazumi/services/platform/secure_bookmark_service.dart';
 import 'package:kazumi/services/storage/storage.dart';
 import 'package:kazumi/utils/file_system.dart';
+import 'package:kazumi/utils/zh.dart';
 
 class DownloadSettingsPage extends StatefulWidget {
   const DownloadSettingsPage({super.key});
@@ -70,7 +71,7 @@ class _DownloadSettingsPageState extends State<DownloadSettingsPage> {
           ? effectiveDirectory
           : null;
       final selectedPath = await FilePicker.platform.getDirectoryPath(
-        dialogTitle: '选择下载位置',
+        dialogTitle: zh('选择下载位置'),
         initialDirectory: initialDirectory,
       );
       if (selectedPath == null || selectedPath.isEmpty) return;
@@ -111,21 +112,21 @@ class _DownloadSettingsPageState extends State<DownloadSettingsPage> {
   @override
   Widget build(BuildContext context) {
     return SettingsDetailScaffold(
-      title: const Text('下载设置'),
+      title: Text(zh('下载设置')),
       body: SettingsList(
         sections: [
           SettingsSection(
-            title: Text('并发设置'),
+            title: Text(zh('并发设置')),
             tiles: [
               SettingsSliderTile(
                 leading: Icons.video_library_rounded,
-                title: Text('同时下载集数'),
-                description: Text('并行下载的剧集数量'),
+                title: Text(zh('同时下载集数')),
+                description: Text(zh('并行下载的剧集数量')),
                 value: parallelEpisodes.toDouble(),
                 min: 1,
                 max: 5,
                 divisions: 4,
-                valueLabel: '$parallelEpisodes 集',
+                valueLabel: '$parallelEpisodes ${zh('集')}',
                 onChanged: (value) {
                   setState(() => parallelEpisodes = value.toInt());
                   GStorage.putSetting(
@@ -136,13 +137,13 @@ class _DownloadSettingsPageState extends State<DownloadSettingsPage> {
               ),
               SettingsSliderTile(
                 leading: Icons.call_split_rounded,
-                title: Text('分片并发数'),
-                description: Text('每集同时下载的分片数量'),
+                title: Text(zh('分片并发数')),
+                description: Text(zh('每集同时下载的分片数量')),
                 value: parallelSegments.toDouble(),
                 min: 1,
                 max: 10,
                 divisions: 9,
-                valueLabel: '$parallelSegments 个',
+                valueLabel: '$parallelSegments ${zh('个')}',
                 onChanged: (value) {
                   setState(() => parallelSegments = value.toInt());
                   GStorage.putSetting(
@@ -154,24 +155,24 @@ class _DownloadSettingsPageState extends State<DownloadSettingsPage> {
             ],
           ),
           SettingsSection(
-            title: Text('缓存设置'),
+            title: Text(zh('缓存设置')),
             tiles: [
               SettingsTile(
                 leading: Icons.folder_rounded,
-                title: Text('下载位置'),
+                title: Text(zh('下载位置')),
                 description: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       _effectiveDownloadDirectory.isEmpty
-                          ? '正在读取默认位置...'
+                          ? zh('正在读取默认位置...')
                           : _effectiveDownloadDirectory,
                     ),
                     const SizedBox(height: 8),
                     Text(
                       _hasCustomDirectory
-                          ? '当前使用自定义下载位置，修改后仅对新下载生效'
-                          : '当前使用默认下载位置，修改后仅对新下载生效',
+                          ? zh('当前使用自定义下载位置，修改后仅对新下载生效')
+                          : zh('当前使用默认下载位置，修改后仅对新下载生效'),
                       style: TextStyle(
                         color: Theme.of(context).textTheme.bodySmall?.color,
                       ),
@@ -186,7 +187,7 @@ class _DownloadSettingsPageState extends State<DownloadSettingsPage> {
                       )
                     : _hasCustomDirectory
                         ? IconButton(
-                            tooltip: '恢复默认',
+                          tooltip: zh('恢复默认'),
                             icon: const Icon(Icons.restore_rounded),
                             onPressed: _resetDownloadDirectory,
                           )
@@ -200,25 +201,25 @@ class _DownloadSettingsPageState extends State<DownloadSettingsPage> {
                   GStorage.putSetting(
                       SettingsKeys.downloadDanmaku, downloadDanmaku);
                 },
-                title: Text('缓存弹幕'),
+                title: Text(zh('缓存弹幕')),
                 description: Text(
-                  '下载视频时同时缓存弹幕数据',
+                  zh('下载视频时同时缓存弹幕数据'),
                 ),
                 initialValue: downloadDanmaku,
               ),
             ],
           ),
           SettingsSection(
-            title: Text('说明'),
+            title: Text(zh('说明')),
             tiles: [
               SettingsTile(
                 leading: Icons.info_outline_rounded,
-                title: Text('关于并发设置'),
+                title: Text(zh('关于并发设置')),
                 description: Text(
-                  '• 集数并发：同时下载多少集视频\n'
+                  zh('• 集数并发：同时下载多少集视频\n'
                   '• 分片并发：每集内同时下载多少个视频片段\n'
                   '• 较高的并发可提升速度，但可能被服务器限制\n'
-                  '• 修改后对新开始的下载生效',
+                  '• 修改后对新开始的下载生效'),
                 ),
               ),
             ],

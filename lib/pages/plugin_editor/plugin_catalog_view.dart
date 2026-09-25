@@ -13,6 +13,7 @@ import 'package:kazumi/pages/plugin_editor/plugin_update_actions.dart';
 import 'package:kazumi/pages/plugin_editor/rule_management_widgets.dart';
 import 'package:kazumi/plugins/plugins_controller.dart';
 import 'package:kazumi/services/storage/storage.dart';
+import 'package:kazumi/utils/zh.dart';
 
 enum _CatalogSort { lastUpdate, name }
 
@@ -181,7 +182,7 @@ class _PluginCatalogViewState extends State<PluginCatalogView> {
               suffix: _search.text.isEmpty
                   ? null
                   : IconButton(
-                      tooltip: '清除搜索',
+                      tooltip: zh('清除搜索'),
                       onPressed: () => setState(_search.clear),
                       icon: const Icon(Icons.close_rounded))),
         ),
@@ -206,7 +207,7 @@ class _PluginCatalogViewState extends State<PluginCatalogView> {
       Row(children: [
         if (widget._onboarding)
           Expanded(
-            child: Text('规则仓库 · 已安装 $installed',
+            child: Text('${zh('规则仓库')} · ${zh('已安装')} $installed',
                 style: theme.textTheme.titleSmall?.copyWith(
                     color: theme.colorScheme.primary,
                     fontWeight: FontWeight.w600)),
@@ -216,7 +217,7 @@ class _PluginCatalogViewState extends State<PluginCatalogView> {
           const Spacer(),
         ],
         IconButton.filledTonal(
-            tooltip: '刷新规则列表',
+            tooltip: zh('刷新规则列表'),
             onPressed: _loading ? null : _refresh,
             icon: const Icon(Icons.refresh_rounded)),
       ]),
@@ -227,7 +228,7 @@ class _PluginCatalogViewState extends State<PluginCatalogView> {
       if (_loadFailed && total > 0)
         Padding(
             padding: const EdgeInsets.symmetric(vertical: 8),
-            child: Text('刷新失败，正在显示上次获取的规则。', style: theme.textTheme.bodySmall)),
+            child: Text(zh('刷新失败，正在显示上次获取的规则。'), style: theme.textTheme.bodySmall)),
       const SizedBox(height: 8),
     ]);
   }
@@ -352,7 +353,7 @@ class _CatalogRuleAction extends StatelessWidget {
         child: Row(mainAxisSize: MainAxisSize.min, children: [
           Icon(Icons.check_rounded, size: 18, color: colors.onSurfaceVariant),
           const SizedBox(width: 6),
-          Text('已安装',
+          Text(zh('已安装'),
               style: Theme.of(context)
                   .textTheme
                   .labelLarge

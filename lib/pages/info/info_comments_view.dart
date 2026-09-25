@@ -4,6 +4,7 @@ import 'package:kazumi/bean/widget/empty_state_widget.dart';
 import 'package:kazumi/bean/widget/error_widget.dart';
 import 'package:kazumi/modules/bangumi/bangumi_interest.dart';
 import 'package:kazumi/modules/comments/comment_item.dart';
+import 'package:kazumi/utils/zh.dart';
 
 class InfoCommentsView extends StatelessWidget {
   const InfoCommentsView({
@@ -188,7 +189,7 @@ class InfoCommentsView extends StatelessWidget {
             child: TextButton(
               onPressed: onReviewTap,
               style: TextButton.styleFrom(minimumSize: const Size(48, 48)),
-              child: const Text('编辑'),
+              child: Text(zh('编辑')),
             ),
           ),
         ),

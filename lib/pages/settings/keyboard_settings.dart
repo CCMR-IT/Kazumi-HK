@@ -6,6 +6,7 @@ import 'package:kazumi/bean/settings/settings_detail_scaffold.dart';
 import 'package:kazumi/bean/widget/content_section.dart';
 import 'package:kazumi/services/storage/storage.dart';
 import 'package:kazumi/utils/constants.dart';
+import 'package:kazumi/utils/zh.dart';
 
 class _ShortcutGroup {
   const _ShortcutGroup(this.title, this.functions);
@@ -208,11 +209,11 @@ class _KeyboardSettingsPageState extends State<KeyboardSettingsPage> {
     final textTheme = Theme.of(context).textTheme;
 
     return SettingsDetailScaffold(
-      title: const Text('操作设置'),
+      title: Text(zh('操作设置')),
       actions: [
         IconButton(
           icon: const Icon(Icons.settings_backup_restore_rounded),
-          tooltip: '恢复默认',
+          tooltip: zh('恢复默认'),
           onPressed: restoreDefaults,
         ),
       ],
@@ -244,7 +245,7 @@ class _KeyboardSettingsPageState extends State<KeyboardSettingsPage> {
                   child: Padding(
                     padding: const EdgeInsets.only(bottom: 12),
                     child: Text(
-                      '点按按键标签，再按下新按键完成修改',
+                      zh('点按按键标签，再按下新按键完成修改'),
                       style: textTheme.bodySmall?.copyWith(
                         color: colorScheme.onSurfaceVariant,
                       ),
@@ -287,7 +288,8 @@ class _KeyboardSettingsPageState extends State<KeyboardSettingsPage> {
       padding: const EdgeInsets.symmetric(vertical: 6),
       child: Row(
         children: [
-          Text(shortcutsChineseName[func] ?? func, style: textTheme.bodyMedium),
+            Text(zh(shortcutsChineseName[func] ?? func),
+              style: textTheme.bodyMedium),
           const SizedBox(width: 12),
           Expanded(
             child: Wrap(
@@ -312,7 +314,7 @@ class _KeyboardSettingsPageState extends State<KeyboardSettingsPage> {
     // Pending placeholders must not count toward the last-binding safeguard.
     final realCount = keys.where((value) => value != '...').length;
     return _KeyCap(
-      label: listening ? '按任意键' : keyAliases[keys[i]] ?? keys[i],
+      label: listening ? zh('按任意键') : keyAliases[keys[i]] ?? keys[i],
       listening: listening,
       onTap: () => onKeyCapTap(func, i),
       onDelete:
@@ -353,7 +355,7 @@ class _KeyCap extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                label,
+                zh(label),
                 style: textTheme.labelMedium?.copyWith(
                   color: listening
                       ? colorScheme.onPrimaryContainer
@@ -395,7 +397,7 @@ class _AddKeyButton extends StatelessWidget {
     );
 
     return Tooltip(
-      message: '添加按键',
+      message: zh('添加按键'),
       child: Material(
         color: Colors.transparent,
         shape: shape,

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:kazumi/bean/dialog/material_bottom_sheet.dart';
 import 'package:kazumi/bean/widget/tonal_card.dart';
 import 'package:kazumi/services/storage/storage.dart';
+import 'package:kazumi/utils/zh.dart';
 
 const double _minDanmakuTimeOffset = -180;
 const double _maxDanmakuTimeOffset = 180;
@@ -17,9 +18,9 @@ double normalizeDanmakuTimeOffset(double value) {
 
 String formatDanmakuTimeOffset(double value) {
   if (value == 0) {
-    return '无偏移';
+    return zh('无偏移');
   }
-  return '${value > 0 ? '延后' : '提前'} ${_formatDanmakuOffsetDuration(value)}';
+  return '${value > 0 ? zh('延后') : zh('提前')} ${_formatDanmakuOffsetDuration(value)}';
 }
 
 String _formatDanmakuOffsetDuration(double value) {
@@ -93,13 +94,15 @@ class _DanmakuTimeOffsetSheetState extends State<DanmakuTimeOffsetSheet> {
               child: Padding(
                 padding: const EdgeInsets.all(16),
                 child: Column(children: [
-                  Text(_offset == 0 ? '与视频同步' : (_offset > 0 ? '延后' : '提前'),
+                    Text(_offset == 0
+                      ? zh('与视频同步')
+                      : (_offset > 0 ? zh('延后') : zh('提前')),
                       style: theme.textTheme.labelLarge
                           ?.copyWith(color: colors.onSurfaceVariant)),
                   const SizedBox(height: 8),
                   Row(children: [
                     IconButton.filledTonal(
-                      tooltip: '提前 1 秒',
+                      tooltip: '${zh('提前')} 1 ${zh('秒')}',
                       onPressed: _offset > _minDanmakuTimeOffset
                           ? () => _updateOffset(_offset - 1)
                           : null,
@@ -115,7 +118,7 @@ class _DanmakuTimeOffsetSheetState extends State<DanmakuTimeOffsetSheet> {
                           )),
                     )),
                     IconButton.filledTonal(
-                      tooltip: '延后 1 秒',
+                      tooltip: '${zh('延后')} 1 ${zh('秒')}',
                       onPressed: _offset < _maxDanmakuTimeOffset
                           ? () => _updateOffset(_offset + 1)
                           : null,
@@ -134,8 +137,8 @@ class _DanmakuTimeOffsetSheetState extends State<DanmakuTimeOffsetSheet> {
                   Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('提前 3 分钟', style: theme.textTheme.labelSmall),
-                        Text('延后 3 分钟', style: theme.textTheme.labelSmall),
+                        Text('${zh('提前')} 3 ${zh('分钟')}', style: theme.textTheme.labelSmall),
+                        Text('${zh('延后')} 3 ${zh('分钟')}', style: theme.textTheme.labelSmall),
                       ]),
                 ]),
               ),
@@ -143,7 +146,7 @@ class _DanmakuTimeOffsetSheetState extends State<DanmakuTimeOffsetSheet> {
             const SizedBox(height: 12),
             TextButton(
               onPressed: _offset != 0 ? () => _updateOffset(0) : null,
-              child: const Text('恢复同步'),
+              child: Text(zh('恢复同步')),
             ),
           ]),
         )),

@@ -4,9 +4,9 @@ const _timelineOptionsTitle = '排序与筛选';
 
 extension _TimelineSortLabel on TimelineSort {
   String get label => switch (this) {
-        TimelineSort.popularity => '热度优先',
-        TimelineSort.rating => '评分优先',
-        TimelineSort.defaultOrder => '默认顺序',
+      TimelineSort.popularity => zh('热度优先'),
+      TimelineSort.rating => zh('评分优先'),
+      TimelineSort.defaultOrder => zh('默认顺序'),
       };
 }
 
@@ -106,17 +106,17 @@ class _TimelineOptionsSheet extends StatelessWidget {
                   title: '显示范围',
                   children: [
                     SwitchListTile(
-                      title: const Text('隐藏看过的番剧'),
+                      title: Text(zh('隐藏看过的番剧')),
                       value: controller.notShowWatchedBangumis,
                       onChanged: controller.setNotShowWatchedBangumis,
                     ),
                     SwitchListTile(
-                      title: const Text('隐藏抛弃的番剧'),
+                      title: Text(zh('隐藏抛弃的番剧')),
                       value: controller.notShowAbandonedBangumis,
                       onChanged: controller.setNotShowAbandonedBangumis,
                     ),
                     SwitchListTile(
-                      title: const Text('只看正在追的番剧'),
+                      title: Text(zh('只看正在追的番剧')),
                       value: controller.onlyShowWatchingBangumis,
                       onChanged: controller.setOnlyShowWatchingBangumis,
                     ),

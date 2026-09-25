@@ -7,6 +7,7 @@ import 'package:scrollview_observer/scrollview_observer.dart';
 import 'package:kazumi/bean/widget/empty_state_widget.dart';
 import 'package:kazumi/modules/download/download_module.dart';
 import 'package:kazumi/modules/roads/road_module.dart';
+import 'package:kazumi/utils/zh.dart';
 
 class EpisodeSelectionPanel extends StatefulWidget {
   const EpisodeSelectionPanel({
@@ -123,7 +124,7 @@ class EpisodeSelectionPanelState extends State<EpisodeSelectionPanel> {
                       Semantics(
                         header: true,
                         child: Text(
-                          widget.title.isEmpty ? '剧集列表' : widget.title,
+                          widget.title.isEmpty ? zh('剧集列表') : zh(widget.title),
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                           style: theme.textTheme.titleLarge?.copyWith(
@@ -157,10 +158,10 @@ class EpisodeSelectionPanelState extends State<EpisodeSelectionPanel> {
                           child: Text(
                             textScaler.scale(14) > 21 ||
                                     constraints.maxWidth < 320
-                                ? '$count 集'
+                                ? '$count ${zh('集')}'
                                 : widget.isOffline
-                                    ? '已缓存 · $count 集'
-                                    : '全部剧集 · $count 集',
+                                  ? '${zh('已缓存')} · $count ${zh('集')}'
+                                  : '${zh('全部剧集')} · $count ${zh('集')}',
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: theme.textTheme.labelLarge?.copyWith(
@@ -169,13 +170,13 @@ class EpisodeSelectionPanelState extends State<EpisodeSelectionPanel> {
                           ),
                         ),
                         IconButton(
-                          tooltip: '定位当前集',
+                          tooltip: zh('定位当前集'),
                           onPressed: _canLocate ? revealCurrentEpisode : null,
                           icon: const Icon(Icons.my_location_rounded, size: 20),
                         ),
                         if (!widget.isOffline)
                           IconButton.filledTonal(
-                            tooltip: '缓存剧集',
+                            tooltip: zh('缓存剧集'),
                             onPressed: count > 0 && widget.onDownload != null
                                 ? () => widget.onDownload!(_visibleRoad)
                                 : null,

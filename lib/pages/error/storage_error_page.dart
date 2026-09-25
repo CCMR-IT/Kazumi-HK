@@ -6,6 +6,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:kazumi/bean/widget/error_widget.dart';
 import 'package:kazumi/bean/widget/loading_indicator.dart';
 import 'package:kazumi/bean/widget/state_presentation.dart';
+import 'package:kazumi/utils/zh.dart';
 
 class StorageErrorPage extends StatelessWidget {
   const StorageErrorPage({super.key});
@@ -14,7 +15,7 @@ class StorageErrorPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('内部错误'),
+        title: Text(zh('内部错误')),
       ),
       body: FutureBuilder<Directory>(
         future: getApplicationSupportDirectory(),

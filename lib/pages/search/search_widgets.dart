@@ -13,12 +13,12 @@ String _filterSummary(SearchFilterState state) => [
       ...state.tags,
       if (state.season.isNotEmpty) state.season,
       if (state.season.isEmpty && state.dateRange != null)
-        '${state.dateRange!.start} 至 ${state.dateRange!.end}',
+        '${state.dateRange!.start} ${zh('至')} ${state.dateRange!.end}',
       if (state.scoreRange?.isValid == true)
-        '评分 ${state.scoreRange!.toToken()}',
-      if (state.rankRange?.isValid == true) '排名 ${state.rankRange!.toToken()}',
+        '${zh('评分')} ${state.scoreRange!.toToken()}',
+      if (state.rankRange?.isValid == true) '${zh('排名')} ${state.rankRange!.toToken()}',
       if (state.weekdays.isNotEmpty)
-        '周${state.weekdays.map((day) => '一二三四五六日'[day - 1]).join('、')}',
+        '${zh('周')}${state.weekdays.map((day) => zh('一二三四五六日'[day - 1])).join('、')}',
     ].join(' · ');
 
 String _readableQuery(String query) {
@@ -26,9 +26,9 @@ String _readableQuery(String query) {
   final summary = _filterSummary(state);
   return [
     if (state.keyword.isNotEmpty) state.keyword,
-    if (state.id.isNotEmpty) '条目 ${state.id}',
+    if (state.id.isNotEmpty) '${zh('条目')} ${state.id}',
     if (summary.isNotEmpty) summary,
-    if (state.sort != 'heat') '${_sortLabel(state.sort)}排序',
+    if (state.sort != 'heat') '${zh(_sortLabel(state.sort))}${zh('排序')}',
   ].join(' · ');
 }
 
@@ -42,7 +42,7 @@ class _SearchSortMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return PopupMenuButton<String>(
-      tooltip: '排序方式',
+      tooltip: zh('排序方式'),
       initialValue: value,
       onSelected: onChanged,
       itemBuilder: (_) => [
@@ -50,12 +50,12 @@ class _SearchSortMenu extends StatelessWidget {
           CheckedPopupMenuItem(
               value: sort.key,
               checked: sort.key == value,
-              child: Text('按${sort.value}排序')),
+              child: Text('${zh('按')}${zh(sort.value)}${zh('排序')}')),
       ],
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
         child: Row(mainAxisSize: MainAxisSize.min, children: [
-          Text(_sortLabel(value),
+          Text(zh(_sortLabel(value)),
               style: theme.textTheme.labelLarge
                   ?.copyWith(color: theme.colorScheme.onSurfaceVariant)),
           const SizedBox(width: 4),
@@ -145,7 +145,7 @@ class _SearchResultCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final title = item.nameCn.isNotEmpty ? item.nameCn : item.name;
+    final title = zh(item.nameCn.isNotEmpty ? item.nameCn : item.name);
     final year = item.airDate.length >= 4 ? item.airDate.substring(0, 4) : '';
     return Material(
       type: MaterialType.transparency,
@@ -212,7 +212,7 @@ class _SearchLoadingState extends StatelessWidget {
           const SizedBox(height: 20),
           Semantics(
               liveRegion: true,
-              child: Text('正在搜索番剧',
+              child: Text(zh('正在搜索番剧'),
                   textAlign: TextAlign.center,
                   style: theme.textTheme.titleMedium)),
         ]));

@@ -9,6 +9,7 @@ import 'package:kazumi/modules/bangumi/sync_priority.dart';
 import 'package:kazumi/pages/settings/sync/sync_settings_widgets.dart';
 import 'package:kazumi/services/storage/storage.dart';
 import 'package:kazumi/services/sync/bangumi_sync_service.dart';
+import 'package:kazumi/utils/zh.dart';
 
 enum _BangumiAction { verify, connect, sync }
 
@@ -161,7 +162,7 @@ class _BangumiSyncPageState extends State<BangumiSyncPage> {
           return PopScope(
             canPop: !_busy,
             child: SettingsDetailScaffold(
-              title: const Text('追番同步'),
+              title: Text(zh('追番同步')),
               body: SyncPageBody(
                 maxWidth: 720,
                 children: [
@@ -189,8 +190,8 @@ class _BangumiSyncPageState extends State<BangumiSyncPage> {
                       shape: const Border(),
                       collapsedShape: const Border(),
                       leading: const Icon(Icons.tune_rounded),
-                      title: const Text('同步偏好'),
-                      subtitle: Text('状态冲突时：${priority.label}'),
+                      title: Text(zh('同步偏好')),
+                      subtitle: Text('${zh('状态冲突时')}：${priority.label}'),
                       tilePadding: const EdgeInsets.symmetric(
                           horizontal: 20, vertical: 4),
                       childrenPadding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
@@ -210,18 +211,18 @@ class _BangumiSyncPageState extends State<BangumiSyncPage> {
                                   value: option,
                                   enabled: !_busy,
                                   title: Text(switch (option) {
-                                    BangumiSyncPriority.localFirst => '以本机为准',
+                                    BangumiSyncPriority.localFirst => zh('以本机为准'),
                                     BangumiSyncPriority.bangumiFirst =>
-                                      '以 Bangumi 为准',
-                                    BangumiSyncPriority.timeFirst => '保留最近更新',
+                                      zh('以 Bangumi 为准'),
+                                    BangumiSyncPriority.timeFirst => zh('保留最近更新'),
                                   }),
                                   subtitle: Text(switch (option) {
                                     BangumiSyncPriority.localFirst =>
-                                      '用本机状态更新 Bangumi',
+                                      zh('用本机状态更新 Bangumi'),
                                     BangumiSyncPriority.bangumiFirst =>
-                                      '用 Bangumi 状态更新本机',
+                                      zh('用 Bangumi 状态更新本机'),
                                     BangumiSyncPriority.timeFirst =>
-                                      '比较两边的更新时间',
+                                      zh('比较两边的更新时间'),
                                   }),
                                 ),
                             ],
@@ -229,8 +230,8 @@ class _BangumiSyncPageState extends State<BangumiSyncPage> {
                         ),
                         const Divider(indent: 16, endIndent: 16),
                         SwitchListTile(
-                          title: const Text('同步结果提示'),
-                          subtitle: const Text('修改追番状态后显示同步结果'),
+                          title: Text(zh('同步结果提示')),
+                          subtitle: Text(zh('修改追番状态后显示同步结果')),
                           value: showToast,
                           onChanged: _busy
                               ? null
@@ -261,9 +262,9 @@ class _BangumiSyncPageState extends State<BangumiSyncPage> {
             tiles: [
               SettingsTile.switchTile(
                 leading: Icons.sync_rounded,
-                title: const Text('自动同步追番'),
+                title: Text(zh('自动同步追番')),
                 description:
-                    Text(configured ? '修改追番状态时同步到 Bangumi' : '请先连接 Bangumi 账号'),
+                  Text(configured ? zh('修改追番状态时同步到 Bangumi') : zh('请先连接 Bangumi 账号')),
                 initialValue: enabled,
                 enabled: configured && !_busy,
                 onToggle: (value) =>
@@ -279,17 +280,17 @@ class _BangumiSyncPageState extends State<BangumiSyncPage> {
                   Expanded(
                     child: Text(
                       _action == _BangumiAction.connect || _bangumi.isConnecting
-                          ? '正在连接…'
+                        ? zh('正在连接…')
                           : _bangumi.initialized
-                              ? '已连接 · ${_bangumi.username}'
-                              : '尚未验证连接',
+                          ? '${zh('已连接')} · ${_bangumi.username}'
+                          : zh('尚未验证连接'),
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
                   ),
                   const SizedBox(width: 8),
                   TextButton(
                     onPressed: _busy ? null : () => _connect(_bangumi.ping),
-                    child: Text(_bangumi.lastError != null ? '重试连接' : '测试连接'),
+                    child: Text(_bangumi.lastError != null ? zh('重试连接') : zh('测试连接')),
                   ),
                 ],
               ),
@@ -306,12 +307,12 @@ class _BangumiSyncPageState extends State<BangumiSyncPage> {
           tilePadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
           childrenPadding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
           leading: const Icon(Icons.account_circle_outlined),
-          title: Text(configured ? 'Bangumi 账号' : '连接 Bangumi 账号'),
+            title: Text(configured ? zh('Bangumi 账号') : zh('连接 Bangumi 账号')),
           subtitle: Text(_bangumi.initialized
               ? _bangumi.username
               : configured
-                  ? '已保存授权信息'
-                  : '使用 Access Token 授权'),
+                ? zh('已保存授权信息')
+                : zh('使用 Access Token 授权')),
           children: [
             const SizedBox(height: 12),
             TextField(
@@ -327,14 +328,14 @@ class _BangumiSyncPageState extends State<BangumiSyncPage> {
               onSubmitted: (_) => _saveToken(),
               decoration: InputDecoration(
                 labelText: 'Access Token',
-                errorText: _tokenError,
+                errorText: zhn(_tokenError),
                 errorMaxLines: 5,
                 helperText:
-                    _action == _BangumiAction.verify ? '正在验证…' : _tokenStatus,
+                  _action == _BangumiAction.verify ? zh('正在验证…') : zhn(_tokenStatus),
                 helperMaxLines: 3,
                 border: const OutlineInputBorder(),
                 suffixIcon: IconButton(
-                  tooltip: _passwordVisible ? '隐藏授权码' : '显示授权码',
+                  tooltip: _passwordVisible ? zh('隐藏授权码') : zh('显示授权码'),
                   onPressed: () =>
                       setState(() => _passwordVisible = !_passwordVisible),
                   icon: Icon(_passwordVisible
@@ -352,7 +353,7 @@ class _BangumiSyncPageState extends State<BangumiSyncPage> {
                 TextButton.icon(
                   onPressed: _busy ? null : _getToken,
                   icon: const Icon(Icons.open_in_new_rounded, size: 18),
-                  label: const Text('获取授权码'),
+                  label: Text(zh('获取授权码')),
                 ),
                 StateActionButton.tonal(
                   onPressed: _busy ? null : _saveToken,

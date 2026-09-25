@@ -4,6 +4,7 @@ import 'package:kazumi/bean/settings/settings_detail_scaffold.dart';
 import 'package:kazumi/bean/widget/content_section.dart';
 import 'package:kazumi/pages/about/about_widgets.dart';
 import 'package:kazumi/request/config/api_endpoints.dart';
+import 'package:kazumi/utils/zh.dart';
 
 class AboutPage extends StatelessWidget {
   const AboutPage({super.key, required this.onCheckUpdate});
@@ -12,7 +13,7 @@ class AboutPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => SettingsDetailScaffold(
-        title: const Text('关于'),
+      title: Text(zh('关于')),
         body: AboutContent(
           children: [
             _ProjectHeader(onCheckUpdate: onCheckUpdate),
@@ -128,7 +129,7 @@ class _ProjectHeader extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           Text(
-            '基于自定义规则的开源番剧应用',
+            zh('基于自定义规则的开源番剧应用'),
             style: theme.textTheme.bodyLarge,
           ),
           const SizedBox(height: 20),
@@ -144,7 +145,7 @@ class _ProjectHeader extends StatelessWidget {
                   context,
                   '${ApiEndpoints.sourceUrl}/releases',
                 ),
-                child: const Text('更新日志'),
+                child: Text(zh('更新日志')),
               ),
             ],
           ),

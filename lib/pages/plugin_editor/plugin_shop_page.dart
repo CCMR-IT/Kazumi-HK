@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kazumi/bean/appbar/sys_app_bar.dart';
 import 'package:kazumi/pages/plugin_editor/plugin_catalog_view.dart';
 import 'package:kazumi/plugins/plugins_controller.dart';
+import 'package:kazumi/utils/zh.dart';
 
 class PluginShopPage extends StatelessWidget {
   const PluginShopPage({super.key, required this.controller});
@@ -9,7 +10,7 @@ class PluginShopPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: const SysAppBar(title: Text('规则仓库')),
+      appBar: SysAppBar(title: Text(zh('规则仓库'))),
         body: SafeArea(
           top: false,
           child: Align(

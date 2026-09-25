@@ -35,6 +35,7 @@ import 'package:saver_gallery/saver_gallery.dart';
 import 'package:kazumi/services/player/audio_controller.dart';
 import 'package:kazumi/utils/device.dart';
 import 'package:kazumi/services/platform/player_menu_service.dart';
+import 'package:kazumi/utils/zh.dart';
 
 class PlayerItem extends StatefulWidget {
   const PlayerItem({
@@ -777,15 +778,15 @@ class _PlayerItemState extends State<PlayerItem>
       if (androidVideoRenderer == 'mediacodec_embed') {
         await KazumiDialog.show(builder: (context) {
           return AlertDialog(
-            title: const Text('兼容性提示'),
-            content: const Text('MediaCodec 渲染器不支持超分辨率功能。\n\n'
-                '如需使用超分辨率，请在播放设置中将视频渲染器切换为 gpu 或 gpu-next。'),
+            title: Text(zh('兼容性提示')),
+            content: Text(zh('MediaCodec 渲染器不支持超分辨率功能。\n\n'
+                '如需使用超分辨率，请在播放设置中将视频渲染器切换为 gpu 或 gpu-next。')),
             actions: [
               TextButton(
                 onPressed: () {
                   KazumiDialog.dismiss(context: context);
                 },
-                child: const Text('确定'),
+                child: Text(zh('确定')),
               ),
             ],
           );
@@ -807,12 +808,12 @@ class _PlayerItemState extends State<PlayerItem>
 
         return StatefulBuilder(builder: (context, setState) {
           return AlertDialog(
-            title: const Text('性能提示'),
+            title: Text(zh('性能提示')),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('启用超分辨率（质量档）可能会造成设备卡顿，是否继续？'),
+                Text(zh('启用超分辨率（质量档）可能会造成设备卡顿，是否继续？')),
                 const SizedBox(height: 12),
                 Row(
                   mainAxisSize: MainAxisSize.min,
@@ -822,7 +823,7 @@ class _PlayerItemState extends State<PlayerItem>
                       onChanged: (value) =>
                           setState(() => dontAskAgain = value ?? false),
                     ),
-                    const Text('下次不再询问'),
+                    Text(zh('下次不再询问')),
                   ],
                 ),
               ],
@@ -839,7 +840,7 @@ class _PlayerItemState extends State<PlayerItem>
                   if (!context.mounted) return;
                   KazumiDialog.dismiss(context: context);
                 },
-                child: const Text('取消'),
+                child: Text(zh('取消')),
               ),
               TextButton(
                 onPressed: () async {
@@ -853,7 +854,7 @@ class _PlayerItemState extends State<PlayerItem>
                   if (!context.mounted) return;
                   KazumiDialog.dismiss(context: context);
                 },
-                child: const Text('确认'),
+                child: Text(zh('确认')),
               ),
             ],
           );

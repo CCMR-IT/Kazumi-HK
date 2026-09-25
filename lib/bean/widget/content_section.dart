@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:kazumi/bean/widget/split_list_row.dart';
 import 'package:kazumi/bean/widget/tonal_card.dart';
+import 'package:kazumi/utils/zh.dart';
 
 class SectionHeader extends StatelessWidget {
   const SectionHeader({super.key, required this.title, this.description});
@@ -70,8 +71,8 @@ class ContentSection extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
             child: SectionHeader(
-              title: Text(title),
-              description: description == null ? null : Text(description!),
+              title: Text(zh(title)),
+              description: description == null ? null : Text(zh(description)),
             ),
           ),
           if (_children != null)
