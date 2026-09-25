@@ -62,7 +62,7 @@ class _InitPageState extends State<InitPage> {
     _loadShaders();
     unawaited(myController.loadShieldList());
     _webDavInit();
-    _bangumiInit();
+    unawaited(_bangumiInit());
     try {
       await downloadController.init();
       _setupBackgroundDownloadNavigation();
@@ -199,21 +199,24 @@ class _InitPageState extends State<InitPage> {
 
   Future<void> _bangumiInit() async {
     final bangumiEnable = GStorage.getSetting(SettingsKeys.bangumiSyncEnable);
-    if (bangumiEnable) {
-      final bangumi = BangumiSyncService();
-      KazumiLogger().i('Bangumi: Starting Bangumi initialization');
-      try {
-        await bangumi.ping();
-      } catch (e) {
-        KazumiLogger().w(
-          'Bangumi: initialization failed; keeping sync enabled for retry',
-          error: e,
-        );
-        KazumiDialog.showToast(
-          message:
-              'Bangumi 暂未连接，同步设置已保留：${BangumiSyncService.describeError(e)}',
-        );
-      }
+    final bangumiToken =
+        GStorage.getSetting(SettingsKeys.bangumiAccessToken).trim();
+    if (!bangumiEnable || bangumiToken.isEmpty) return;
+
+    final bangumi = BangumiSyncService();
+    KazumiLogger().i('Bangumi: Starting Bangumi collectibles sync');
+    try {
+      await bangumi.syncCollectibles();
+      KazumiLogger().i('Bangumi: Completed syncing collectibles');
+    } catch (e, stackTrace) {
+      KazumiLogger().w(
+        'Bangumi: automatic collectibles sync failed; keeping sync enabled for retry',
+        error: e,
+        stackTrace: stackTrace,
+      );
+      KazumiDialog.showToast(
+        message: 'Bangumi 自动同步失败：${BangumiSyncService.describeError(e)}',
+      );
     }
   }
 
